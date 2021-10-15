@@ -6,10 +6,11 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { appWithTranslation } from "next-i18next";
 import { Router } from "next/dist/client/router";
 import { AppContextType } from "next/dist/shared/lib/utils";
+import { theme } from "../utils/";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Component {...pageProps} />;
     </ChakraProvider>
   );
