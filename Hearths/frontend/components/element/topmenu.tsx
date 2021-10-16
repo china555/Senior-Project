@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import HeartsContainer from "../common/HeartsContainer";
 import { Link } from "@chakra-ui/react";
-export const HeartTopMenu = () => {
+export const HeartsTopMenu = () => {
   return (
     <Box bg="PrimaryColor.900" color="white" fontWeight="medium">
       <HeartsContainer>
@@ -18,4 +18,4 @@ export const HeartTopMenu = () => {
   );
 };
 
-HeartTopMenu.displayName = "HeartTopMenu";
+HeartsTopMenu.displayName = "HeartsTopMenu";
