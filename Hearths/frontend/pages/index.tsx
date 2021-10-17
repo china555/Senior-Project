@@ -3,13 +3,16 @@ import type { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { HeartInput } from "../components/element/Input";
-import TopMenu from "../components/topmenu";
+import { HeartsNavbar } from "../components/element/narbar";
+import { HeartsTopMenu } from "../components/element/topmenu";
 
 const Home: NextPage = () => {
   const { t, i18n } = useTranslation();
   return (
     <Box>
-      <TopMenu />
+      <HeartsTopMenu />
+      <HeartsNavbar />
+
       {/* <Box width={["100%", "30%"]} mx="auto">
         {t("test")}
         <HeartInput

@@ -19,10 +19,18 @@ const styles = {
       bg: "white",
       color: "#2d3748",
     },
-    a: {
+  },
+};
+
+const components = {
+  Link: {
+    baseStyle: {
       textDecoration: "none",
-      color: "#2d3748",
+      _hover: {
+        textDecoration: "none",
+      },
     },
   },
 };
-export const theme = extendTheme({ colors, fonts, styles });
+
+export const theme = extendTheme({ colors, fonts, styles, components });
