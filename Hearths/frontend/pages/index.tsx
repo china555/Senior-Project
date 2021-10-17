@@ -12,6 +12,7 @@ const Home: NextPage = () => {
     <Box>
       <HeartsTopMenu />
       <HeartsNavbar />
+
       {/* <Box width={["100%", "30%"]} mx="auto">
         {t("test")}
         <HeartInput
