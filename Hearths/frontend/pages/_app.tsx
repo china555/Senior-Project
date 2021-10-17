@@ -7,11 +7,19 @@ import { appWithTranslation } from "next-i18next";
 import { Router } from "next/dist/client/router";
 import { AppContextType } from "next/dist/shared/lib/utils";
 import { theme } from "../utils/";
-
+import { useTranslation } from "next-i18next";
+import { useEffect } from "react";
 function MyApp({ Component, pageProps }: AppProps) {
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      localStorage.setItem("language", i18n.language);
+    }
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </ChakraProvider>
   );
 }
