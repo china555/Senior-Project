@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   return (
     <Box>
       <TopMenu />
-      <Box width={["100%", "30%"]} mx="auto">
+      {/* <Box width={["100%", "30%"]} mx="auto">
         {t("test")}
         <HeartInput
           placeholder="User name"
@@ -25,7 +25,7 @@ in this process. It will not be used for anything else"
         >
           Change Language
         </Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
