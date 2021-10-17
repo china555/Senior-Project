@@ -7,7 +7,7 @@ export const HeartsTopMenu = () => {
   return (
     <Box bg="PrimaryColor.900" color="white" fontWeight="medium">
       <HeartsContainer>
-        <Box display="flex" justifyContent="space-between" p="2">
+        <Box display="flex" justifyContent="space-between" py="2">
           <Box display="flex">
             <Box
               cursor="pointer"

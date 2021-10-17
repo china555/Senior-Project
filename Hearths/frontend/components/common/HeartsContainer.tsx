@@ -6,7 +6,7 @@ interface MyProps {
 
 const HeartsContainer: React.FunctionComponent<MyProps> = (props) => {
   return (
-    <Box maxWidth={{ base: "100%", xl: "1200px" }} mx="auto">
+    <Box maxWidth={{ base: "100%", xl: "1200px" }} mx="auto" px="2">
       {props.children}
     </Box>
   );

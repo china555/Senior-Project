@@ -2,6 +2,7 @@ import { Box, Button } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { BannerHearths } from "../components/element/banner";
 import { HeartInput } from "../components/element/Input";
 import { HeartsNavbar } from "../components/element/narbar";
 import { HeartsTopMenu } from "../components/element/topmenu";
@@ -12,6 +13,7 @@ const Home: NextPage = () => {
     <Box>
       <HeartsTopMenu />
       <HeartsNavbar />
+      <BannerHearths />
       {/* <Box width={["100%", "30%"]} mx="auto">
         {t("test")}
         <HeartInput
