@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { useWindowSize } from "web-api-hooks";
 import { DrawerHearths } from "./drawer";
 import { useDisclosure } from "@chakra-ui/hooks";
+import { useEffect } from "react";
 export const HeartsNavbar = () => {
   const { t } = useTranslation();
   const [windowWidth] = useWindowSize();

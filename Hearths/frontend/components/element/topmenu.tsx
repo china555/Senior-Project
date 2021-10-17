@@ -10,6 +10,7 @@ export const HeartsTopMenu = () => {
         <Box display="flex" justifyContent="space-between" p="2">
           <Box display="flex">
             <Box
+              cursor="pointer"
               onClick={() => {
                 i18n.changeLanguage("en");
                 localStorage.setItem("language", "en");
@@ -21,6 +22,7 @@ export const HeartsTopMenu = () => {
               <Divider orientation="vertical" />
             </Box>
             <Box
+              cursor="pointer"
               onClick={() => {
                 i18n.changeLanguage("th");
                 localStorage.setItem("language", "th");
