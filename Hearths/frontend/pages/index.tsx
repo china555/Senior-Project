@@ -10,7 +10,6 @@ import { HeartsService } from "../components/element/service";
 import { HeartsTopMenu } from "../components/element/topmenu";
 
 const Home: NextPage = () => {
-  const { t, i18n } = useTranslation();
   return (
     <Box>
       <HeartsTopMenu />
