@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState, useEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 
 const isBrowser = () => typeof window !== "undefined";
 
@@ -8,7 +8,7 @@ const getInitialViewport = (): number[] =>
 export const useSize = (): Record<string, number> => {
   const [size, setSize] = useState(getInitialViewport());
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const getSize = () => {
       if (isBrowser()) {
         setSize([window.innerWidth, window.innerHeight]);
