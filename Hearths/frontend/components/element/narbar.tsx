@@ -9,7 +9,6 @@ export const HeartsNavbar = () => {
   const { t } = useTranslation();
   const { width } = useSize();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(width);
   return (
     <Box>
       <DrawerHearths isOpen={isOpen} onOpen={onOpen} onClose={onClose} />

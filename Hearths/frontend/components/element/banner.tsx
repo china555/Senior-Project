@@ -2,7 +2,7 @@ import { Box, Image, Link, Button } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import HeartsContainer from "../common/HeartsContainer";
 
-export const BannerHearths = () => {
+export const HearthsBanner = () => {
   const { t } = useTranslation();
   return (
     <Box>
