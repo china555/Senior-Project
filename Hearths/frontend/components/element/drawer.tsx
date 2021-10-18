@@ -17,13 +17,11 @@ import { useRef } from "react";
 export const DrawerHearths = (props: UseDisclosureProps) => {
   const { isOpen, onClose } = props;
   const { t } = useTranslation();
-  const btnRef = useRef();
   return (
     <Drawer
       isOpen={isOpen as boolean}
       placement="right"
       onClose={onClose as () => void}
-      finalFocusRef={btnRef as any}
     >
       <DrawerOverlay />
       <DrawerContent>
