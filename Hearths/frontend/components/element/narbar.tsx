@@ -1,13 +1,19 @@
 import { Box, Image, Link, Button } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import HeartsContainer from "../common/HeartsContainer";
-import { useTranslation } from "next-i18next";
 import { useSize } from "../../hooks/index";
 import { DrawerHearths } from "./drawer";
 import { useDisclosure } from "@chakra-ui/hooks";
+import { useTranslation } from "../../hooks/useTranslation";
 
 export const HeartsNavbar = () => {
-  const { t } = useTranslation();
+  const { translations } = useTranslation(
+    "Home",
+    "Service",
+    "AboutUs",
+    "Contact",
+    "Appointment"
+  );
   const { width } = useSize();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -31,13 +37,13 @@ export const HeartsNavbar = () => {
               alignItems="center"
               fontWeight="bold"
             >
-              <Link>{t("Home")}</Link>
-              <Link>{t("Service")}</Link>
-              <Link>{t("About_us")}</Link>
-              <Link>{t("Contact")}</Link>
+              <Link>{translations.Home}</Link>
+              <Link>{translations.Service}</Link>
+              <Link>{translations.AboutUs}</Link>
+              <Link>{translations.Contact}</Link>
               <Link>
                 <Button borderRadius="20" color="white" bg="SecondaryColor">
-                  {t("Appointment")}
+                  {translations.Appointment}
                 </Button>
               </Link>
             </Box>

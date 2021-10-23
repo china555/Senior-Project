@@ -1,9 +1,9 @@
 import { Box, Image, Link, Button } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
 import HeartsContainer from "../common/HeartsContainer";
+import { useTranslation } from "../../hooks/useTranslation";
 
 export const HearthsBanner = () => {
-  const { t } = useTranslation();
+  const { translations, changeLocale } = useTranslation("Appointment");
   return (
     <Box>
       <Box
@@ -56,7 +56,7 @@ export const HearthsBanner = () => {
                 fontSize="lg"
                 p="6"
               >
-                {t("Appointment")}
+                {translations.Appointment}
               </Button>
             </Link>
           </Box>

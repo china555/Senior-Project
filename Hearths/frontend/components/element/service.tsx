@@ -1,9 +1,9 @@
 import { Box, Heading, Flex, Image, Divider } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "../../hooks/useTranslation";
 import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsService = () => {
-  const { t } = useTranslation();
+  const { translations } = useTranslation("Appointment");
   return (
     <HeartsContainer>
       <Box mt={{ base: "2rem", xl: "5rem" }} textAlign="center">
@@ -28,13 +28,13 @@ export const HeartsService = () => {
             <Box w={{ base: "30%", xl: "20%" }} mx="auto">
               <Image w="100%" alt="" src="/images/icons/calendar.png" />
             </Box>
-            <Box>{t("Appointment")}</Box>
+            <Box>{translations.Appointment}</Box>
           </Box>
           <Box mt={{ base: "2%", xl: "0" }} width={{ base: "100%", xl: "50%" }}>
             <Box w={{ base: "30%", xl: "20%" }} mx="auto">
               <Image w="100%" alt="" src="/images/icons/appoint.png" />
             </Box>
-            <Box>{t("Appointment")}</Box>
+            <Box>{translations.Appointment}</Box>
           </Box>
           <Divider
             my={{ base: "0", xl: "2%" }}
@@ -51,13 +51,13 @@ export const HeartsService = () => {
             <Box w={{ base: "30%", xl: "20%" }} mx="auto">
               <Image w="100%" alt="" src="/images/icons/document.png" />
             </Box>
-            <Box>{t("Appointment")}</Box>
+            <Box>{translations.Appointment}</Box>
           </Box>
           <Box mt={{ base: "2%", xl: "0" }} width={{ base: "100%", xl: "50%" }}>
             <Box w={{ base: "30%", xl: "20%" }} mx="auto">
               <Image w="100%" alt="" src="/images/icons/vdocall.png" />
             </Box>
-            <Box>{t("Appointment")}</Box>
+            <Box>{translations.Appointment}</Box>
           </Box>
         </Flex>
       </Box>

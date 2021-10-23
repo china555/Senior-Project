@@ -12,11 +12,16 @@ import {
   Link,
   Box,
 } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
-import { useRef } from "react";
+import { useTranslation } from "../../hooks/useTranslation";
 export const DrawerHearths = (props: UseDisclosureProps) => {
   const { isOpen, onClose } = props;
-  const { t } = useTranslation();
+  const { translations } = useTranslation(
+    "Home",
+    "Service",
+    "AboutUs",
+    "Contact",
+    "Appointment"
+  );
   return (
     <Drawer
       isOpen={isOpen as boolean}
@@ -30,19 +35,19 @@ export const DrawerHearths = (props: UseDisclosureProps) => {
 
         <DrawerBody>
           <Box>
-            <Link>{t("Home")}</Link>
+            <Link>{translations.Home}</Link>
           </Box>
           <Box>
-            <Link>{t("Service")}</Link>
+            <Link>{translations.Service}</Link>
           </Box>
           <Box>
-            <Link>{t("About_us")}</Link>
+            <Link>{translations.AboutUs}</Link>
           </Box>
           <Box>
-            <Link>{t("Contact")}</Link>
+            <Link>{translations.Contact}</Link>
           </Box>
           <Box>
-            <Link>{t("Appointment")}</Link>
+            <Link>{translations.Appointment}</Link>
           </Box>
         </DrawerBody>
       </DrawerContent>
