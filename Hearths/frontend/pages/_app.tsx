@@ -3,25 +3,15 @@ import type { AppProps } from "next/app";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../utils/";
-import React, { useEffect } from "react";
+import React from "react";
 import { store, StoreonContext, useAppStore } from "../store";
-import { isBrowser } from "../utils/isBrowser";
-import { Language } from "../store/locale/@types";
 
-function RenderComponent({
-  Component,
-  pageProps,
-}: Pick<AppProps, "Component" | "pageProps">) {
-  const { dispatch } = useAppStore();
-  useEffect(() => {
-    if (!isBrowser) return;
-    const language = localStorage.getItem("language") as Language;
-    if (!language) return;
-    dispatch("locale/changeLocale", language);
-  }, []);
+import dynamic from "next/dynamic";
 
-  return <Component {...pageProps} />;
-}
+const RenderComponent = dynamic(
+  import("../components/shared/RenderComponent"),
+  { ssr: false }
+);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
