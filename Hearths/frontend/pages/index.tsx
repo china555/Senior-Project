@@ -12,13 +12,6 @@ const Home: NextPage = () => {
   console.log("translation-result", translations);
   return (
     <HeartsLayouts>
-      <Button
-        onClick={() => {
-          changeLocale(translations.currentLocale === "en" ? "th" : "en");
-        }}
-      >
-        change language
-      </Button>
       <HeartsBanner />
       <HeartsService />
       <HeartsAboutUs />
