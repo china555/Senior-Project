@@ -7,7 +7,7 @@ import {
   Box,
   Flex,
 } from "@chakra-ui/react";
-import { InfoIcon, WarningIcon } from "@chakra-ui/icons";
+import { InfoOutlineIcon, WarningIcon } from "@chakra-ui/icons";
 import React, { forwardRef } from "react";
 import { ErrorMessages } from "../shared/ErrorMessages";
 import { isNil } from "lodash";
@@ -27,7 +27,7 @@ export const HeartInput = forwardRef<HTMLInputElement, IInputProps>(
       labelText,
       helperText,
       errorMessages = [],
-      size = "md",
+      size = "lg",
       isInvalid = false,
       isRequired = false,
       placeholder = "",
@@ -59,8 +59,18 @@ export const HeartInput = forwardRef<HTMLInputElement, IInputProps>(
               borderColor="#E8E8E8"
             />
             {toolTipText && (
-              <Tooltip label={toolTipText} aria-label={toolTipText}>
-                <InfoIcon w={4} h={4} mx={4} display={["none", "block"]} />
+              <Tooltip
+                label={toolTipText}
+                aria-label={toolTipText}
+                placement="right-end"
+              >
+                <InfoOutlineIcon
+                  w={4}
+                  h={4}
+                  mx={4}
+                  display={["none", "block"]}
+                  color="#C1B9B9"
+                />
               </Tooltip>
             )}
           </Flex>
