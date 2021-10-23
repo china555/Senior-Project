@@ -35,7 +35,7 @@ export const HeartsTopMenu = () => {
             </Box>
           </Box>
           <Box display="flex">
-            <Link href="/sign-up/1">{translations.SignUp}</Link>
+            <Link href="/sign-up">{translations.SignUp}</Link>
             <Box px="2">
               <Divider orientation="vertical" />
             </Box>

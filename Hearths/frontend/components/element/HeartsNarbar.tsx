@@ -5,6 +5,7 @@ import { useSize } from "../../hooks/index";
 import { HearthsDrawer } from "./HeartsDrawer";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useTranslation } from "../../hooks/useTranslation";
+import { useRouter } from "next/router";
 
 export const HeartsNavbar = () => {
   const { translations } = useTranslation(
@@ -16,6 +17,7 @@ export const HeartsNavbar = () => {
   );
   const { width } = useSize();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
   return (
     <Box>
       <HearthsDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
@@ -24,6 +26,10 @@ export const HeartsNavbar = () => {
         <Box display="flex" w="100%">
           <Box w={{ base: "20%", xl: "40%" }}>
             <Image
+              cursor="pointer"
+              onClick={() => {
+                router.push("/");
+              }}
               w={["60%", "5rem", "5rem"]}
               alt="sorry"
               src="/images/logo/hearts_logo.png"
