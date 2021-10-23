@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useAppStore } from "../store";
 import { ILocaleState, Language } from "../store/locale/@types";
+import { isBrowser } from "../utils/isBrowser";
 
 export const useTranslation = <
   K extends keyof Omit<ILocaleState, "currentLocale">,
@@ -12,6 +13,9 @@ export const useTranslation = <
   const changeLocale = useCallback(
     (language: Language) => {
       dispatch("locale/changeLocale", language);
+
+      if (!isBrowser) return;
+      localStorage.setItem("language", language);
     },
     [dispatch]
   );
@@ -31,7 +35,7 @@ export const useTranslation = <
     );
     return {
       translations: Object.entries(locales)
-        .filter(([key]) => keys.includes(key as K))
+        .filter(([key]) => ["currentLocale", ...keys].includes(key as K))
         .reduce((a, [k, v]) => ({ ...a, [k]: v }), {}) as Record<
         K | "currentLocale",
         V
