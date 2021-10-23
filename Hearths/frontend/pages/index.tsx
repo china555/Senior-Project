@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { HearthsAboutUs } from "../components/element/aboutus";
 import { HearthsBanner } from "../components/element/banner";
 import { HeartsContactUs } from "../components/element/contactus";

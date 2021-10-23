@@ -1,10 +1,10 @@
 import { Box, Divider } from "@chakra-ui/react";
 import HeartsContainer from "../common/HeartsContainer";
 import { Link } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
-
+import { useTranslation } from "../../hooks/useTranslation";
 export const HeartsTopMenu = () => {
-  const { t, i18n } = useTranslation();
+  const { translations, changeLocale } = useTranslation("test");
+
   return (
     <Box bg="PrimaryColor.900" color="white" fontWeight="medium">
       <HeartsContainer>
