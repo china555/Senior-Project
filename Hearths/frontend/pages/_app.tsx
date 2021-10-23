@@ -12,7 +12,10 @@ import { useEffect } from "react";
 function MyApp({ Component, pageProps }: AppProps) {
   const { i18n } = useTranslation();
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (
+      typeof window !== undefined &&
+      localStorage.getItem("language") === null
+    ) {
       localStorage.setItem("language", i18n.language);
     }
   }, []);

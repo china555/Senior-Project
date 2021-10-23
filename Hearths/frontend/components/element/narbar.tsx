@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { useSize } from "../../hooks/index";
 import { DrawerHearths } from "./drawer";
 import { useDisclosure } from "@chakra-ui/hooks";
+
 export const HeartsNavbar = () => {
   const { t } = useTranslation();
   const { width } = useSize();

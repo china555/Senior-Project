@@ -2,6 +2,7 @@ import { Box, Divider } from "@chakra-ui/react";
 import HeartsContainer from "../common/HeartsContainer";
 import { Link } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
+
 export const HeartsTopMenu = () => {
   const { t, i18n } = useTranslation();
   return (
@@ -32,7 +33,7 @@ export const HeartsTopMenu = () => {
             </Box>
           </Box>
           <Box display="flex">
-            <Link>{t("SignUp")}</Link>
+            <Link href="/sign-up/1">{t("SignUp")}</Link>
             <Box px="2">
               <Divider orientation="vertical" />
             </Box>

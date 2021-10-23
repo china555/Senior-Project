@@ -2,8 +2,8 @@ import { Flex, Image, Box } from "@chakra-ui/react";
 
 export const HeartsFooter = () => {
   return (
-    <Flex justifyContent="center" bg="#4D7C97CC" py="2rem">
-      <Box w={{ base: "90%", xl: "60%" }}>
+    <Box bg="#7197AC" py="2rem">
+      <Box mx="auto" w={{ base: "80%", lg: "40%", xl: "60%" }}>
         <Flex alignItems="center">
           <Box w="50%">
             <Box w={{ base: "50%", xl: "30%" }} mx="auto">
@@ -17,6 +17,6 @@ export const HeartsFooter = () => {
           </Box>
         </Flex>
       </Box>
-    </Flex>
+    </Box>
   );
 };

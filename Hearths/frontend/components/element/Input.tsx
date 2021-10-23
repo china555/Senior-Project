@@ -51,12 +51,12 @@ export const HeartInput = forwardRef<HTMLInputElement, IInputProps>(
               size={size}
               errorBorderColor="red.500"
               focusBorderColor="gray.400"
-              backgroundColor="gray.200"
+              backgroundColor="#F6F6F6"
               placeholder={placeholder}
               {...style}
               isInvalid={isInvalid}
               ref={ref}
-              borderColor="gray.400"
+              borderColor="#E8E8E8"
             />
             {toolTipText && (
               <Tooltip label={toolTipText} aria-label={toolTipText}>
