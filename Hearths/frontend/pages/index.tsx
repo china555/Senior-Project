@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import { HearthsAboutUs } from "../components/element/aboutus";
-import { HearthsBanner } from "../components/element/banner";
-import { HeartsContactUs } from "../components/element/contactus";
-import { HeartsService } from "../components/element/service";
+import { HeartsAboutUs } from "../components/element/HeartsAboutUs";
+import { HeartsBanner } from "../components/element/HeartsBanner";
+import { HeartsContactUs } from "../components/element/HeartsContactus";
+import { HeartsService } from "../components/element/HeartsService";
 import { HeartsLayouts } from "../layouts/layout";
 import { useTranslation } from "../hooks/useTranslation";
 import { Button } from "@chakra-ui/react";
@@ -19,9 +19,9 @@ const Home: NextPage = () => {
       >
         change language
       </Button>
-      <HearthsBanner />
+      <HeartsBanner />
       <HeartsService />
-      <HearthsAboutUs />
+      <HeartsAboutUs />
       <HeartsContactUs />
     </HeartsLayouts>
     //       {/* <Box width={["100%", "30%"]} mx="auto">

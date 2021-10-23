@@ -1,7 +1,7 @@
 import { Box, Heading, Flex, Image, Text, Button } from "@chakra-ui/react";
 import HeartsContainer from "../common/HeartsContainer";
 
-export const HearthsAboutUs = () => {
+export const HeartsAboutUs = () => {
   return (
     <Box bg="PrimaryColor.bg" mt={{ base: "2rem", xl: "5rem" }} pb="5">
       <HeartsContainer>

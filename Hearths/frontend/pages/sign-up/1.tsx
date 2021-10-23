@@ -1,6 +1,6 @@
 import { Button, Center, Heading } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import { HeartInput } from "../../components/element/Input";
+import { HeartInput } from "../../components/element/HeartsInput";
 import { HeartsLayouts } from "../../layouts/layout";
 const SignUp: NextPage = () => {
   return (

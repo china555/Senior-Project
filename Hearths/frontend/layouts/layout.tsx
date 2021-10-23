@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
-import { HeartsFooter } from "../components/element/footer";
-import { HeartsNavbar } from "../components/element/narbar";
-import { HeartsTopMenu } from "../components/element/topmenu";
+import { HeartsFooter } from "../components/element/HeartsFooter";
+import { HeartsNavbar } from "../components/element/HeartsNarbar";
+import { HeartsTopMenu } from "../components/element/HeartsTopmenu";
 
 interface Props {
   children?: React.ReactNode;

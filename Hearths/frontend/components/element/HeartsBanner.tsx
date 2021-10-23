@@ -2,7 +2,7 @@ import { Box, Image, Link, Button } from "@chakra-ui/react";
 import HeartsContainer from "../common/HeartsContainer";
 import { useTranslation } from "../../hooks/useTranslation";
 
-export const HearthsBanner = () => {
+export const HeartsBanner = () => {
   const { translations, changeLocale } = useTranslation("Appointment");
   return (
     <Box>

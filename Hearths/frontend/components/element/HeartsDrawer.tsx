@@ -13,7 +13,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useTranslation } from "../../hooks/useTranslation";
-export const DrawerHearths = (props: UseDisclosureProps) => {
+export const HearthsDrawer = (props: UseDisclosureProps) => {
   const { isOpen, onClose } = props;
   const { translations } = useTranslation(
     "Home",

@@ -2,7 +2,7 @@ import { Box, Image, Link, Button } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import HeartsContainer from "../common/HeartsContainer";
 import { useSize } from "../../hooks/index";
-import { DrawerHearths } from "./drawer";
+import { HearthsDrawer } from "./HeartsDrawer";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useTranslation } from "../../hooks/useTranslation";
 
@@ -18,7 +18,7 @@ export const HeartsNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box>
-      <DrawerHearths isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <HearthsDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
 
       <HeartsContainer>
         <Box display="flex" w="100%">
