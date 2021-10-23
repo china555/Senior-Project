@@ -5,10 +5,7 @@ import { HeartsTopMenu } from "../components/element/topmenu";
 import { useTranslation } from "../hooks/useTranslation";
 
 const Home: NextPage = () => {
-  const { translations, changeLocale } = useTranslation(
-    "currentLocale",
-    "test"
-  );
+  const { translations, changeLocale } = useTranslation("test");
   console.log("translation-result", translations);
 
   return (

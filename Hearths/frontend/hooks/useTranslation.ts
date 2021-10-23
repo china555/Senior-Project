@@ -3,7 +3,7 @@ import { useAppStore } from "../store";
 import { ILocaleState, Language } from "../store/locale/@types";
 
 export const useTranslation = <
-  K extends keyof ILocaleState,
+  K extends keyof Omit<ILocaleState, "currentLocale">,
   V extends ILocaleState[K]
 >(
   ...keys: K[]
@@ -21,7 +21,7 @@ export const useTranslation = <
       translations: Object.entries(locales)
         .filter(([key]) => keys.includes(key as K))
         .reduce((a, [k, v]) => ({ ...a, [k]: v }), {}) as Record<
-        K & "currentLocale",
+        K | "currentLocale",
         V
       >,
       changeLocale,
