@@ -1,18 +1,27 @@
 import { Box, Button } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { HeartInput } from "../components/element/Input";
 import { HeartsNavbar } from "../components/element/narbar";
 import { HeartsTopMenu } from "../components/element/topmenu";
+import { useTranslation } from "../hooks/useTranslation";
 
 const Home: NextPage = () => {
-  const { t, i18n } = useTranslation();
+  const { translations, changeLocale } = useTranslation([
+    "test",
+    "currentLocale",
+  ]);
+  console.log("translation-result", translations);
+
   return (
     <Box>
       <HeartsTopMenu />
       <HeartsNavbar />
-
+      <Button
+        onClick={() => {
+          changeLocale(translations.currentLocale === "en" ? "th" : "en");
+        }}
+      >
+        change language
+      </Button>
       {/* <Box width={["100%", "30%"]} mx="auto">
         {t("test")}
         <HeartInput
@@ -32,11 +41,5 @@ in this process. It will not be used for anything else"
     </Box>
   );
 };
-
-export const getStaticProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ["common"])),
-  },
-});
 
 export default Home;
