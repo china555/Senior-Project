@@ -3,10 +3,10 @@ import { useAppStore } from "../store";
 import { ILocaleState, Language } from "../store/locale/@types";
 
 export const useTranslation = <
-  T extends keyof ILocaleState,
-  V extends ILocaleState[T]
+  K extends keyof ILocaleState,
+  V extends ILocaleState[K]
 >(
-  keys: T[]
+  keys: K[]
 ) => {
   const { dispatch, ...locales } = useAppStore("currentLocale", ...keys);
   const changeLocale = useCallback(
@@ -19,8 +19,8 @@ export const useTranslation = <
   return useMemo(
     () => ({
       translations: Object.entries(locales)
-        .filter(([key]) => keys.includes(key as T))
-        .reduce((a, [k, v]) => ({ ...a, [k]: v }), {}) as Record<T, V>,
+        .filter(([key]) => keys.includes(key as K))
+        .reduce((a, [k, v]) => ({ ...a, [k]: v }), {}) as Record<K, V>,
       changeLocale,
     }),
     [changeLocale, keys, locales]
