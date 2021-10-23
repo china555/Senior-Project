@@ -5,10 +5,24 @@ import { HearthsBanner } from "../components/element/banner";
 import { HeartsContactUs } from "../components/element/contactus";
 import { HeartsService } from "../components/element/service";
 import { HeartsLayouts } from "../layouts/layout";
+import { useTranslation } from "../hooks/useTranslation";
+import { Button } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
+  const { translations, changeLocale } = useTranslation([
+    "test",
+    "currentLocale",
+  ]);
+  console.log("translation-result", translations);
   return (
     <HeartsLayouts>
+      <Button
+        onClick={() => {
+          changeLocale(translations.currentLocale === "en" ? "th" : "en");
+        }}
+      >
+        change language
+      </Button>
       <HearthsBanner />
       <HeartsService />
       <HearthsAboutUs />
@@ -32,11 +46,5 @@ const Home: NextPage = () => {
     //       </Box> */}
   );
 };
-
-export const getStaticProps = async ({ locale }: any) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ["common"])),
-  },
-});
 
 export default Home;
