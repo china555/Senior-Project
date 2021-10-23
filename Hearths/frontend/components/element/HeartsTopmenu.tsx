@@ -1,19 +1,23 @@
 import { Box, Divider } from "@chakra-ui/react";
 import HeartsContainer from "../common/HeartsContainer";
 import { Link } from "@chakra-ui/react";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "../../hooks/useTranslation";
 export const HeartsTopMenu = () => {
-  const { t, i18n } = useTranslation();
+  const { translations, changeLocale } = useTranslation(
+    "test",
+    "SignUp",
+    "SignIn"
+  );
+
   return (
     <Box bg="PrimaryColor.900" color="white" fontWeight="medium">
       <HeartsContainer>
-        <Box display="flex" justifyContent="space-between" p="2">
+        <Box display="flex" justifyContent="space-between" py="2">
           <Box display="flex">
             <Box
               cursor="pointer"
               onClick={() => {
-                i18n.changeLanguage("en");
-                localStorage.setItem("language", "en");
+                changeLocale("en");
               }}
             >
               Eng
@@ -24,19 +28,18 @@ export const HeartsTopMenu = () => {
             <Box
               cursor="pointer"
               onClick={() => {
-                i18n.changeLanguage("th");
-                localStorage.setItem("language", "th");
+                changeLocale("th");
               }}
             >
               ไทย
             </Box>
           </Box>
           <Box display="flex">
-            <Link>{t("SignUp")}</Link>
+            <Link href="/sign-up/1">{translations.SignUp}</Link>
             <Box px="2">
               <Divider orientation="vertical" />
             </Box>
-            <Link>{t("SignIn")}</Link>
+            <Link>{translations.SignIn}</Link>
           </Box>
         </Box>
       </HeartsContainer>

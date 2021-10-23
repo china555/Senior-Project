@@ -4,9 +4,10 @@ const colors = {
   PrimaryColor: {
     900: "#225378",
     800: "#4D7C97",
-    bg: "#CBD8DB",
+    bg: "#F2F5F6",
   },
   SecondaryColor: "#FF7A00",
+  ThirdColor: "#3387B6",
 };
 
 const fonts = {

@@ -4,13 +4,20 @@ import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../utils/";
 import React from "react";
-import { store, StoreonContext } from "../store";
+import { store, StoreonContext, useAppStore } from "../store";
+
+import dynamic from "next/dynamic";
+
+const RenderComponent = dynamic(
+  import("../components/shared/RenderComponent"),
+  { ssr: false }
+);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <StoreonContext.Provider value={store}>
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
+        <RenderComponent Component={Component} pageProps={pageProps} />
       </ChakraProvider>
     </StoreonContext.Provider>
   );
