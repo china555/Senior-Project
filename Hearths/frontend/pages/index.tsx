@@ -9,10 +9,7 @@ import { useTranslation } from "../hooks/useTranslation";
 import { Button } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
-  const { translations, changeLocale } = useTranslation([
-    "test",
-    "currentLocale",
-  ]);
+  const { translations, changeLocale } = useTranslation("test");
   console.log("translation-result", translations);
   return (
     <HeartsLayouts>
