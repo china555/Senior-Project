@@ -6,7 +6,7 @@ export const useTranslation = <
   K extends keyof ILocaleState,
   V extends ILocaleState[K]
 >(
-  keys: K[]
+  ...keys: K[]
 ) => {
   const { dispatch, ...locales } = useAppStore("currentLocale", ...keys);
   const changeLocale = useCallback(
@@ -20,7 +20,10 @@ export const useTranslation = <
     () => ({
       translations: Object.entries(locales)
         .filter(([key]) => keys.includes(key as K))
-        .reduce((a, [k, v]) => ({ ...a, [k]: v }), {}) as Record<K, V>,
+        .reduce((a, [k, v]) => ({ ...a, [k]: v }), {}) as Record<
+        K & "currentLocale",
+        V
+      >,
       changeLocale,
     }),
     [changeLocale, keys, locales]
