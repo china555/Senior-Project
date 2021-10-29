@@ -43,12 +43,13 @@ export const HeartsDropzone = () => {
   };
 
   const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isDragActive ? activeStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
+    () =>
+      ({
+        ...baseStyle,
+        ...(isDragActive ? activeStyle : {}),
+        ...(isDragAccept ? acceptStyle : {}),
+        ...(isDragReject ? rejectStyle : {}),
+      } as React.CSSProperties),
     [isDragActive, isDragReject, isDragAccept]
   );
   return (
