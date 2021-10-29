@@ -39,7 +39,7 @@ export const HeartsTopMenu = () => {
             <Box px="2">
               <Divider orientation="vertical" />
             </Box>
-            <Link>{translations.SignIn}</Link>
+            <Link href="/sign-in">{translations.SignIn}</Link>
           </Box>
         </Box>
       </HeartsContainer>

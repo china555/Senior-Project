@@ -3,7 +3,7 @@ import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsContactUs = () => {
   return (
-    <Box my={{ base: "2rem", xl: "2rem" }}>
+    <Box id="contactus" my={{ base: "2rem", xl: "2rem" }}>
       <HeartsContainer>
         <Heading
           textDecor="underline"

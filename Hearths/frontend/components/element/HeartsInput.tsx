@@ -68,7 +68,7 @@ export const HeartInput = forwardRef<HTMLInputElement, IInputProps>(
                   w={4}
                   h={4}
                   mx={4}
-                  display={["none", "block"]}
+                  display={{ base: "none", xl: "block" }}
                   color="#C1B9B9"
                 />
               </Tooltip>

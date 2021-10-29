@@ -19,7 +19,7 @@ export const HeartsNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   return (
-    <Box>
+    <Box position="sticky" top="0" bg="white" zIndex="10">
       <HearthsDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
 
       <HeartsContainer>
@@ -43,10 +43,10 @@ export const HeartsNavbar = () => {
               alignItems="center"
               fontWeight="bold"
             >
-              <Link>{translations.Home}</Link>
-              <Link>{translations.Service}</Link>
-              <Link>{translations.AboutUs}</Link>
-              <Link>{translations.Contact}</Link>
+              <Link href="/">{translations.Home}</Link>
+              <Link href="#services">{translations.Service}</Link>
+              <Link href="#aboutus">{translations.AboutUs}</Link>
+              <Link href="#contactus">{translations.Contact}</Link>
               <Link>
                 <Button borderRadius="20" color="white" bg="SecondaryColor">
                   {translations.Appointment}
@@ -54,7 +54,13 @@ export const HeartsNavbar = () => {
               </Link>
             </Box>
           ) : (
-            <Box w="80%" px="5" textAlign="right" onClick={onOpen}>
+            <Box
+              alignSelf="center"
+              w="80%"
+              px="5"
+              textAlign="right"
+              onClick={onOpen}
+            >
               <HamburgerIcon w={10} h={10} color="gray.500" cursor="pointer" />
             </Box>
           )}

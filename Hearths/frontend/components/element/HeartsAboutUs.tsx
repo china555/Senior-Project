@@ -3,7 +3,12 @@ import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsAboutUs = () => {
   return (
-    <Box bg="PrimaryColor.bg" mt={{ base: "2rem", xl: "5rem" }} pb="5">
+    <Box
+      id="aboutus"
+      bg="PrimaryColor.bg"
+      mt={{ base: "2rem", xl: "5rem" }}
+      pb="5"
+    >
       <HeartsContainer>
         <Heading
           textDecor="underline"

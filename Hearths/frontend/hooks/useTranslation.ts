@@ -21,18 +21,18 @@ export const useTranslation = <
   );
 
   return useMemo(() => {
-    console.log("1", locales, keys);
-    console.log("2", Object.entries(locales));
-    console.log(
-      "3",
-      Object.entries(locales).filter(([key]) => keys.includes(key as K))
-    );
-    console.log(
-      "4",
-      Object.entries(locales)
-        .filter(([key]) => keys.includes(key as K))
-        .reduce((a, [k, v]) => ({ ...a, [k]: v }), {}) as Record<K, V>
-    );
+    // console.log("1", locales, keys);
+    // console.log("2", Object.entries(locales));
+    // console.log(
+    //   "3",
+    //   Object.entries(locales).filter(([key]) => keys.includes(key as K))
+    // );
+    // console.log(
+    //   "4",
+    //   Object.entries(locales)
+    //     .filter(([key]) => keys.includes(key as K))
+    //     .reduce((a, [k, v]) => ({ ...a, [k]: v }), {}) as Record<K, V>
+    // );
     return {
       translations: Object.entries(locales)
         .filter(([key]) => ["currentLocale", ...keys].includes(key as K))
