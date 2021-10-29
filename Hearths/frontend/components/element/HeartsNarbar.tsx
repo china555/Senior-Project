@@ -43,10 +43,10 @@ export const HeartsNavbar = () => {
               alignItems="center"
               fontWeight="bold"
             >
-              <Link>{translations.Home}</Link>
-              <Link>{translations.Service}</Link>
-              <Link>{translations.AboutUs}</Link>
-              <Link>{translations.Contact}</Link>
+              <Link href="/">{translations.Home}</Link>
+              <Link href="#services">{translations.Service}</Link>
+              <Link href="#aboutus">{translations.AboutUs}</Link>
+              <Link href="#contactus">{translations.Contact}</Link>
               <Link>
                 <Button borderRadius="20" color="white" bg="SecondaryColor">
                   {translations.Appointment}

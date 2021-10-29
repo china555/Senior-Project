@@ -35,16 +35,16 @@ export const HearthsDrawer = (props: UseDisclosureProps) => {
 
         <DrawerBody>
           <Box>
-            <Link>{translations.Home}</Link>
+            <Link href="/">{translations.Home}</Link>
           </Box>
           <Box>
-            <Link>{translations.Service}</Link>
+            <Link href="#services">{translations.Service}</Link>
           </Box>
           <Box>
-            <Link>{translations.AboutUs}</Link>
+            <Link href="#aboutus">{translations.AboutUs}</Link>
           </Box>
           <Box>
-            <Link>{translations.Contact}</Link>
+            <Link href="#contactus">{translations.Contact}</Link>
           </Box>
           <Box>
             <Link>{translations.Appointment}</Link>

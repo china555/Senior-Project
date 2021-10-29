@@ -5,6 +5,7 @@ import { HeartsLayouts } from "../layouts/layout";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { HeartsDropzone } from "../components/common/HeartsDropZone";
 import { HeartsMordal } from "../components/common/HeartsMordal";
+import { useState } from "react";
 
 type RegisterForm = {
   idCardNumber: string;
@@ -13,7 +14,7 @@ type RegisterForm = {
 };
 
 const SignUp: NextPage = () => {
-  let step = 2;
+  const [stepRegister, setstepRegister] = useState(1);
 
   const idCardToolTip = `It is used for your identification and is used only 
                          in this process. It will not be used for anything else`;
@@ -31,14 +32,16 @@ const SignUp: NextPage = () => {
   } = useForm<RegisterForm>();
 
   const onSubmit = (data: any) => {
-    console.log(data);
-    step++;
-    console.log(step);
+    console.log(stepRegister);
+    setstepRegister(stepRegister + 1);
   };
   return (
     <HeartsLayouts>
-      <HeartsMordal />
-      {step == 1 ? (
+      <HeartsMordal
+        img="/images/icons/warning.png"
+        text="Please upload payment receipt before click confirm botton"
+      />
+      {stepRegister == 1 ? (
         <Flex
           flexDirection="column"
           gridRowGap="15px"
@@ -46,7 +49,7 @@ const SignUp: NextPage = () => {
           mx="auto"
         >
           <Heading color="#003B71" as="h1" textAlign="center">
-            Sign up
+            Sign Up
           </Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Flex flexDirection="column" gridRowGap="15px">

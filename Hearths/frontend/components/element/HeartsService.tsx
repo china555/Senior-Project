@@ -6,7 +6,7 @@ export const HeartsService = () => {
   const { translations } = useTranslation("Appointment");
   return (
     <HeartsContainer>
-      <Box mt={{ base: "2rem", xl: "5rem" }} textAlign="center">
+      <Box id="services" mt={{ base: "2rem", xl: "5rem" }} textAlign="center">
         <Box>
           <Heading textDecor="underline" color="#003B71" as="h1">
             Our Services
