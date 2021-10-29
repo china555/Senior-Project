@@ -1,5 +1,8 @@
 import { Box } from "@chakra-ui/react";
+import type { NextPage } from "next";
 
-export const OurTeam = () => {
+const OurTeam: NextPage = () => {
   return <Box>Hello World</Box>;
 };
+
+export default OurTeam;
