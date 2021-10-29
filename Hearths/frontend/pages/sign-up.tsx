@@ -5,7 +5,9 @@ import { HeartsLayouts } from "../layouts/layout";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { HeartsDropzone } from "../components/common/HeartsDropZone";
 import { HeartsMordal } from "../components/common/HeartsMordal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDisclosure } from "@chakra-ui/hooks";
+import router from "next/router";
 
 type RegisterForm = {
   idCardNumber: string;
@@ -14,11 +16,21 @@ type RegisterForm = {
 };
 
 const SignUp: NextPage = () => {
-  const [stepRegister, setstepRegister] = useState(1);
-
+  const [stepRegister, setstepRegister] = useState(2);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isCancel, setIsCancel] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [isUpload, setUpload] = useState(false);
   const idCardToolTip = `It is used for your identification and is used only 
                          in this process. It will not be used for anything else`;
-
+  useEffect(() => {
+    window.addEventListener("beforeunload", function (event) {
+      console.log("hello");
+    });
+  }, []);
+  const closeHanlder = () => {
+    router.push("/");
+  };
   const consentImg = [
     "/images/consent/consent.png",
     "/images/consent/consent2.png",
@@ -37,10 +49,60 @@ const SignUp: NextPage = () => {
   };
   return (
     <HeartsLayouts>
-      <HeartsMordal
-        img="/images/icons/warning.png"
-        text="Please upload payment receipt before click confirm botton"
-      />
+      {isCancel ? (
+        <HeartsMordal isOpen={isOpen} onClose={onClose} isButtonClose={true}>
+          <Box w="100%">
+            <Box w="100px" mx="auto">
+              <Image
+                w="100%"
+                alt="NOt Found"
+                src="/images/icons/time-left.png"
+              />
+            </Box>
+            <Box mt="5">
+              Your appointment is on the payment confirmation process, you can
+              check appointment status on My Appointment
+            </Box>
+          </Box>
+          <Button
+            mt="20px"
+            colorScheme="blue"
+            onClick={closeHanlder}
+            w="200px"
+            borderRadius="35px"
+            bg="ButtonColor"
+          >
+            Close
+          </Button>
+        </HeartsMordal>
+      ) : (
+        <HeartsMordal isOpen={isOpen} onClose={onClose} isButtonClose={false}>
+          <Box w="100%">
+            <Box w="100px" mx="auto">
+              <Image
+                w="100%"
+                alt="NOt Found"
+                src="/images/icons/time-left.png"
+              />
+            </Box>
+            <Box mt="5">
+              Your appointment is on the payment confirmation process, you can
+              check appointment status on My Appointment
+            </Box>
+          </Box>
+          <Button
+            mt="20px"
+            colorScheme="blue"
+            onClick={closeHanlder}
+            w="200px"
+            borderRadius="35px"
+            bg="ButtonColor"
+          >
+            Close
+          </Button>
+        </HeartsMordal>
+      )}
+
       {stepRegister == 1 ? (
         <Flex
           flexDirection="column"
@@ -129,16 +191,28 @@ const SignUp: NextPage = () => {
             <br />- You must upload the receipt.
           </Heading>
           <Button
-            my="2rem"
+            mt="1rem"
             bg="ButtonColor"
             borderRadius="35px"
             color="white"
             py="35px"
             fontSize="1.6rem"
-            type="submit"
+            onClick={onOpen}
           >
             Confirm
           </Button>
+          <Heading
+            textAlign="center"
+            as="h3"
+            mb="3rem"
+            size="md"
+            fontWeight="medium"
+            color="red"
+            textDecoration="underline"
+            onClick={() => setIsCancel(true)}
+          >
+            Cancel
+          </Heading>
         </Flex>
       )}
     </HeartsLayouts>

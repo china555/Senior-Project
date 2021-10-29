@@ -13,11 +13,21 @@ export const HeartsContactUs = () => {
         >
           Contact Us
         </Heading>
-        <Flex flexWrap="wrap" mt="2rem">
-          <Box w={{ base: "100%", xl: "50%" }} textAlign="center">
-            <Box fontSize="2.5rem">GOOGLE MAP</Box>
+        <Flex
+          flexWrap="wrap"
+          mt="2rem"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Box w={{ base: "100%", xl: "49%" }} textAlign="center">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3874.6904751661323!2d100.31983081528838!3d13.79752339994859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2938c2967d2e1%3A0x8c7062528ac85923!2sFaculty%20of%20Physical%20Therapy%20(MU)!5e0!3m2!1sen!2sth!4v1635494392935!5m2!1sen!2sth"
+              width="100%"
+              height="350"
+              loading="lazy"
+            />
           </Box>
-          <Box w={{ base: "100%", xl: "50%" }}>
+          <Box w={{ base: "100%", xl: "49%" }} mt={{ base: "5", xl: "0" }}>
             <Flex w="100%" bg="PrimaryColor.bg" padding="2" alignItems="center">
               <Box w="20%">
                 <Image
