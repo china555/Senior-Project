@@ -1,67 +1,39 @@
-import { Box, Image, Button } from "@chakra-ui/react";
-import { CloseIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import {
+  Box,
+  Image,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
 
-interface MyProps {
+interface IModal {
+  isOpen: boolean;
+  onClose: () => void;
   children?: React.ReactNode;
-  img: string;
-  text: string;
+  isButtonClose?: boolean;
 }
 
-export const HeartsMordal: React.FunctionComponent<MyProps> = (props) => {
-  const [isopen, setisopen] = useState(false);
-  const { img, text } = props;
+export const HeartsMordal: React.FunctionComponent<IModal> = (props) => {
+  const { isOpen, onClose, isButtonClose } = props;
   return (
-    <Box
-      style={{
-        display: isopen ? "flex" : "none",
-      }}
-      position="fixed"
-      m="auto"
-      top="0"
-      bg="rgba(255,255,255, 0.3)"
-      w="100%"
-      h="100%"
-      zIndex="5"
-      overflow="auto"
-      transition="all 0.3s linear"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Box
-        w={{ base: "60%", xl: "40%" }}
-        bg="white"
-        borderRadius="20px"
-        border="1px solid black"
-        padding="20px"
-        textAlign="center"
-      >
-        <Box
-          position="relative"
-          top="0"
-          float="right"
-          cursor="pointer"
-          onClick={() => setisopen(!isopen)}
+    <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
+      <ModalOverlay />
+      <ModalContent>
+        {isButtonClose ? <ModalCloseButton /> : null}
+        <ModalBody
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          p="30px"
+          flexDirection="column"
         >
-          <CloseIcon />
-        </Box>
-        <Box w="100px" mx="auto">
-          <Image w="100%" alt="NOt Found" src={img} />
-        </Box>
-        <Box>{text}</Box>
-        <Button
-          my="1rem"
-          bg="ButtonColor"
-          borderRadius="35px"
-          color="white"
-          fontSize="1.2rem"
-          w="40%"
-          onClick={() => setisopen(!isopen)}
-        >
-          OK
-        </Button>
-      </Box>
-    </Box>
+          {props.children}
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
