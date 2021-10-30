@@ -1,11 +1,7 @@
 import {
-  Box,
-  Image,
-  Button,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
@@ -23,7 +19,7 @@ export const HeartsMordal: React.FunctionComponent<IModal> = (props) => {
     <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
       <ModalOverlay />
       <ModalContent>
-        {isButtonClose ? <ModalCloseButton /> : null}
+        {isButtonClose && <ModalCloseButton />}
         <ModalBody
           display="flex"
           justifyContent="center"

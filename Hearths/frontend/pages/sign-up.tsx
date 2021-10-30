@@ -5,9 +5,9 @@ import { HeartsLayouts } from "../layouts/layout";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { HeartsDropzone } from "../components/common/HeartsDropZone";
 import { HeartsMordal } from "../components/common/HeartsMordal";
-import { useEffect, useState } from "react";
-import { useDisclosure } from "@chakra-ui/hooks";
+import { useState } from "react";
 import router from "next/router";
+import { HeartsSignUpFee } from "../components/element/HeartsSignUpFee";
 
 type RegisterForm = {
   idCardNumber: string;
@@ -16,18 +16,10 @@ type RegisterForm = {
 };
 
 const SignUp: NextPage = () => {
-  const [stepRegister, setstepRegister] = useState(2);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isCancel, setIsCancel] = useState(false);
-  const [isConfirm, setIsConfirm] = useState(false);
-  const [isUpload, setUpload] = useState(false);
+  const [stepRegister, setstepRegister] = useState(1);
   const idCardToolTip = `It is used for your identification and is used only 
                          in this process. It will not be used for anything else`;
-  useEffect(() => {
-    window.addEventListener("beforeunload", function (event) {
-      console.log("hello");
-    });
-  }, []);
+
   const closeHanlder = () => {
     router.push("/");
   };
@@ -43,66 +35,12 @@ const SignUp: NextPage = () => {
     formState: { errors },
   } = useForm<RegisterForm>();
 
-  const onSubmit = (data: any) => {
-    console.log(stepRegister);
+  const onSubmit = (data: RegisterForm) => {
+    console.log(data);
     setstepRegister(stepRegister + 1);
   };
   return (
     <HeartsLayouts>
-      {isCancel ? (
-        <HeartsMordal isOpen={isOpen} onClose={onClose} isButtonClose={true}>
-          <Box w="100%">
-            <Box w="100px" mx="auto">
-              <Image
-                w="100%"
-                alt="NOt Found"
-                src="/images/icons/time-left.png"
-              />
-            </Box>
-            <Box mt="5">
-              Your appointment is on the payment confirmation process, you can
-              check appointment status on My Appointment
-            </Box>
-          </Box>
-          <Button
-            mt="20px"
-            colorScheme="blue"
-            onClick={closeHanlder}
-            w="200px"
-            borderRadius="35px"
-            bg="ButtonColor"
-          >
-            Close
-          </Button>
-        </HeartsMordal>
-      ) : (
-        <HeartsMordal isOpen={isOpen} onClose={onClose} isButtonClose={false}>
-          <Box w="100%">
-            <Box w="100px" mx="auto">
-              <Image
-                w="100%"
-                alt="NOt Found"
-                src="/images/icons/time-left.png"
-              />
-            </Box>
-            <Box mt="5">
-              Your appointment is on the payment confirmation process, you can
-              check appointment status on My Appointment
-            </Box>
-          </Box>
-          <Button
-            mt="20px"
-            colorScheme="blue"
-            onClick={closeHanlder}
-            w="200px"
-            borderRadius="35px"
-            bg="ButtonColor"
-          >
-            Close
-          </Button>
-        </HeartsMordal>
-      )}
-
       {stepRegister == 1 ? (
         <Flex
           flexDirection="column"
@@ -121,16 +59,28 @@ const SignUp: NextPage = () => {
                   maxLength={13}
                   toolTipText={idCardToolTip}
                   {...register("idCardNumber", {
-                    required: true,
+                    // required: true,
                     maxLength: 13,
                   })}
                 />
               </Box>
               <Box pr={{ base: 0, xl: "50px" }}>
-                <HeartInput type="email" placeholder="Email" />
+                <HeartInput
+                  {...register("email", {
+                    // required: true,
+                  })}
+                  // type="email"
+                  placeholder="Email"
+                />
               </Box>
               <Box pr={{ base: 0, xl: "50px" }}>
-                <HeartInput placeholder="Password" type="password" />
+                <HeartInput
+                  {...register("password", {
+                    // required: true,
+                  })}
+                  placeholder="Password"
+                  type="password"
+                />
               </Box>
               <Box w="100%">
                 {consentImg.map((img, idx) => {
@@ -172,48 +122,7 @@ const SignUp: NextPage = () => {
           </form>
         </Flex>
       ) : (
-        <Flex
-          flexDirection="column"
-          gridRowGap="15px"
-          w={{ base: "70%", lg: "40%", xl: "30%" }}
-          mx="auto"
-        >
-          <Heading color="#003B71" as="h1" textAlign="center">
-            Sign up Fee
-          </Heading>
-          <Box w="100%">
-            <Image mx="auto" alt="Not Found" src="/images/payment/QRcode.png" />
-          </Box>
-          <HeartsDropzone />
-          <Heading as="h3" size="sm" fontWeight="medium" color="red">
-            *Note: <br />- You cannot skip this process. If you change or close
-            this page, this process will be canceled.
-            <br />- You must upload the receipt.
-          </Heading>
-          <Button
-            mt="1rem"
-            bg="ButtonColor"
-            borderRadius="35px"
-            color="white"
-            py="35px"
-            fontSize="1.6rem"
-            onClick={onOpen}
-          >
-            Confirm
-          </Button>
-          <Heading
-            textAlign="center"
-            as="h3"
-            mb="3rem"
-            size="md"
-            fontWeight="medium"
-            color="red"
-            textDecoration="underline"
-            onClick={() => setIsCancel(true)}
-          >
-            Cancel
-          </Heading>
-        </Flex>
+        <HeartsSignUpFee title="Sign Up Fee" />
       )}
     </HeartsLayouts>
   );
