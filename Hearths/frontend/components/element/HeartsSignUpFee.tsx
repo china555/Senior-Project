@@ -18,9 +18,15 @@ export const HeartsSignUpFee = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const hasReceipFile = !isNil(receiptFile);
 
-  const handleRedirectionToIndexPage = () => {
-    onClose();
+  const resetState = () => {
+    setIsClickCancel(false);
 
+    setReceiptFile(undefined);
+  };
+
+  const handleCloseModal = () => {
+    onClose();
+    resetState();
     if (hasReceipFile || isClickCancel) {
       router.push("/");
     }
@@ -32,26 +38,37 @@ export const HeartsSignUpFee = () => {
   };
 
   const getModalIcon = () => {
+    if (!hasReceipFile && !isClickCancel) return "/images/icons/warning.png";
     if (isClickCancel) return "/images/icons/remove.png";
-    if (!hasReceipFile) return "/images/icons/warning.png";
     return "/images/icons/time-left.png";
   };
 
   const getModalText = () => {
+    if (!hasReceipFile && !isClickCancel)
+      return "Please upload payment recipte before click confirm button";
+
     if (isClickCancel)
       return "If you click confirm your process of appointment will be canceled";
-    if (!hasReceipFile)
-      return "Please upload payment recipte before click confirm button";
+
     return "Please wait for payment confirmation";
   };
+
   const handleUploadFile = (files: File[]) => {
     if (isEmpty(files)) return;
 
     setReceiptFile(first(files));
   };
+
   return (
     <Box>
-      <HeartsModal isOpen={isOpen} onClose={onClose} isButtonClose={true}>
+      <HeartsModal
+        isOpen={isOpen}
+        onClose={() => {
+          onClose();
+          resetState();
+        }}
+        isButtonClose={isClickCancel || !hasReceipFile}
+      >
         <Box w="100%">
           <Box w="100px" mx="auto">
             <Image w="100%" alt="NOt Found" src={getModalIcon()} />
@@ -61,7 +78,7 @@ export const HeartsSignUpFee = () => {
         <Button
           mt="20px"
           colorScheme="blue"
-          onClick={handleRedirectionToIndexPage}
+          onClick={handleCloseModal}
           w="200px"
           borderRadius="35px"
           bg="ButtonColor"
