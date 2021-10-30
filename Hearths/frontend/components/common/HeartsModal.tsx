@@ -13,7 +13,7 @@ interface IModal {
   isButtonClose?: boolean;
 }
 
-export const HeartsMordal: React.FunctionComponent<IModal> = (props) => {
+export const HeartsModal: React.FunctionComponent<IModal> = (props) => {
   const { isOpen, onClose, isButtonClose } = props;
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
