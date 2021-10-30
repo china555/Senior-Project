@@ -6,18 +6,12 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import router from "next/router";
 import { useState } from "react";
 import { first, isEmpty, isNil } from "lodash";
-interface IPayment {
-  title: string;
-  onSubmitHandler: () => void;
-  onCancelHandler: () => void;
-}
 
 type PaymentForm = {
   url: string;
 };
 
-export const HeartsSignUpFee = (props: IPayment) => {
-  const { onCancelHandler, onSubmitHandler, title } = props;
+export const HeartsSignUpFee = () => {
   const [isClickCancel, setIsClickCancel] = useState(false);
   const [receiptFile, setReceiptFile] = useState<File>();
 
@@ -83,7 +77,7 @@ export const HeartsSignUpFee = (props: IPayment) => {
         mx="auto"
       >
         <Heading color="#003B71" as="h1" textAlign="center">
-          {title}
+          Sign Up Fee
         </Heading>
         <Box w="100%">
           <Image mx="auto" alt="Not Found" src="/images/payment/QRcode.png" />

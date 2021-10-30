@@ -3,8 +3,6 @@ import type { NextPage } from "next";
 import { HeartInput } from "../components/element/HeartsInput";
 import { HeartsLayouts } from "../layouts/layout";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { HeartsDropzone } from "../components/common/HeartsDropZone";
-import { HeartsMordal } from "../components/common/HeartsMordal";
 import { useState } from "react";
 import router from "next/router";
 import { HeartsSignUpFee } from "../components/element/HeartsSignUpFee";
@@ -122,7 +120,7 @@ const SignUp: NextPage = () => {
           </form>
         </Flex>
       ) : (
-        <HeartsSignUpFee title="Sign Up Fee" />
+        <HeartsSignUpFee />
       )}
     </HeartsLayouts>
   );
