@@ -2,8 +2,12 @@ import { Box, Input, Text } from "@chakra-ui/react";
 import { useCallback, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
 
-export const HeartsDropzone = () => {
+interface IHeartsDropzoneProps {
+  onUploadFile: (files: File[]) => void;
+}
+export const HeartsDropzone = ({ onUploadFile }: IHeartsDropzoneProps) => {
   const onDrop = useCallback((acceptedFiles) => {
+    onUploadFile(acceptedFiles);
     // Do something with the files
   }, []);
   const {
