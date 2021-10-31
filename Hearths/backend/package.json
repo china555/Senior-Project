@@ -57,6 +57,7 @@
     "pg": "^8.7.1",
     "sequelize": "^6.3.5",
     "serve-favicon": "^2.5.0",
+    "socket.io-parser": "^4.1.1",
     "winston": "^3.0.0"
   },
   "devDependencies": {
