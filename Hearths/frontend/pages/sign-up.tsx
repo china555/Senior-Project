@@ -4,7 +4,7 @@ import { HeartInput } from "../components/element/HeartsInput";
 import { HeartsLayouts } from "../layouts/layout";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { HeartsSignUpFee } from "../components/element/HeartsSignUpFee";
 
 type RegisterForm = {
@@ -14,6 +14,7 @@ type RegisterForm = {
 };
 
 const SignUp: NextPage = () => {
+  const router = useRouter();
   const [stepRegister, setstepRegister] = useState(1);
   const idCardToolTip = `It is used for your identification and is used only 
                          in this process. It will not be used for anything else`;

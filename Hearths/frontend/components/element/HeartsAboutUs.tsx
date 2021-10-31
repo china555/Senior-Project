@@ -1,8 +1,10 @@
 import { Box, Heading, Flex, Image, Text, Button } from "@chakra-ui/react";
-import router from "next/router";
+import { useRouter } from "next/router";
+
 import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsAboutUs = () => {
+  const router = useRouter();
   return (
     <Box
       id="aboutus"

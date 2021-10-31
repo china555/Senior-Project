@@ -3,7 +3,7 @@ import { HeartsDropzone } from "../common/HeartsDropZone";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { HeartsModal } from "../common/HeartsModal";
 import { useDisclosure } from "@chakra-ui/hooks";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { first, isEmpty, isNil } from "lodash";
 
@@ -12,6 +12,7 @@ type PaymentForm = {
 };
 
 export const HeartsSignUpFee = () => {
+  const router = useRouter();
   const [isClickCancel, setIsClickCancel] = useState(false);
   const [receiptFile, setReceiptFile] = useState<File>();
 
