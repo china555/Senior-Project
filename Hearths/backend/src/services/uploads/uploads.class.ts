@@ -1,6 +1,21 @@
 import { Id, NullableId, Paginated, Params, ServiceMethods } from '@feathersjs/feathers';
 import { Application } from '../../declarations';
+import multer from 'multer';
 
+const storage = multer.diskStorage({
+  destination: (_req, _file, cb) => cb(null, 'public/uploads'), // where the files are being stored
+  filename: (_req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`) // getting the file name
+});
+
+const upload = multer({
+  storage,
+  limits: {
+    fieldSize: 1e+8, // Max field value size in bytes, here it's 100MB
+    fileSize: 1e+7 //  The max file size in bytes, here it's 10MB
+    // files: the number of files
+    // READ MORE https://www.npmjs.com/package/multer#limits
+  }
+});
 interface Data {}
 
 interface ServiceOptions {}
