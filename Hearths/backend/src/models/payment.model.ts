@@ -6,29 +6,12 @@ import { HookReturn } from "sequelize/types/lib/hooks";
 
 export default function (app: Application): typeof Model {
   const sequelizeClient: Sequelize = app.get("sequelizeClient");
-  const patient = sequelizeClient.define(
-    "patient",
+  const payment = sequelizeClient.define(
+    "payment",
     {
-      email: {
+      text: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      hn: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      photo: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      isPaid: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
       },
     },
     {
@@ -40,11 +23,12 @@ export default function (app: Application): typeof Model {
     }
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (patient as any).associate = function (models: any): void {
+  (payment as any).associate = function (models: any): void {
+    console.log("models", models);
+    models.patient.belongsTo(models.payment, { as: "patient" });
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 
-  return patient;
+  return payment;
 }
