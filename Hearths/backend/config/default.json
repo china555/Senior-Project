@@ -10,10 +10,7 @@
     "entity": "patient",
     "service": "patient",
     "secret": "WR8sVcofRyJNJBaiururVCtl2Rg=",
-    "authStrategies": [
-      "jwt",
-      "local"
-    ],
+    "authStrategies": ["jwt", "local"],
     "jwtOptions": {
       "header": {
         "typ": "access"
@@ -28,5 +25,5 @@
       "passwordField": "password"
     }
   },
-  "postgres": "postgres://postgres:@localhost:5432/backend"
+  "postgres": "postgres://postgres:fred@localhost:5432/backend"
 }
