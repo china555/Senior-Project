@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import HeartsContainer from "../components/common/HeartsContainer";
 import { HeartsLayouts } from "../layouts/layout";
 import { Grid } from "@chakra-ui/react";
+import ReactPlayer from "react-player";
 
 const OurTeam: NextPage = () => {
   return (
@@ -11,25 +12,29 @@ const OurTeam: NextPage = () => {
         <Heading color="#046483" as="h1" textAlign="center">
           Our Team
         </Heading>
-        <Text px={{ base: 0, xl: "100px" }}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industrys standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </Text>
+        <Box
+          mt="2rem"
+          textAlign="center"
+          mx="auto"
+          w={{ base: "100%", xl: "50%" }}
+          h={{ base: "320px", xl: "400px" }}
+        >
+          <iframe
+            src="https://drive.google.com/file/d/1hWJ-3clKQ2NgZz0emJuyKF5vUdZN2HaN/preview"
+            width="100%"
+            height="100%"
+            allow="autoplay"
+            allowFullScreen
+          />
+        </Box>
         <Grid
           my="2rem"
-          templateColumns="50% 50%"
+          templateColumns={{ base: "100%", xl: "50% 50%" }}
           gap="50px 30px"
           justifyContent="center"
         >
           <Box w="70%" textAlign="center" mx="auto" bg="#F6F8F8" p="20px">
-            <Heading as="h4" textAlign="center" size="md">
+            <Heading as="h4" textAlign="center" size="lg">
               Neurologic
             </Heading>
             <Box w="50%" mx="auto" mt="5">
@@ -37,7 +42,7 @@ const OurTeam: NextPage = () => {
             </Box>
           </Box>
           <Box w="70%" textAlign="center" mx="auto" bg="#F6F8F8" p="20px">
-            <Heading as="h4" textAlign="center" size="md">
+            <Heading as="h4" textAlign="center" size="lg">
               Pediatric
             </Heading>
             <Box w="50%" mx="auto" mt="5">
@@ -45,7 +50,7 @@ const OurTeam: NextPage = () => {
             </Box>
           </Box>
           <Box w="70%" textAlign="center" mx="auto" bg="#F6F8F8" p="20px">
-            <Heading as="h4" textAlign="center" size="md">
+            <Heading as="h4" textAlign="center" size="lg">
               Orthopaedic
             </Heading>
             <Box w="50%" mx="auto" mt="5">
@@ -53,7 +58,7 @@ const OurTeam: NextPage = () => {
             </Box>
           </Box>
           <Box w="70%" textAlign="center" mx="auto" bg="#F6F8F8" p="20px">
-            <Heading as="h4" textAlign="center" size="md">
+            <Heading as="h4" textAlign="center" size="lg">
               Occupational Therapy
             </Heading>
             <Box w="50%" mx="auto" mt="5">
