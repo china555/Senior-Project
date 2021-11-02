@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 import HeartsContainer from "../components/common/HeartsContainer";
 import { HeartsLayouts } from "../layouts/layout";
 import { Grid } from "@chakra-ui/react";
-import ReactPlayer from "react-player";
 
 const OurTeam: NextPage = () => {
   return (
