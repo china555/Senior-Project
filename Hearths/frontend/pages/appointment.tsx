@@ -24,7 +24,9 @@ const Appointment = () => {
         .map(([startA, endA, startB, endB]) => [
           { start: startA, end: endA, isBooked: false },
           { start: startB, end: endB, isBooked: false },
-        ])
+        ]).filter((ele)=>{
+          return ele.start !== 12
+        })
     )
   );
   return (
