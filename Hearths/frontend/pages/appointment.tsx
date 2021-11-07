@@ -18,7 +18,8 @@ const Appointment = () => {
   };
 
   const [value, onChange] = useState(new Date());
-  const [selectedDate, SetSelectedDate] = useState();
+  const [selectedDate, SetSelectedDate] = useState("");
+  const [selectedTime, SetSelectedTime] = useState("");
   const [allTimeLength, setAllTimeLength] = useState<Time[]>(
     flatMap(
       range(8, 20)
@@ -28,7 +29,7 @@ const Appointment = () => {
         .map((val) => [`${val}:00`, `${val}:30`, `${val}:30`, `${val + 1}:00`])
         .map(([startA, endA, startB, endB]) => [
           { start: startA, end: endA, isBooked: false },
-          { start: startB, end: endB, isBooked: false },
+          { start: startB, end: endB, isBooked: true },
         ])
     )
   );
@@ -73,6 +74,9 @@ const Appointment = () => {
                   return (
                     <Flex
                       key={index}
+                      onClick={() => {
+                        SetSelectedTime(`${ele.start} - ${ele.end}`);
+                      }}
                       bg="#f6f6f6"
                       borderBottom="1px solid"
                       p="0.5rem"
