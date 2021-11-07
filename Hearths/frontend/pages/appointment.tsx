@@ -38,8 +38,8 @@ const Appointment = () => {
         <Heading color="#046483" as="h1" textAlign="center">
           Make an Appointment
         </Heading>
-        <Flex>
-          <Box w="50%">
+        <Flex flexWrap="wrap" mt="5">
+          <Box w={{ base: "100%", xl: "50%" }}>
             <Text fontSize="24px">1.Select Specialty</Text>
             <Select bg="#F6F6F6" placeholder="Specialty">
               <option value="option1">Option 1</option>
@@ -58,9 +58,9 @@ const Appointment = () => {
               *Note: You can skip step 1 and 2, if you do not know.
             </Heading>
           </Box>
-          <Box w="50%">
-            <Box w="50%">
-              <Text fontSize="24px">3.Select Date</Text>
+          <Box w={{ base: "100%", xl: "50%" }} mt={{ base: "5", xl: "0" }}>
+            <Text fontSize="24px">3.Select Date</Text>
+            <Box w={{ base: "100%", xl: "60%" }} mx="auto">
               <Calendar
                 onChange={onChange}
                 value={value}
@@ -68,38 +68,37 @@ const Appointment = () => {
                 minDate={new Date()}
                 onClickDay={handleSelectedDate}
               />
-            </Box>
-            <Box maxH="200px" overflowY="scroll" className="scroll">
-              {allTimeLength.map((ele, index) => {
-                return (
-                  <Flex
-                    key={index}
-                    w="50%"
-                    bg="#f6f6f6"
-                    borderBottom="1px solid"
-                    p="0.5rem"
-                    borderColor="#E8E8E8"
-                  >
-                    <Flex w="100%" _active={{ bg: "#DDDCDC" }}>
-                      <Box w="20%" textAlign="center" alignSelf="center">
-                        <Box
-                          w="15px"
-                          h="15px"
-                          mx="auto"
-                          borderRadius="100%"
-                          bg="blue.300"
-                        >
-                          &nbsp;
+              <Box maxH="200px" overflowY="scroll" className="scroll">
+                {allTimeLength.map((ele, index) => {
+                  return (
+                    <Flex
+                      key={index}
+                      bg="#f6f6f6"
+                      borderBottom="1px solid"
+                      p="0.5rem"
+                      borderColor="#E8E8E8"
+                    >
+                      <Flex w="100%" _active={{ bg: "#DDDCDC" }}>
+                        <Box w="20%" textAlign="center" alignSelf="center">
+                          <Box
+                            w="15px"
+                            h="15px"
+                            mx="auto"
+                            borderRadius="100%"
+                            bg="blue.300"
+                          >
+                            &nbsp;
+                          </Box>
                         </Box>
-                      </Box>
-                      <Box w="60%" fontWeight="800">
-                        {ele.start} - {ele.end}
-                      </Box>
-                      <Box w="20%">{ele.isBooked ? "Booked" : "Free"}</Box>
+                        <Box w="60%" fontWeight="800">
+                          {ele.start} - {ele.end}
+                        </Box>
+                        <Box w="20%">{ele.isBooked ? "Booked" : "Free"}</Box>
+                      </Flex>
                     </Flex>
-                  </Flex>
-                );
-              })}
+                  );
+                })}
+              </Box>
             </Box>
           </Box>
         </Flex>
@@ -111,7 +110,7 @@ const Appointment = () => {
             color="white"
             py="30px"
             fontSize="1.6rem"
-            width="40%"
+            w={{ base: "60%", xl: "40%" }}
           >
             Confirm
           </Button>
