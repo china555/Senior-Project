@@ -1,4 +1,5 @@
 import { Box, Heading, Flex, Image, Text, Button } from "@chakra-ui/react";
+import { route } from "next/dist/server/router";
 import { useRouter } from "next/router";
 
 import HeartsContainer from "../common/HeartsContainer";
@@ -81,6 +82,9 @@ export const HeartsAboutUs = () => {
                   bg="ThirdColor"
                   color="white"
                   boxShadow="xl"
+                  onClick={() => {
+                    router.push("/FAQ");
+                  }}
                 >
                   FAQ
                 </Button>

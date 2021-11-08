@@ -47,7 +47,7 @@ export const HeartsNavbar = () => {
               <Link href="#services">{translations.Service}</Link>
               <Link href="#aboutus">{translations.AboutUs}</Link>
               <Link href="#contactus">{translations.Contact}</Link>
-              <Link>
+              <Link href="/appointment">
                 <Button borderRadius="20" color="white" bg="SecondaryColor">
                   {translations.Appointment}
                 </Button>

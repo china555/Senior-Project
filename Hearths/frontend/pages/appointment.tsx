@@ -36,7 +36,7 @@ const Appointment = () => {
   return (
     <HeartsLayouts>
       <HeartsContainer>
-        <Heading color="#046483" as="h1" textAlign="center">
+        <Heading color="#046483" as="h1" textAlign="center" mt="5">
           Make an Appointment
         </Heading>
         <Flex flexWrap="wrap" mt="5">
@@ -75,14 +75,20 @@ const Appointment = () => {
                     <Flex
                       key={index}
                       onClick={() => {
-                        SetSelectedTime(`${ele.start} - ${ele.end}`);
+                        if (!ele.isBooked) {
+                          SetSelectedTime(`${ele.start} - ${ele.end}`);
+                        }
                       }}
                       bg="#f6f6f6"
                       borderBottom="1px solid"
                       p="0.5rem"
                       borderColor="#E8E8E8"
                     >
-                      <Flex w="100%" _active={{ bg: "#DDDCDC" }}>
+                      <Flex
+                        w="100%"
+                        _active={{ bg: "#DDDCDC" }}
+                        _focus={{ bg: "red" }}
+                      >
                         <Box w="20%" textAlign="center" alignSelf="center">
                           <Box
                             w="15px"

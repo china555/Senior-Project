@@ -1,8 +1,12 @@
 import { Box, Image, Link, Button } from "@chakra-ui/react";
 import HeartsContainer from "../common/HeartsContainer";
 import { useTranslation } from "../../hooks/useTranslation";
-
+import { useRouter } from "next/router";
 export const HeartsBanner = () => {
+  const router = useRouter();
+  const appointment = () =>{
+    router.push('appointment')
+  }
   const { translations, changeLocale } = useTranslation("Appointment");
   return (
     <Box>
@@ -48,17 +52,16 @@ export const HeartsBanner = () => {
             One More Reason To Be Healthy
           </Box>
           <Box mt="2">
-            <Link>
               <Button
                 borderRadius="20"
                 color="white"
                 bg="SecondaryColor"
                 fontSize="lg"
                 p="6"
+                onClick={appointment}
               >
                 {translations.Appointment}
               </Button>
-            </Link>
           </Box>
         </HeartsContainer>
       </Box>

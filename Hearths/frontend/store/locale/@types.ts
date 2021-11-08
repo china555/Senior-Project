@@ -1,4 +1,8 @@
 export type Language = "en" | "th";
+export type QuestionAndAnswer = {
+  Question: string;
+  Answer: string;
+};
 export interface ILocaleState {
   currentLocale: Language;
   test: string;
@@ -9,6 +13,7 @@ export interface ILocaleState {
   AboutUs: string;
   Contact: string;
   Appointment: string;
+  Question: QuestionAndAnswer[];
 }
 
 export interface ILocaleEvent {
