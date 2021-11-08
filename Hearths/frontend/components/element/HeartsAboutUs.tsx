@@ -1,9 +1,16 @@
 import { Box, Heading, Flex, Image, Text, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { useTranslation } from "../../hooks/useTranslation";
 
 import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsAboutUs = () => {
+  const { translations } = useTranslation(
+    "FAQ",
+    "Contact",
+    "OurTeam",
+    "AboutUs"
+  );
   const router = useRouter();
   return (
     <Box bg="PrimaryColor.bg" mt="6rem" pb="5">
@@ -13,10 +20,11 @@ export const HeartsAboutUs = () => {
           color="#003B71"
           as="h1"
           textAlign="center"
+          pt="5"
         >
-          About Us
+          {translations.AboutUs}
         </Heading>
-        <Flex flexWrap="wrap">
+        <Flex flexWrap="wrap" mt="5">
           <Box w={{ base: "100%", xl: "50%" }}>
             <Box w={{ base: "50%", xl: "40%" }} mx="auto">
               <Image w="100%" alt="" src="/images/logo/hearts_logo.png" />
@@ -54,7 +62,7 @@ export const HeartsAboutUs = () => {
                     router.push("#contactus");
                   }}
                 >
-                  Contact Us
+                  {translations.Contact}
                 </Button>
                 <Button
                   py="2rem"
@@ -67,7 +75,7 @@ export const HeartsAboutUs = () => {
                     router.push("/our-team");
                   }}
                 >
-                  Our Team
+                  {translations.OurTeam}
                 </Button>
                 <br />
                 <Button
@@ -83,7 +91,7 @@ export const HeartsAboutUs = () => {
                     router.push("/FAQ");
                   }}
                 >
-                  FAQ
+                  {translations.FAQ}
                 </Button>
               </Box>
             </Box>

@@ -1,7 +1,9 @@
 import { Box, Heading, Flex, Image } from "@chakra-ui/react";
+import { useTranslation } from "../../hooks/useTranslation";
 import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsContactUs = () => {
+  const { translations } = useTranslation("Contact");
   return (
     <Box my="6rem">
       <HeartsContainer>
@@ -11,7 +13,7 @@ export const HeartsContactUs = () => {
           as="h1"
           textAlign="center"
         >
-          Contact Us
+          {translations.Contact}
         </Heading>
         <Flex
           flexWrap="wrap"

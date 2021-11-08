@@ -4,10 +4,10 @@ import { useTranslation } from "../../hooks/useTranslation";
 import { useRouter } from "next/router";
 export const HeartsBanner = () => {
   const router = useRouter();
-  const appointment = () =>{
-    router.push('appointment')
-  }
-  const { translations, changeLocale } = useTranslation("Appointment");
+  const appointment = () => {
+    router.push("appointment");
+  };
+  const { translations } = useTranslation("Appointment");
   return (
     <Box>
       <Box
@@ -52,16 +52,16 @@ export const HeartsBanner = () => {
             One More Reason To Be Healthy
           </Box>
           <Box mt="2">
-              <Button
-                borderRadius="20"
-                color="white"
-                bg="SecondaryColor"
-                fontSize="lg"
-                p="6"
-                onClick={appointment}
-              >
-                {translations.Appointment}
-              </Button>
+            <Button
+              borderRadius="20"
+              color="white"
+              bg="SecondaryColor"
+              fontSize="lg"
+              p="6"
+              onClick={appointment}
+            >
+              {translations.Appointment}
+            </Button>
           </Box>
         </HeartsContainer>
       </Box>
