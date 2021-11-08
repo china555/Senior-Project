@@ -10,6 +10,9 @@ export const enLocale: ILocaleState = {
   AboutUs: "About Us",
   Contact: "Contact",
   Appointment: "Make an appointment",
+  MyAppointment: "My Appointment",
+  RequestDocument: "Request Documet",
+  VDOCallService: "Service",
   Question: [
     {
       Question:
@@ -59,6 +62,10 @@ export const thLocale: ILocaleState = {
   AboutUs: "เกี่ยวกับพวกเรา",
   Contact: "ติดต่อเรา",
   Appointment: "นัดหมาย",
+  MyAppointment: "นัดหมายของฉัน",
+  RequestDocument: "ขอเอกสาร",
+  VDOCallService: "บริการ",
+
   Question: [
     {
       Question:

@@ -3,10 +3,15 @@ import { useTranslation } from "../../hooks/useTranslation";
 import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsService = () => {
-  const { translations } = useTranslation("Appointment");
+  const { translations } = useTranslation(
+    "Appointment",
+    "MyAppointment",
+    "RequestDocument",
+    "VDOCallService"
+  );
   return (
     <HeartsContainer>
-      <Box id="services" mt={{ base: "2rem", xl: "5rem" }} textAlign="center">
+      <Box mt="6rem" textAlign="center">
         <Box>
           <Heading textDecor="underline" color="#003B71" as="h1">
             Our Services
@@ -34,7 +39,7 @@ export const HeartsService = () => {
             <Box w={{ base: "20%", xl: "20%" }} mx="auto">
               <Image w="100%" alt="" src="/images/icons/appoint.png" />
             </Box>
-            <Box>{translations.Appointment}</Box>
+            <Box>{translations.MyAppointment}</Box>
           </Box>
           <Divider
             my={{ base: "0", xl: "2%" }}
@@ -51,13 +56,13 @@ export const HeartsService = () => {
             <Box w={{ base: "20%", xl: "20%" }} mx="auto">
               <Image w="100%" alt="" src="/images/icons/document.png" />
             </Box>
-            <Box>{translations.Appointment}</Box>
+            <Box>{translations.RequestDocument}</Box>
           </Box>
           <Box mt={{ base: "2%", xl: "0" }} width={{ base: "100%", xl: "50%" }}>
             <Box w={{ base: "20%", xl: "20%" }} mx="auto">
               <Image w="100%" alt="" src="/images/icons/vdocall.png" />
             </Box>
-            <Box>{translations.Appointment}</Box>
+            <Box>{translations.VDOCallService}</Box>
           </Box>
         </Flex>
       </Box>

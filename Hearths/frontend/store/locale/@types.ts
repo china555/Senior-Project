@@ -13,6 +13,9 @@ export interface ILocaleState {
   AboutUs: string;
   Contact: string;
   Appointment: string;
+  MyAppointment: string;
+  RequestDocument: string;
+  VDOCallService: string;
   Question: QuestionAndAnswer[];
 }
 

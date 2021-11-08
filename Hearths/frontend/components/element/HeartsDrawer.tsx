@@ -33,21 +33,21 @@ export const HearthsDrawer = (props: UseDisclosureProps) => {
         <DrawerCloseButton />
         <DrawerHeader></DrawerHeader>
 
-        <DrawerBody>
-          <Box>
+        <DrawerBody fontSize="1.5rem">
+          <Box my="4" pb="2" borderBottom="1px solid #dadce0">
             <Link href="/">{translations.Home}</Link>
           </Box>
-          <Box>
-            <Link href="#services">{translations.Service}</Link>
+          <Box my="4" pb="2" borderBottom="1px solid #dadce0">
+            <Link href="/#services">{translations.Service}</Link>
           </Box>
-          <Box>
-            <Link href="#aboutus">{translations.AboutUs}</Link>
+          <Box my="4" pb="2" borderBottom="1px solid #dadce0">
+            <Link href="/#aboutus">{translations.AboutUs}</Link>
           </Box>
-          <Box>
-            <Link href="#contactus">{translations.Contact}</Link>
+          <Box my="4" pb="2" borderBottom="1px solid #dadce0">
+            <Link href="/#contactus">{translations.Contact}</Link>
           </Box>
-          <Box>
-            <Link>{translations.Appointment}</Link>
+          <Box my="4" pb="2" borderBottom="1px solid #dadce0">
+            <Link href="/appointment">{translations.Appointment}</Link>
           </Box>
         </DrawerBody>
       </DrawerContent>

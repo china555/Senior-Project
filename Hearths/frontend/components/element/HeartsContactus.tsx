@@ -3,7 +3,7 @@ import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsContactUs = () => {
   return (
-    <Box id="contactus" my={{ base: "2rem", xl: "2rem" }}>
+    <Box my="6rem">
       <HeartsContainer>
         <Heading
           textDecor="underline"
@@ -36,7 +36,11 @@ export const HeartsContactUs = () => {
                   alt=""
                 />
               </Box>
-              <Box w="80%">Wat thra phra</Box>
+              <Box w="80%">
+                ศูนย์กายภาพบำบัด (เชิงสะพานสมเด็จพระปิ่นเกล้า) คณะกายภาพบำบัด
+                มหาวิทยาลัยมหิดล 198/2 ถนนสมเด็จพระปิ่นเกล้า แขวงบางยี่ขัน
+                เขตบางพลัด กรุงเทพฯ 10700
+              </Box>
             </Flex>
             <Flex
               w="100%"
@@ -48,7 +52,7 @@ export const HeartsContactUs = () => {
               <Box w="20%">
                 <Image w="60%" src="/images/icons/mail_23797.png" alt="" />
               </Box>
-              <Box w="80%">hearths@gmail.com</Box>
+              <Box w="80%">HeaRTS@gmail.com</Box>
             </Flex>
             <Flex
               w="100%"
@@ -60,7 +64,7 @@ export const HeartsContactUs = () => {
               <Box w="20%">
                 <Image w="60%" src="/images/icons/phone_23732.png" alt="" />
               </Box>
-              <Box w="80%">091-111-0258</Box>
+              <Box w="80%">063-520-5151</Box>
             </Flex>
           </Box>
         </Flex>

@@ -1,5 +1,4 @@
 import { Box, Heading, Flex, Image, Text, Button } from "@chakra-ui/react";
-import { route } from "next/dist/server/router";
 import { useRouter } from "next/router";
 
 import HeartsContainer from "../common/HeartsContainer";
@@ -7,12 +6,7 @@ import HeartsContainer from "../common/HeartsContainer";
 export const HeartsAboutUs = () => {
   const router = useRouter();
   return (
-    <Box
-      id="aboutus"
-      bg="PrimaryColor.bg"
-      mt={{ base: "2rem", xl: "5rem" }}
-      pb="5"
-    >
+    <Box bg="PrimaryColor.bg" mt="6rem" pb="5">
       <HeartsContainer>
         <Heading
           textDecor="underline"
@@ -56,6 +50,9 @@ export const HeartsAboutUs = () => {
                   bg="white"
                   color="ThirdColor"
                   boxShadow="xl"
+                  onClick={() => {
+                    router.push("#contactus");
+                  }}
                 >
                   Contact Us
                 </Button>
