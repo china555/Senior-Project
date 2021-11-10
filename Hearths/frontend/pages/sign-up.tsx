@@ -90,18 +90,10 @@ const SignUp: NextPage = () => {
                 *Please read carefully. Click accept before click Sign Up
               </Heading>
               <Flex flexDirection="column" px="10px">
-                <Checkbox
-                  colorScheme="#F6F6F6"
-                  iconColor="black"
-                  defaultIsChecked
-                >
+                <Checkbox colorScheme="#F6F6F6" iconColor="black">
                   Accept
                 </Checkbox>
-                <Checkbox
-                  colorScheme="#F6F6F6"
-                  iconColor="black"
-                  defaultIsChecked
-                >
+                <Checkbox colorScheme="#F6F6F6" iconColor="black">
                   I would like to receive your newsletter and other promotional
                   information.
                 </Checkbox>
