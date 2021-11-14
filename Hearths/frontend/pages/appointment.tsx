@@ -150,6 +150,7 @@ const Appointment = () => {
                                 ? "#DDDCDC"
                                 : "#f6f6f6",
                           }}
+                          cursor="pointer"
                         >
                           <Box w="20%" textAlign="center" alignSelf="center">
                             <Box
