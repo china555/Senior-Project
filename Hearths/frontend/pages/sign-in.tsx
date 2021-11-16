@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { HeartInput } from "../components/element/HeartsInput";
 import { HeartsLayouts } from "../layouts/layout";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/router";
 
 type LogInForm = {
   email: string;
@@ -15,8 +16,12 @@ const SignIn: NextPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LogInForm>();
+  const router = useRouter();
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    console.log(data);
+    router.push("/");
+  };
   return (
     <HeartsLayouts>
       <Flex
@@ -45,6 +50,7 @@ const SignIn: NextPage = () => {
                 color="white"
                 py="30px"
                 fontSize="1.6rem"
+                type="submit"
               >
                 Sign In
               </Button>
