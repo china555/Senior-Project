@@ -38,9 +38,10 @@ export const HeartsBanner = () => {
             fontSize="4xl"
             fontWeight="800"
           >
-            HeaRTS
+            <span style={{ color: "#225378" }}>Hea</span>
+            <span style={{ color: "#EB7F00" }}>RTS</span>
             <br />
-            Health Care Tele Delivery Service
+            HealthcaRe Tele-delivery Service
           </Box>
           <Box
             textShadow="-1px 1px 0 #FFFFFF,

@@ -34,8 +34,8 @@ export const HeartsAboutUs = () => {
             <Box w="90%" mx="auto">
               <Heading as="h2" size="lg" mt={{ base: "1rem", xl: "0" }}>
                 We are <span style={{ color: "#225378" }}>Hea</span>
-                <span style={{ color: "#EB7F00" }}>RTS</span> a <br /> Health
-                Care Tele Delivery Service
+                <span style={{ color: "#EB7F00" }}>RTS</span> a <br />{" "}
+                HealthcaRe Tele-delivery Service
               </Heading>
               <Text>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
