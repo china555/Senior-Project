@@ -3,8 +3,75 @@ import type { NextPage } from "next";
 import HeartsContainer from "../components/common/HeartsContainer";
 import { HeartsLayouts } from "../layouts/layout";
 import { Grid } from "@chakra-ui/react";
-
+import { useRouter } from "next/router";
+import { useTranslation } from "../hooks/useTranslation";
+interface IDepartment {
+  name: string;
+  img: string;
+  alt: string;
+  clickhandler: () => void;
+}
 const OurTeam: NextPage = () => {
+  const router = useRouter();
+  const { translations } = useTranslation("DepartMentName");
+  const department: IDepartment[] = [
+    {
+      name: translations.DepartMentName.OccupationalTherapy,
+      img: "/images/our-team/Logo/OT.jpg",
+      alt: "Occupational Therapy",
+      clickhandler: () => {
+        router.push("/");
+      },
+    },
+    {
+      name: translations.DepartMentName.MusculoSkeletalSystem,
+      img: "/images/our-team/Logo/OT.jpg",
+      alt: "Physical Therapy: Musculoskeletal system",
+      clickhandler: () => {
+        router.push("/");
+      },
+    },
+    {
+      name: translations.DepartMentName.NeurologicalSystem,
+      img: "/images/our-team/Logo/Neuro.jpg",
+      alt: "Physical Therapy: Neurological system",
+      clickhandler: () => {
+        router.push("/");
+      },
+    },
+    {
+      name: translations.DepartMentName.Pediatric,
+      img: "/images/our-team/Logo/Pediatric.jpg",
+      alt: "Physical Therapy: Pediatric",
+      clickhandler: () => {
+        router.push("/");
+      },
+    },
+    {
+      name: translations.DepartMentName.Scoliosis,
+      img: "/images/our-team/Logo/Scoliosis.jpg",
+      alt: "Physical Therapy: Scoliosis",
+      clickhandler: () => {
+        router.push("/");
+      },
+    },
+    {
+      name: translations.DepartMentName.WomenHealth,
+      img: "/images/our-team/Logo/Women.jpg",
+      alt: "Physical Therapy: Women health",
+      clickhandler: () => {
+        router.push("/");
+      },
+    },
+    {
+      name: translations.DepartMentName.Community,
+      img: "/images/our-team/Logo/Women.jpg",
+      alt: "Physical Therapy: Community",
+      clickhandler: () => {
+        router.push("/");
+      },
+    },
+  ];
   return (
     <HeartsLayouts>
       <HeartsContainer>
@@ -32,42 +99,26 @@ const OurTeam: NextPage = () => {
           gap="50px 30px"
           justifyContent="center"
         >
-          <Box w="70%" textAlign="center" mx="auto" bg="#F6F8F8" p="20px">
-            <Heading as="h4" textAlign="center" size="lg">
-              Neurologic
-            </Heading>
-            <Box w="50%" mx="auto" mt="5">
-              <Image w="100%" alt="Not Found" src="/images/icons/brain 1.png" />
-            </Box>
-          </Box>
-          <Box w="70%" textAlign="center" mx="auto" bg="#F6F8F8" p="20px">
-            <Heading as="h4" textAlign="center" size="lg">
-              Pediatric
-            </Heading>
-            <Box w="50%" mx="auto" mt="5">
-              <Image w="100%" alt="Not Found" src="/images/icons/child 1.png" />
-            </Box>
-          </Box>
-          <Box w="70%" textAlign="center" mx="auto" bg="#F6F8F8" p="20px">
-            <Heading as="h4" textAlign="center" size="lg">
-              Orthopaedic
-            </Heading>
-            <Box w="50%" mx="auto" mt="5">
-              <Image w="100%" alt="Not Found" src="/images/icons/joint 1.png" />
-            </Box>
-          </Box>
-          <Box w="70%" textAlign="center" mx="auto" bg="#F6F8F8" p="20px">
-            <Heading as="h4" textAlign="center" size="lg">
-              Occupational Therapy
-            </Heading>
-            <Box w="50%" mx="auto" mt="5">
-              <Image
-                w="100%"
-                alt="Not Found"
-                src="/images/icons/physical 1.png"
-              />
-            </Box>
-          </Box>
+          {department.map((department) => {
+            return (
+              <Box
+                w="70%"
+                textAlign="center"
+                mx="auto"
+                bg="#F6F8F8"
+                p="20px"
+                key={department.name}
+                onClick={department.clickhandler}
+              >
+                <Heading as="h4" textAlign="center" size="lg">
+                  {department.name}
+                </Heading>
+                <Box w="70%" mx="auto" mt="5">
+                  <Image w="100%" alt={department.alt} src={department.img} />
+                </Box>
+              </Box>
+            );
+          })}
         </Grid>
       </HeartsContainer>
     </HeartsLayouts>

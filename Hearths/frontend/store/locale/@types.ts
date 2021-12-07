@@ -3,6 +3,15 @@ export type QuestionAndAnswer = {
   Question: string;
   Answer: string;
 };
+type DepartMent = {
+  OccupationalTherapy: string;
+  MusculoSkeletalSystem: string;
+  NeurologicalSystem: string;
+  Pediatric: string;
+  Scoliosis: string;
+  WomenHealth: string;
+  Community: string;
+};
 export interface ILocaleState {
   currentLocale: Language;
   test: string;
@@ -18,6 +27,8 @@ export interface ILocaleState {
   VDOCallService: string;
   FAQ: string;
   OurTeam: string;
+  DepartMentName: DepartMent;
+
   Question: QuestionAndAnswer[];
 }
 

@@ -15,6 +15,15 @@ export const enLocale: ILocaleState = {
   VDOCallService: "Service",
   FAQ: "FAQ",
   OurTeam: "Our Team",
+  DepartMentName: {
+    OccupationalTherapy: "Occupational Therapy",
+    MusculoSkeletalSystem: "Musculoskeletal system",
+    NeurologicalSystem: "Neurological system",
+    Pediatric: "Pediatric",
+    Scoliosis: "Scoliosis",
+    WomenHealth: "Women health",
+    Community: "Community",
+  },
   Question: [
     {
       Question:
@@ -70,6 +79,15 @@ export const thLocale: ILocaleState = {
   VDOCallService: "บริการ",
   FAQ: "คำถามที่พบบ่อย",
   OurTeam: "ทีมของเรา",
+  DepartMentName: {
+    OccupationalTherapy: "กิจกรรมบำบัด",
+    MusculoSkeletalSystem: "กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ",
+    NeurologicalSystem: "กายภาพบำบัดระบบประสาท",
+    Pediatric: "กายภาพบำบัดทางเด็ก",
+    Scoliosis: "กายภาพบำบัดในกระดูกสันหลังคด",
+    WomenHealth: "กายภาพบำบัดสุขภาพหญิง",
+    Community: "กายภาพบำบัดชุมชน",
+  },
   Question: [
     {
       Question:
