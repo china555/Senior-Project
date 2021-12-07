@@ -3,7 +3,11 @@ export type QuestionAndAnswer = {
   Question: string;
   Answer: string;
 };
-type DepartMent = {
+export interface IPhysiotherapist {
+  name: string;
+  specialty: string[];
+}
+export type DepartMent = {
   OccupationalTherapy: string;
   MusculoSkeletalSystem: string;
   NeurologicalSystem: string;
@@ -11,6 +15,15 @@ type DepartMent = {
   Scoliosis: string;
   WomenHealth: string;
   Community: string;
+};
+export type Physiotherapist = {
+  PhysiotherapistOT: IPhysiotherapist[];
+  PhysiotherapistMS: IPhysiotherapist[];
+  PhysiotherapistNS: IPhysiotherapist[];
+  PhysiotherapistPediatric: IPhysiotherapist[];
+  PhysiotherapistScoliosis: IPhysiotherapist[];
+  PhysiotherapistWomen: IPhysiotherapist[];
+  PhysiotherapistCommunity: IPhysiotherapist[];
 };
 export interface ILocaleState {
   currentLocale: Language;
@@ -28,7 +41,7 @@ export interface ILocaleState {
   FAQ: string;
   OurTeam: string;
   DepartMentName: DepartMent;
-
+  Physiotherapist: Physiotherapist;
   Question: QuestionAndAnswer[];
 }
 
