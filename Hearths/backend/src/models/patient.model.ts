@@ -18,7 +18,7 @@ export default function (app: Application): typeof Model {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      hn: {
+      HN: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -26,7 +26,11 @@ export default function (app: Application): typeof Model {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      isPaid: {
+      consent_agreement: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      news_receiving_agreement: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
@@ -43,6 +47,7 @@ export default function (app: Application): typeof Model {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (patient as any).associate = function (models: any): void {
     // Define associations here
+    models.payment.belongsTo(models.patient, { as: "patient" });
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
 

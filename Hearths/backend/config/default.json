@@ -25,5 +25,6 @@
       "passwordField": "password"
     }
   },
-  "postgres": "postgres://postgres:fred@localhost:5432/backend"
+  "postgres": "postgres://postgres:123456@localhost:5432/hearts",
+  "mysql" : "mysql://china:123456@localhost:3306/pt_system"
 }

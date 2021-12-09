@@ -72,7 +72,7 @@ export const HeartsSignUpFee = () => {
       >
         <Box w="100%">
           <Box w="100px" mx="auto">
-            <Image w="100%" alt="NOt Found" src={getModalIcon()} />
+            <Image w="100%" alt="icon" src={getModalIcon()} />
           </Box>
           <Box mt="5">{getModalText()}</Box>
         </Box>
@@ -98,7 +98,7 @@ export const HeartsSignUpFee = () => {
           Sign Up Fee
         </Heading>
         <Box w="100%">
-          <Image mx="auto" alt="Not Found" src="/images/payment/QRcode.png" />
+          <Image mx="auto" alt="Hearts" src="/images/payment/QRcode.png" />
         </Box>
         <HeartsDropzone onUploadFile={handleUploadFile} />
         <Heading as="h3" size="sm" fontWeight="medium" color="red">

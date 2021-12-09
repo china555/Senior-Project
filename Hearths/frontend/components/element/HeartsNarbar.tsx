@@ -31,7 +31,7 @@ export const HeartsNavbar = () => {
                 router.push("/");
               }}
               w={["60%", "5rem", "5rem"]}
-              alt="sorry"
+              alt="Hearts"
               src="/images/logo/hearts_logo.png"
             />
           </Box>

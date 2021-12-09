@@ -27,7 +27,7 @@ export const HeartsAboutUs = () => {
         <Flex flexWrap="wrap" mt="5">
           <Box w={{ base: "100%", xl: "50%" }}>
             <Box w={{ base: "50%", xl: "40%" }} mx="auto">
-              <Image w="100%" alt="" src="/images/logo/hearts_logo.png" />
+              <Image w="100%" alt="Hearts" src="/images/logo/hearts_logo.png" />
             </Box>
           </Box>
           <Box w={{ base: "100%", xl: "50%" }}>

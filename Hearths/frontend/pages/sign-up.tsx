@@ -83,7 +83,15 @@ const SignUp: NextPage = () => {
               </Box>
               <Box w="100%">
                 {consentImg.map((img, idx) => {
-                  return <Image w="100%" src={img} key={idx} alt="" pb="5px" />;
+                  return (
+                    <Image
+                      w="100%"
+                      src={img}
+                      key={idx}
+                      alt="Consent Form"
+                      pb="5px"
+                    />
+                  );
                 })}
               </Box>
               <Heading as="h3" size="sm" fontWeight="medium" color="red">

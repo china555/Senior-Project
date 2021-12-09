@@ -35,7 +35,7 @@ export const HeartsContactUs = () => {
                 <Image
                   w="60%"
                   src="/images/icons/crossroads_23760.png"
-                  alt=""
+                  alt="address"
                 />
               </Box>
               <Box w="80%">
@@ -52,7 +52,11 @@ export const HeartsContactUs = () => {
               mt="4"
             >
               <Box w="20%">
-                <Image w="60%" src="/images/icons/mail_23797.png" alt="" />
+                <Image
+                  w="60%"
+                  src="/images/icons/mail_23797.png"
+                  alt="e-mail"
+                />
               </Box>
               <Box w="80%">HeaRTS@gmail.com</Box>
             </Flex>
@@ -64,7 +68,11 @@ export const HeartsContactUs = () => {
               mt="4"
             >
               <Box w="20%">
-                <Image w="60%" src="/images/icons/phone_23732.png" alt="" />
+                <Image
+                  w="60%"
+                  src="/images/icons/phone_23732.png"
+                  alt="phone"
+                />
               </Box>
               <Box w="80%">063-520-5151</Box>
             </Flex>

@@ -74,16 +74,16 @@ const OurTeam: NextPage = () => {
   ];
   return (
     <HeartsLayouts>
-      <HeartsContainer>
+      <Box bg="PrimaryColor.bg" mt="5" pt="5" pb="10">
         <Heading color="#046483" as="h1" textAlign="center">
-          Our Team
+          Our Department
         </Heading>
         <Box
           mt="2rem"
           textAlign="center"
           mx="auto"
-          w={{ base: "100%", xl: "50%" }}
-          h={{ base: "320px", xl: "400px" }}
+          w={{ base: "640px", xl: "640px" }}
+          h={{ base: "360px", xl: "360px" }}
         >
           <iframe
             src="https://drive.google.com/file/d/1hWJ-3clKQ2NgZz0emJuyKF5vUdZN2HaN/preview"
@@ -93,6 +93,8 @@ const OurTeam: NextPage = () => {
             allowFullScreen
           />
         </Box>
+      </Box>
+      <HeartsContainer>
         <Grid
           my="2rem"
           templateColumns={{ base: "100%", xl: "50% 50%" }}
@@ -102,10 +104,9 @@ const OurTeam: NextPage = () => {
           {department.map((department) => {
             return (
               <Box
-                w="70%"
+                w="80%"
                 textAlign="center"
                 mx="auto"
-                bg="#F6F8F8"
                 p="20px"
                 key={department.name}
                 onClick={department.clickhandler}
@@ -113,8 +114,13 @@ const OurTeam: NextPage = () => {
                 <Heading as="h4" textAlign="center" size="lg">
                   {department.name}
                 </Heading>
-                <Box w="70%" mx="auto" mt="5">
-                  <Image w="100%" alt={department.alt} src={department.img} />
+                <Box w="100%" mx="auto" mt="5">
+                  <Image
+                    w="100%"
+                    alt={department.alt}
+                    src={department.img}
+                    borderRadius="20px"
+                  />
                 </Box>
               </Box>
             );

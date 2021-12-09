@@ -6,6 +6,7 @@ export type QuestionAndAnswer = {
 export interface IPhysiotherapist {
   name: string;
   specialty: string[];
+  img: string;
 }
 export type DepartMent = {
   OccupationalTherapy: string;
@@ -40,8 +41,8 @@ export interface ILocaleState {
   VDOCallService: string;
   FAQ: string;
   OurTeam: string;
-  DepartMentName: DepartMent;
-  Physiotherapist: Physiotherapist;
+  DepartMentName: any;
+  Physiotherapist: any;
   Question: QuestionAndAnswer[];
 }
 

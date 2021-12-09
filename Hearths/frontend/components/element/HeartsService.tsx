@@ -31,13 +31,17 @@ export const HeartsService = () => {
             borderColor={{ base: "SecondaryColor", xl: "SecondaryColor" }}
           >
             <Box w={{ base: "20%", xl: "20%" }} mx="auto">
-              <Image w="100%" alt="" src="/images/icons/calendar.png" />
+              <Image w="100%" alt="calendar" src="/images/icons/calendar.png" />
             </Box>
             <Box>{translations.Appointment}</Box>
           </Box>
           <Box mt={{ base: "2%", xl: "0" }} width={{ base: "100%", xl: "50%" }}>
             <Box w={{ base: "20%", xl: "20%" }} mx="auto">
-              <Image w="100%" alt="" src="/images/icons/appoint.png" />
+              <Image
+                w="100%"
+                alt="appointment"
+                src="/images/icons/appoint.png"
+              />
             </Box>
             <Box>{translations.MyAppointment}</Box>
           </Box>
@@ -54,13 +58,13 @@ export const HeartsService = () => {
             borderColor={{ base: "SecondaryColor", xl: "SecondaryColor" }}
           >
             <Box w={{ base: "20%", xl: "20%" }} mx="auto">
-              <Image w="100%" alt="" src="/images/icons/document.png" />
+              <Image w="100%" alt="document" src="/images/icons/document.png" />
             </Box>
             <Box>{translations.RequestDocument}</Box>
           </Box>
           <Box mt={{ base: "2%", xl: "0" }} width={{ base: "100%", xl: "50%" }}>
             <Box w={{ base: "20%", xl: "20%" }} mx="auto">
-              <Image w="100%" alt="" src="/images/icons/vdocall.png" />
+              <Image w="100%" alt="vdocall" src="/images/icons/vdocall.png" />
             </Box>
             <Box>{translations.VDOCallService}</Box>
           </Box>

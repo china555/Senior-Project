@@ -1,6 +1,6 @@
-import { IPhysiotherapist } from "../locale/@types";
+import { IPhysiotherapist, Physiotherapist } from "../locale/@types";
 
-const PhysiotherapistOTENG: IPhysiotherapist[] = [
+const PhysiotherapistOTTH: IPhysiotherapist[] = [
   {
     name: "ก.บ. ธราดล รอดแก้ว",
     specialty: [
@@ -10,6 +10,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "การรับรู้ความเข้าใจในผู้สูงอายุ",
       "การกระตุ้นกลืน",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ธราดล รอดแก้ว.jpg",
   },
   {
     name: "ก.บ. ศศิชา จันทร์วรวิทย์",
@@ -19,6 +20,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "เด็กสมาธิสั้น",
       "การรับรู้ความเข้าใจในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ศศิชา จันทร์วรวิทย์.jpg",
   },
   {
     name: "ก.บ. ชนิตพล บุญยะวัตร",
@@ -30,6 +32,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "การกระตุ้นกลืน",
       "ผู้ป่วยโรคหลอดเลือดสมอง",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ชนิตพล บุญยะวัตร.jpg",
   },
   {
     name: "ก.บ. กีรติ อ้นมั่น",
@@ -39,6 +42,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "เด็กสมาธิสั้น",
       "ผู้ป่วยโรคหลอดเลือดสมอง",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/กีรติ อ้นมั่น.jpg",
   },
   {
     name: "ก.บ. สรัลยา งามจิตวงศ์สกุล",
@@ -49,6 +53,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "การกระตุ้นกลืน",
       "ผู้ป่วยโรคหลอดเลือดสมอง",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/สรัลยา งามจิตวงศ์สกุล.jpg",
   },
   {
     name: "อ.ก.บ. ศุภธิดา สรศักดิ์",
@@ -59,15 +64,12 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "การกระตุ้นกลืน",
       "การรับรู้ความเข้าใจในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ศุภธิดา สร.jpg",
   },
   {
     name: "อ.ก.บ. นนทิชา ถาวรไพบูลย์บุตร",
-    specialty: [
-      "เด็กที่มีความต้องการพิเศษ",
-      "พัฒนาการเด็ก",
-      "เด็กสมาธิสั้น",
-      "",
-    ],
+    specialty: ["เด็กที่มีความต้องการพิเศษ", "พัฒนาการเด็ก", "เด็กสมาธิสั้น"],
+    img: "/images/our-team/หมอ_Occupational_Therapy/นนทิชา ถาวร.jpg",
   },
   {
     name: "อ.ดร.ก.บ. มะลิวัลย์ เรือนคำ",
@@ -77,6 +79,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "ภาวะซึมเศร้า",
       "จิตสังคมในวัยรุ่น",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/มะลิวัลย์ เรือน.jpg",
   },
   {
     name: "อ.ก.บ.ศิรินันท์ ไชยพันธ์โก๋",
@@ -87,6 +90,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "เด็กสมาธิสั้น",
       "การรับรู้ความเข้าใจในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ศิรินันท์ ไชย.jpg",
   },
   {
     name: "อ.ก.บ. พิชญา บารมี",
@@ -96,6 +100,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "การกระตุ้นกลืน",
       "การรับรู้ความเข้าใจในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/พิชญา.jpg",
   },
   {
     name: "อ.ดร.ก.บ. วัฒนารี อัมมวรรธน์",
@@ -105,6 +110,7 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "การรับรู้ความเข้าใจในผู้สูงอายุ",
       "กิจกรรมบำบัดในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/วัฒนารี อัม.jpg",
   },
   {
     name: "อ.ดร.ก.บ. สุรชาต ทองชุมสิน",
@@ -116,9 +122,10 @@ const PhysiotherapistOTENG: IPhysiotherapist[] = [
       "การปรับสภาพที่อยู่อาศัยและอุปกรณ์ช่วยสำหรับผู้พิการ",
       "การฟื้นฟูสมรรถภาพในการทำงาน",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/สุรชาต ทอง.jpg",
   },
 ];
-const PhysiotherapistOTTH: IPhysiotherapist[] = [
+const PhysiotherapistOTENG: IPhysiotherapist[] = [
   {
     name: "OT. Tharadon Rodkaeo",
     specialty: [
@@ -128,6 +135,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Cognitive Training",
       "Swallow Training",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ธราดล รอดแก้ว.jpg",
   },
   {
     name: "OT. Sasicha Chanworavit",
@@ -137,6 +145,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Attention deficit/ hyperactivity disorder : ADHD",
       "Cognitive Training",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ศศิชา จันทร์วรวิทย์.jpg",
   },
   {
     name: "OT. Chanitpon Bunyawat",
@@ -148,6 +157,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Swallow Training",
       "Stroke",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ชนิตพล บุญยะวัตร.jpg",
   },
   {
     name: "OT. Keerathi Oanmun",
@@ -157,6 +167,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Attention deficit/ hyperactivity disorder : ADHD",
       "Stroke",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/กีรติ อ้นมั่น.jpg",
   },
   {
     name: "OT. Saranya Ngamjitwongsakul",
@@ -167,6 +178,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Swallow Training",
       "Stroke",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/สรัลยา งามจิตวงศ์สกุล.jpg",
   },
   {
     name: "Lect. Supatida Sorasak",
@@ -177,6 +189,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Swallow Training",
       "Cognitive Training",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ศุภธิดา สร.jpg",
   },
   {
     name: "Lect. Nonticha Thavornpaiboonbud",
@@ -185,6 +198,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Child Development",
       "Attention deficit/ hyperactivity disorder : ADHD",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/นนทิชา ถาวร.jpg",
   },
   {
     name: "Lect.Dr. Maliwan Rueankam",
@@ -194,6 +208,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Depression",
       "Psychosocial in Adolescent",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/มะลิวัลย์ เรือน.jpg",
   },
   {
     name: "Lect. Sirinan Chaipanko",
@@ -204,6 +219,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Attention deficit/ hyperactivity disorder : ADHD",
       "Cognitive Training",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/ศิรินันท์ ไชย.jpg",
   },
   {
     name: "Lect. Phichaya Baramee",
@@ -213,6 +229,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Swallow Training",
       "Cognitive Training",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/พิชญา.jpg",
   },
   {
     name: "Lect.Dr. Watthanaree Ammawat",
@@ -222,6 +239,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Cognitive Training",
       "Occupational Therapy in Elderly",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/วัฒนารี อัม.jpg",
   },
   {
     name: "Lect.Dr. Surachart Thongchoomsin",
@@ -233,6 +251,7 @@ const PhysiotherapistOTTH: IPhysiotherapist[] = [
       "Environment Modification and Assistive Devices",
       "Work Hardening",
     ],
+    img: "/images/our-team/หมอ_Occupational_Therapy/สุรชาต ทอง.jpg",
   },
 ];
 
@@ -240,10 +259,12 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
   {
     name: "กภ. พรสิริ พิพัฒน์กษีร",
     specialty: ["ออฟฟิศซินโดรม", "กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/พรสิริ พิพัฒน์กษีร.jpg",
   },
   {
     name: "กภ. ลออรัตน์ สุทธิวิริยะกุล",
     specialty: ["กายภาพบำบัดทางการกีฬา", "ธาราบำบัด"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ลออรัตน์ สุทธิวิริยะกุล.jpg",
   },
   {
     name: "กภ. สรไกร คุณานุสรชัย",
@@ -252,6 +273,7 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "ธาราบำบัด",
       "ออฟฟิศซินโดรม",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/สรไกร คุณานุสรณ์ชัย.jpg",
   },
   {
     name: "กภ. ทิพวรรณ สิทธิ",
@@ -260,18 +282,22 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ",
       "ปวดเข่า",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ทิพวรรณ สิทธิ.jpg",
   },
   {
     name: "กภ. พรรณนภา ลี้โภคภิญโญ",
     specialty: ["กายภาพบำบัดทางการกีฬา"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/พรรณนภา ลี้โภคภิญโญ.jpg",
   },
   {
     name: "กภ. ปัทมาพร ฟุ้งเกียรติไพบูลย์",
     specialty: ["กายภาพบำบัดทางการกีฬา", "ออฟฟิศซินโดรม"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ปัทมาพร ฟุ้งเกียรติไพบูลย์.jpg",
   },
   {
     name: "กภ. ลดาวรรณ เติมวรกุล",
     specialty: ["กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ลดาวรรณ เติมวรกุล.jpg",
   },
   {
     name: "กภ. ไผทมาศ กิ่งชา",
@@ -281,6 +307,7 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "กายภาพบำบัดทางการกีฬา",
       "กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ไผทมาศ กิ่งชา.jpg",
   },
   {
     name: "กภ. นุชจรี ศิริ",
@@ -289,14 +316,17 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "ออฟฟิศซินโดรม",
       "กระดูกสันหลังคด",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/นุชจรี ศิริ.jpg",
   },
   {
     name: "กภ. สรินดา ศาตะมาน",
     specialty: ["ออฟฟิศซินโดรม", "กายภาพบำบัดในผู้สูงอายุ", "ธาราบำบัด"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/สรินดา ศาตะมาน.jpg",
   },
   {
     name: "กภ. วีธรา ฉั่น",
     specialty: ["กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/วีธรา ฉั่น.jpg",
   },
   {
     name: "กภ. สุธิดา สกุลกรุณา",
@@ -307,10 +337,12 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "ออฟฟิศซินโดรม",
       "ปวดเข่า",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/สุธิดา สกุลกรุณา.jpg",
   },
   {
     name: "กภ. นันทัชพร คำบุญเรือง",
     specialty: ["กระดูกสันหลังคด", "ธาราบำบัด", "ออฟฟิศซินโดรม"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/นันทัชพร คำบุญเรือง.jpg",
   },
   {
     name: "กภ. ปรัธยาน์ ภาคภากร",
@@ -319,6 +351,7 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "ออฟฟิศซินโดรม",
       "กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ปรัธยาน์ ภาคภากร.jpg",
   },
   {
     name: "กภ. เยาวภา ใจรักดี",
@@ -328,14 +361,17 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "หมอนรองกระดูกทับเส้นประสาท",
       "ออฟฟิศซินโดรม",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/เยาวภา ใจรักดี.jpg",
   },
   {
     name: "กภ. อาภาณัฐ ผลกมล",
     specialty: ["กระดูกสันหลังคด", "ออฟฟิศซินโดรม"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/อาภาณัฐ ผลกมล.jpg",
   },
   {
     name: "กภ. กฤตภาส เอมสมุทร",
     specialty: ["กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ", "ปวดเข่า"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/กฤตภาส เอมสมุทร.jpg",
   },
   {
     name: "กภ. มณฑาทิพย์ เทพทอง",
@@ -345,10 +381,12 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "ปวดไหล่",
       "",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/มณฑาทิพย์ เทพทอง.jpg",
   },
   {
     name: "กภ. วรวรรณ เอกบุตร",
     specialty: ["กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ", "กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/วรวรรณ เอกบุตร.jpg",
   },
   {
     name: "กภ. วัลย์ลิกา ประเสริฐกุล",
@@ -360,10 +398,12 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "ปวดเข่า",
       "ปวดไหล่",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/วัลย์ลิกา ประเสริฐกุล.jpg",
   },
   {
     name: "กภ. ภควดี ธัญยนพพร",
     specialty: ["กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ", "กายภาพบำบัดสุขภาพสตรี"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ภควดี ธัญยนพพร.jpg",
   },
   {
     name: "กภ. ทัชชกร สงวนศักดิ์",
@@ -374,14 +414,17 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "ปวดหลังส่วนล่าง",
       "ปวดไหล่",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ทัชชกร สงวนศักดิ์.jpg",
   },
   {
     name: "อ.ดร.กภ. สิริกาญจน์ สมประสงค์",
     specialty: ["กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/สิริกาญจน์ สมประสงค์.jpg",
   },
   {
     name: "กภ. วรท เอกพินิจพิทยา",
     specialty: ["กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ", "ธาราบำบัด"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/วรท เอกพินิจพิทยา.jpg",
   },
   {
     name: "ก.ภ. พงษ์ประภัทร เสนา",
@@ -390,6 +433,7 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "ธาราบำบัด",
       "กายภาพบำบัดในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/พงษ์ประภัทร เสนา.jpg",
   },
   {
     name: "อ.ดร.กภ. กานต์ธีรา อารีรักษ์",
@@ -398,20 +442,24 @@ const PhysiotherapistMSTH: IPhysiotherapist[] = [
       "กายภาพบำบัดทางการกีฬา",
       "ออฟฟิศซินโดรม",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/กานต์ธีรา อารีรักษ์.jpg",
   },
   {
     name: "กภ. ลัดดาวัลย์ ถวัลยวิชชจิต",
     specialty: ["กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ", "กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ลัดดาวัลย์ ถวัลยวิชชจิต.jpg",
   },
 ];
 const PhysiotherapistMSENG: IPhysiotherapist[] = [
   {
     name: "PT. Pornsiri Pipatkasira",
     specialty: ["Office Syndrome", "Musculoskeletal Physical Therapy"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/พรสิริ พิพัฒน์กษีร.jpg",
   },
   {
     name: "PT. Laorrat Suttiwiriyakul",
     specialty: ["Sports physical therapy", "Hydrotherapy"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ลออรัตน์ สุทธิวิริยะกุล.jpg",
   },
   {
     name: "PT. Sorakrai Kunanusornchai",
@@ -420,6 +468,7 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Hydrotherapy",
       "Office Syndrome",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/สรไกร คุณานุสรณ์ชัย.jpg",
   },
   {
     name: "PT. Tippawan Sitti",
@@ -428,18 +477,22 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Musculoskeletal Physical Therapy",
       "Knee Pain",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ทิพวรรณ สิทธิ.jpg",
   },
   {
     name: "PT. Pannapa Leepokpinyo",
     specialty: ["Sports physical therapy"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/พรรณนภา ลี้โภคภิญโญ.jpg",
   },
   {
     name: "PT. Pattamaporn Fungkiatphaiboon",
     specialty: ["Sports physical therapy", "Office Syndrome"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ปัทมาพร ฟุ้งเกียรติไพบูลย์.jpg",
   },
   {
     name: "PT. Ladawan Thermworakul",
     specialty: ["Musculoskeletal Physical Therapy"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ลดาวรรณ เติมวรกุล.jpg",
   },
   {
     name: "PT. Pathaimas Kingcha",
@@ -449,6 +502,7 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Sports physical therapy",
       "Musculoskeletal Physical Therapy",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ไผทมาศ กิ่งชา.jpg",
   },
   {
     name: "PT. Noochjaree Siri",
@@ -457,6 +511,7 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Office Syndrom",
       "Scoliosis",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/นุชจรี ศิริ.jpg",
   },
   {
     name: "PT. Sarinda Sataman",
@@ -465,11 +520,14 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Geriatric Physical Therapy",
       "Hydrotherapy",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/สรินดา ศาตะมาน.jpg",
   },
   {
     name: "PT. Weethara Chan",
     specialty: ["Musculoskeletal Physical Therapy"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/วีธรา ฉั่น.jpg",
   },
+
   {
     name: "PT. Sutida Sakunkaruna",
     specialty: [
@@ -479,10 +537,12 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Office Syndrome",
       "Knee Pain",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/สุธิดา สกุลกรุณา.jpg",
   },
   {
     name: "PT. Nantuchporn Khambunruang",
     specialty: ["Scoliosis", "Hydrotherapy", "Office Syndrome"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/นันทัชพร คำบุญเรือง.jpg",
   },
   {
     name: "PT. Phrattaya Pakpakorn",
@@ -491,6 +551,7 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Office syndrome",
       "Musculoskeletal Physical Therapy",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ปรัธยาน์ ภาคภากร.jpg",
   },
   {
     name: "PT. Yaowapa Jairakdee",
@@ -500,14 +561,17 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Herniated Nucleus Pulposus : HNP",
       "Office Syndrome",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/เยาวภา ใจรักดี.jpg",
   },
   {
     name: "PT. Arpanat Pholkamol",
     specialty: ["Scoliosis", "Office Syndrome"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/อาภาณัฐ ผลกมล.jpg",
   },
   {
     name: "PT. krittapat amsamut",
     specialty: ["Musculoskeletal Physical Therapy", "Knee Pain"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/กฤตภาส เอมสมุทร.jpg",
   },
   {
     name: "PT. Montatip Theapthong",
@@ -516,10 +580,12 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Women health",
       "Shoulder Pain",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/มณฑาทิพย์ เทพทอง.jpg",
   },
   {
     name: "PT. Worawan Ekabutr",
     specialty: ["Musculoskeletal Physical Therapy", "Scoliosis"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/วรวรรณ เอกบุตร.jpg",
   },
   {
     name: "PT. Wallika Prasertkul",
@@ -531,10 +597,12 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Knee Pain",
       "Shoulder Pain",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/วัลย์ลิกา ประเสริฐกุล.jpg",
   },
   {
     name: "PT. Pakawadee Thanyanopporn",
     specialty: ["Musculoskeletal Physical Therapy", "Women health"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ภควดี ธัญยนพพร.jpg",
   },
   {
     name: "PT. Thachakorn Sa-ngounsak",
@@ -545,14 +613,17 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Low Back Pain",
       "Shoulder Pain",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ทัชชกร สงวนศักดิ์.jpg",
   },
   {
     name: "Lect.Dr. Sirikarn Somprasong",
     specialty: ["Musculoskeletal Physical Therapy"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/สิริกาญจน์ สมประสงค์.jpg",
   },
   {
     name: "PT. Varot Eakpinitpittaya",
     specialty: ["Musculoskeletal Physical Therapy", "Hydrotherapy"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/วรท เอกพินิจพิทยา.jpg",
   },
   {
     name: "PT. Phongprapat Sena",
@@ -561,6 +632,7 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Hydrotherapy",
       "Geriatric Physical Therapy",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/พงษ์ประภัทร เสนา.jpg",
   },
   {
     name: "Lect.Dr. Kantheera Areerak",
@@ -569,10 +641,12 @@ const PhysiotherapistMSENG: IPhysiotherapist[] = [
       "Sports physical therapy",
       "Office Syndrome",
     ],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/กานต์ธีรา อารีรักษ์.jpg",
   },
   {
     name: "PT. Laddawan Thawalyawichachit",
     specialty: ["Musculoskeletal Physical Therapy", "Scoliosis"],
+    img: "/images/our-team/หมอ_Musculoskeletal_system/ลัดดาวัลย์ ถวัลยวิชชจิต.jpg",
   },
 ];
 
@@ -586,6 +660,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ภาวะปวดไหล่ในผู้ป่วยอัมพาต",
       "กายภาพบำบัดในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/อังสุนี มีศรีสุข.jpg",
   },
   {
     name: "กภ. สกาวรัตน์ เตชทวีทรัพย์",
@@ -595,6 +670,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ผู้ป่วยบาดเจ็บไขสันหลัง",
       "กายภาพบำบัดร่วมกับการกระตุ้นสมองผ่านกะโหลกศีรษะด้วยสนามแม่เหล็กไฟฟ้า",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/สกาวรัตน์ เตชทวีทรัพย์.jpg",
   },
   {
     name: "กภ. เมธาพร มั่นคง",
@@ -604,6 +680,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ธาราบำบัด",
       "กายภาพบำบัดในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/เมธาพร มั่นคง.jpg",
   },
   {
     name: "กภ. พรพิรุณ ฝึกศิลป์",
@@ -612,10 +689,12 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ผู้ป่วยโรคพาร์กินสัน",
       "กายภาพบำบัดในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/พรพิรุณ ฝึกศิลป์.jpg",
   },
   {
     name: "กภ. สุปรียา อภิจรัสกุล",
     specialty: ["ผู้ป่วยโรคหลอดเลือดสมอง", "ผู้ป่วยโรคพาร์กินสัน", "ธาราบำบัด"],
+    img: "/images/our-team/หมอ_Neurological_system/สุปรียา อภิจรัสกุล.jpg",
   },
   {
     name: "กภ. ขนิษฐา จิตรอารี",
@@ -624,6 +703,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ผู้ป่วยโรคหลอดเลือดสมอง",
       "ผู้ป่วยโรคพาร์กินสัน",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/ขนิษฐา จิตรอารี.jpg",
   },
   {
     name: "กภ. ศุภลักษณ์ พรมศร",
@@ -631,6 +711,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ผู้ป่วยโรคหลอดเลือดสมอง",
       "กายภาพบำบัดร่วมกับการกระตุ้นสมองผ่านกะโหลกศีรษะด้วยสนามแม่เหล็กไฟฟ้า",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/ศุภลักษณ์ พรมศร.jpg",
   },
   {
     name: "กภ. ภาพวิจิตร เสียงเสนาะ",
@@ -639,6 +720,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "กายภาพบำบัดในผู้สูงอายุ",
       "กายภาพบำบัดร่วมกับการกระตุ้นสมองผ่านกะโหลกศีรษะด้วยสนามแม่เหล็กไฟฟ้า",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/ภาพวิจิตร.jpg",
   },
   {
     name: "กภ. ปิยาภรณ์ วิชัยดิษฐ",
@@ -648,6 +730,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ผู้ป่วยโรคพาร์กินสัน",
       "ภาวะปวดไหล่ในผู้ป่วยอัมพาต",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/ปิยาภรณ์ วิชัย.jpg",
   },
   {
     name: "อ.ดร.กภ. รัตนา เพชรสีทอง",
@@ -656,6 +739,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "กายภาพบำบัดชุมชน",
       "กายภาพบำบัดในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/รัตนา เพชรสีทอง.jpg",
   },
   {
     name: "กภ. สุธางค์ ตัณทนาวิวัฒน์",
@@ -666,6 +750,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ผู้ป่วยโรคพาร์กินสัน",
       "ภาวะปวดไหล่ในผู้ป่วยอัมพาต",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/สุธางค์ ตัณ.jpg",
   },
   {
     name: "กภ. สุชญา สถาวรานนท์",
@@ -674,6 +759,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ออฟฟิศซินโดรม",
       "ผู้ป่วยโรคหลอดเลือดสมอง",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/สุชญา สถา.jpg",
   },
   {
     name: "กภ. กวินทรา สันติอภิรักษ์",
@@ -682,6 +768,7 @@ const PhysiotherapistNSTH: IPhysiotherapist[] = [
       "ผู้ป่วยโรคหลอดเลือดสมอง",
       "กายภาพบำบัดในผู้สูงอายุ",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/กวินทรา.jpg",
   },
 ];
 const PhysiotherapistNSENG: IPhysiotherapist[] = [
@@ -694,6 +781,7 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Shoulder pain in stroke",
       "Geriatric Physical Therapy",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/อังสุนี มีศรีสุข.jpg",
   },
   {
     name: "PT. Sakaowrat Techataweesub",
@@ -703,6 +791,7 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Spinal Cord Injury",
       "Transcranial Magnetic Stimulation : TMS",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/สกาวรัตน์ เตชทวีทรัพย์.jpg",
   },
   {
     name: "PT. mataporn munkong",
@@ -712,14 +801,17 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Hydrotherapy",
       "Geriatric Physical Therapy",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/เมธาพร มั่นคง.jpg",
   },
   {
     name: "PT. Pornpiroon Phuegsilp",
     specialty: ["Stroke", "Parkinson’s disease", "Geriatric Physical Therapy"],
+    img: "/images/our-team/หมอ_Neurological_system/พรพิรุณ ฝึกศิลป์.jpg",
   },
   {
     name: "PT. Supreeya Apijaraskul",
     specialty: ["Stroke", "Parkinson’s disease", "Hydrotherapy"],
+    img: "/images/our-team/หมอ_Neurological_system/สุปรียา อภิจรัสกุล.jpg",
   },
   {
     name: "PT. Khanitha Jitaree",
@@ -728,10 +820,12 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Stroke",
       "Parkinson’s disease",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/ขนิษฐา จิตรอารี.jpg",
   },
   {
     name: "PT. Supaluk Promsorn",
     specialty: ["Stroke", "Transcranial Magnetic Stimulation : TMS"],
+    img: "/images/our-team/หมอ_Neurological_system/ศุภลักษณ์ พรมศร.jpg",
   },
   {
     name: "PT. Phapvijid Seangsanor",
@@ -740,6 +834,7 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Geriatric Physical Therapy",
       "Transcranial Magnetic Stimulation : TMS",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/ภาพวิจิตร.jpg",
   },
   {
     name: "PT. Piyaporn Wichaidit",
@@ -749,6 +844,7 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Parkinson’s disease",
       "Shoulder pain in stroke",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/ปิยาภรณ์ วิชัย.jpg",
   },
   {
     name: "Lect.Dr. Ruttana Phetsitong",
@@ -757,6 +853,7 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Community Physical Therapy",
       "Geriatric Physical Therapy",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/รัตนา เพชรสีทอง.jpg",
   },
   {
     name: "PT. Sutang Tantanavivat",
@@ -767,10 +864,12 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Parkinson’s disease",
       "Shoulder pain in stroke",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/สุธางค์ ตัณ.jpg",
   },
   {
     name: "PT. suchaya sathawaranon",
     specialty: ["Neurological Physical Theray", "Office Syndrome", "Stroke"],
+    img: "/images/our-team/หมอ_Neurological_system/สุชญา สถา.jpg",
   },
   {
     name: "PT. Kawintra Santiaphirak",
@@ -779,6 +878,7 @@ const PhysiotherapistNSENG: IPhysiotherapist[] = [
       "Stroke",
       "Geriatric Physical Therapy",
     ],
+    img: "/images/our-team/หมอ_Neurological_system/กวินทรา.jpg",
   },
 ];
 
@@ -786,10 +886,12 @@ const PhysiotherapistPediatricTH: IPhysiotherapist[] = [
   {
     name: "กภ. ณัชชา เลิศอรุณวัฒนา",
     specialty: ["กายภาพบำบัดทางเด็ก"],
+    img: "/images/our-team/หมอ_Pediatric/ณัชชา เลิศอรุณวัฒนา.jpg",
   },
   {
     name: "กภ. สรญา​ สระทองเทียน",
     specialty: ["วอยตาบำบัด", "เด็กสมองพิการ", "เด็กพัฒนาการช้า"],
+    img: "/images/our-team/หมอ_Pediatric/สรญา​ สระทองเทียน.jpg",
   },
   {
     name: "กภ. องครักษ์ ธรรมมิกะ",
@@ -800,6 +902,7 @@ const PhysiotherapistPediatricTH: IPhysiotherapist[] = [
       "เด็กสมองพิการ",
       "วอยตาบำบัด",
     ],
+    img: "/images/our-team/หมอ_Pediatric/องครักษ์ ธรรมมิกะ.jpg",
   },
   {
     name: "ผศ.ดร.กภ. สายพิณ ประเสริฐสุขดี",
@@ -809,6 +912,7 @@ const PhysiotherapistPediatricTH: IPhysiotherapist[] = [
       "เด็กสมองพิการ",
       "เด็กพัฒนาการช้า",
     ],
+    img: "/images/our-team/หมอ_Pediatric/สายพิณ.jpg",
   },
   {
     name: "ผศ.ดร.กภ. ระวีวรรณ เล็กสกุลไชย",
@@ -819,6 +923,7 @@ const PhysiotherapistPediatricTH: IPhysiotherapist[] = [
       "เด็กพัฒนาการช้า",
       "เท้าแบนในเด็ก",
     ],
+    img: "/images/our-team/หมอ_Pediatric/ระวีวรรณ.jpg",
   },
   {
     name: "ดร.กภ.ศิวพร ลิมปนิลชาติ",
@@ -831,16 +936,19 @@ const PhysiotherapistPediatricTH: IPhysiotherapist[] = [
       "เท้าแบนในเด็ก",
       "อาชาบำบัด",
     ],
+    img: "/images/our-team/หมอ_Pediatric/ศิวพร.jpg",
   },
 ];
 const PhysiotherapistPediatricENG: IPhysiotherapist[] = [
   {
     name: "PT. Natcha Lertaroonwattana",
     specialty: ["Pediatric Physical Therapy"],
+    img: "/images/our-team/หมอ_Pediatric/ณัชชา เลิศอรุณวัฒนา.jpg",
   },
   {
     name: "PT. Soraya Sratongtean",
     specialty: ["Vojta Therapy", "Cerebral Palsy", "Delayed Development"],
+    img: "/images/our-team/หมอ_Pediatric/สรญา​ สระทองเทียน.jpg",
   },
   {
     name: "PT. Ongkarak Thammiga",
@@ -851,6 +959,7 @@ const PhysiotherapistPediatricENG: IPhysiotherapist[] = [
       "Cerebral Palsy",
       "Vojta Therapy",
     ],
+    img: "/images/our-team/หมอ_Pediatric/องครักษ์ ธรรมมิกะ.jpg",
   },
   {
     name: "Asst.Prof.Dr. Saipin Prasertsukdee",
@@ -860,6 +969,7 @@ const PhysiotherapistPediatricENG: IPhysiotherapist[] = [
       "Cerebral Palsy",
       "Delayed Development",
     ],
+    img: "/images/our-team/หมอ_Pediatric/สายพิณ.jpg",
   },
   {
     name: "Asst.Prof.Dr. Raweewan Lekskulchai",
@@ -870,6 +980,7 @@ const PhysiotherapistPediatricENG: IPhysiotherapist[] = [
       "Delayed Development",
       "Flat Feet in Children",
     ],
+    img: "/images/our-team/หมอ_Pediatric/ระวีวรรณ.jpg",
   },
   {
     name: "Lect. Sivaporn Limpaninlachat",
@@ -882,6 +993,7 @@ const PhysiotherapistPediatricENG: IPhysiotherapist[] = [
       "Flat Feet in Children",
       "Hippotherapy",
     ],
+    img: "/images/our-team/หมอ_Pediatric/ศิวพร.jpg",
   },
 ];
 
@@ -889,60 +1001,74 @@ const PhysiotherapistScoliosisTH: IPhysiotherapist[] = [
   {
     name: "กภ. นุชจรี ศิริ",
     specialty: ["กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ _Scoliosis/นุชจรี ศิริ.jpg",
   },
   {
     name: "กภ. นันทัชพร คำบุญเรือง",
     specialty: ["กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ _Scoliosis/นันทัชพร คำบุญเรือง.jpg",
   },
   {
     name: "กภ. ปรัธยาน์ ภาคภากร",
     specialty: ["กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ _Scoliosis/ปรัธยาน์ ภาคภากร.jpg",
   },
   {
     name: "กภ. อาภาณัฐ ผลกมล",
     specialty: ["กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ _Scoliosis/อาภาณัฐ ผล.jpg",
   },
   {
     name: "กภ. วรวรรณ เอกบุตร",
     specialty: ["กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ _Scoliosis/วรวรรณ เอก.jpg",
   },
   {
     name: "กภ. ลัดดาวัลย์ ถวัลยวิชชจิต",
     specialty: ["กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ _Scoliosis/ลัดดาวัลย์ ถวัล.jpg",
   },
   {
     name: "กภ. ทัชชกร สงวนศักดิ์",
     specialty: ["กระดูกสันหลังคด"],
+    img: "/images/our-team/หมอ _Scoliosis/ทัชชกร สงวน.jpg",
   },
 ];
 const PhysiotherapistScoliosisENG: IPhysiotherapist[] = [
   {
     name: "PT. Noochjaree Siri",
     specialty: ["Scoliosis"],
+    img: "/images/our-team/หมอ _Scoliosis/นุชจรี ศิริ.jpg",
   },
   {
     name: "PT. Nantuchporn Khambunruang",
     specialty: ["Scoliosis"],
+    img: "/images/our-team/หมอ _Scoliosis/นันทัชพร คำบุญเรือง.jpg",
   },
   {
     name: "PT. Phrattaya Pakpakorn",
     specialty: ["Scoliosis"],
+    img: "/images/our-team/หมอ _Scoliosis/ปรัธยาน์ ภาคภากร.jpg",
   },
   {
     name: "PT. Arpanat Pholkamol",
     specialty: ["Scoliosis"],
+    img: "/images/our-team/หมอ _Scoliosis/อาภาณัฐ ผล.jpg",
   },
   {
     name: "PT. Worawan Ekabutr",
     specialty: ["Scoliosis"],
+    img: "/images/our-team/หมอ _Scoliosis/วรวรรณ เอก.jpg",
   },
   {
     name: "PT. Laddawan Thawalyawichachit",
     specialty: ["Scoliosis"],
+    img: "/images/our-team/หมอ _Scoliosis/ลัดดาวัลย์ ถวัล.jpg",
   },
   {
     name: "PT. Thachakorn Sa-ngounsak",
     specialty: ["Scoliosis"],
+    img: "/images/our-team/หมอ _Scoliosis/ทัชชกร สงวน.jpg",
   },
 ];
 
@@ -950,56 +1076,64 @@ const PhysiotherapistWomenTH: IPhysiotherapist[] = [
   {
     name: "ผศ ดร กภ.ภครตี ชัยวัฒน์",
     specialty: [
-      "กายภาพบำบัดสุขภาพสตรี:",
-      "ผ่านการอบรม",
+      "กายภาพบำบัดสุขภาพสตรี",
       "Dynamic Neuromuscular Stabilization course for women health",
       "Women health Physiotherapy จาก Australian  Physiotherapy Association",
       "International Board Certified Lactation Consultant® (IBCLC®)",
     ],
+    img: "/images/our-team/หมอ_women health/ภครตี ชัยวัฒน์.jpg",
   },
   {
     name: "กภ. สุธิดา สกุลกรุณา",
     specialty: ["กายภาพบำบัดสุขภาพสตรี"],
+    img: "/images/our-team/หมอ_women health/สุธิดา สกุลกรุณา.jpg",
   },
   {
     name: "กภ. มณฑาทิพย์ เทพทอง",
     specialty: ["กายภาพบำบัดสุขภาพสตรี"],
+    img: "/images/our-team/หมอ_women health/มณฑาทิพย์ เทพ.jpg",
   },
   {
     name: "กภ. วัลย์ลิกา ประเสริฐกุล",
     specialty: ["กายภาพบำบัดสุขภาพสตรี"],
+    img: "/images/our-team/หมอ_women health/วัลย์ลิกา ประเสริฐ.jpg",
   },
   {
     name: "กภ. ภควดี ธัญยนพพร",
     specialty: ["กายภาพบำบัดสุขภาพสตรี"],
+    img: "/images/our-team/หมอ_women health/ภควดี ธัญยนพพร.jpg",
   },
 ];
 const PhysiotherapistWomenENG: IPhysiotherapist[] = [
   {
     name: "PT. Pakaratee Chaiyawat",
     specialty: [
-      "Women health:",
-      "Certificated of",
+      "Women health",
       "Dynamic Neuromuscular Stabilization course for women health",
-      "Women health Physiotherapy จาก Australian  Physiotherapy Association",
+      "Women health Physiotherapy from Australian  Physiotherapy Association",
       "International Board Certified Lactation Consultant® (IBCLC®)",
     ],
+    img: "/images/our-team/หมอ_women health/ภครตี ชัยวัฒน์.jpg",
   },
   {
     name: "PT. Sutida Sakunkaruna",
     specialty: ["Women health"],
+    img: "/images/our-team/หมอ_women health/สุธิดา สกุลกรุณา.jpg",
   },
   {
     name: "PT. Montatip Theapthong",
     specialty: ["Women health"],
+    img: "/images/our-team/หมอ_women health/มณฑาทิพย์ เทพ.jpg",
   },
   {
     name: "PT. Wallika Prasertkul",
     specialty: ["Women health"],
+    img: "/images/our-team/หมอ_women health/วัลย์ลิกา ประเสริฐ.jpg",
   },
   {
     name: "PT. Pakawadee Thanyanopporn",
     specialty: ["Women health"],
+    img: "/images/our-team/หมอ_women health/ภควดี ธัญยนพพร.jpg",
   },
 ];
 
@@ -1007,32 +1141,38 @@ const PhysiotherapistCommunityTH: IPhysiotherapist[] = [
   {
     name: "ผศ ดร กภ ภครตี ชัยวัฒน์",
     specialty: ["กายภาพบำบัดชุมชน", "กายภาพบำบัดในผู้สูงอายุ"],
+    img: "/images/our-team/หมอ_community/ภครตี ชัยวัฒน์.jpg",
   },
   {
     name: "อ.ดร.กภ. รัตนา เพชรสีทอง",
     specialty: ["กายภาพบำบัดชุมชน", "กายภาพบำบัดในผู้สูงอายุ"],
+    img: "/images/our-team/หมอ_community/รัตนา เพชรสีทอง.jpg",
   },
   {
     name: "อ.ดร.กภ.เจนจิรา ธนกำโชคชัย",
     specialty: ["กายภาพบำบัดชุมชน", "กายภาพบำบัดในผู้สูงอายุ"],
+    img: "/images/our-team/หมอ_community/เจนจิรา ธนกำโชคชัย.jpg",
   },
 ];
 const PhysiotherapistCommunityENG: IPhysiotherapist[] = [
   {
     name: "Asst Prof Dr Pakaratee Chaiyawat",
     specialty: ["Community Physical Therapy", "Geriatric Physical Therapy"],
+    img: "/images/our-team/หมอ_community/ภครตี ชัยวัฒน์.jpg",
   },
   {
     name: "Lect.Dr. Ruttana Phetsitong",
     specialty: ["Community Physical Therapy", "Geriatric Physical Therapy"],
+    img: "/images/our-team/หมอ_community/รัตนา เพชรสีทอง.jpg",
   },
   {
     name: "Lect.Dr.Jenjira Thanakamchokchai",
     specialty: ["Community Physical Therapy", "Geriatric Physical Therapy"],
+    img: "/images/our-team/หมอ_community/เจนจิรา ธนกำโชคชัย.jpg",
   },
 ];
 
-export const PhysiotherapistTH = {
+export const PhysiotherapistTH: Physiotherapist = {
   PhysiotherapistOT: PhysiotherapistOTTH,
   PhysiotherapistCommunity: PhysiotherapistCommunityTH,
   PhysiotherapistMS: PhysiotherapistMSTH,
@@ -1041,7 +1181,7 @@ export const PhysiotherapistTH = {
   PhysiotherapistScoliosis: PhysiotherapistScoliosisTH,
   PhysiotherapistWomen: PhysiotherapistWomenTH,
 };
-export const PhysiotherapistENG = {
+export const PhysiotherapistENG: Physiotherapist = {
   PhysiotherapistOT: PhysiotherapistOTENG,
   PhysiotherapistCommunity: PhysiotherapistCommunityENG,
   PhysiotherapistMS: PhysiotherapistMSENG,

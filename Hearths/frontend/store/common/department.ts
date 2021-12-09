@@ -1,4 +1,6 @@
-export const departmentENG = {
+import { DepartMent } from "../locale/@types";
+
+export const departmentENG: DepartMent = {
   OccupationalTherapy: "Occupational Therapy",
   MusculoSkeletalSystem: "Musculoskeletal system",
   NeurologicalSystem: "Neurological system",
@@ -8,7 +10,7 @@ export const departmentENG = {
   Community: "Community",
 };
 
-export const departmentTH = {
+export const departmentTH: DepartMent = {
   OccupationalTherapy: "กิจกรรมบำบัด",
   MusculoSkeletalSystem: "กายภาพบำบัดระบบกระดูกและกล้ามเนื้อ",
   NeurologicalSystem: "กายภาพบำบัดระบบประสาท",

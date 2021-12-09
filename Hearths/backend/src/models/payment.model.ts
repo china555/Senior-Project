@@ -9,7 +9,7 @@ export default function (app: Application): typeof Model {
   const payment = sequelizeClient.define(
     "payment",
     {
-      text: {
+      pay_for: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -24,8 +24,6 @@ export default function (app: Application): typeof Model {
   );
 
   (payment as any).associate = function (models: any): void {
-    console.log("models", models);
-    models.patient.belongsTo(models.payment, { as: "patient" });
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
   };
