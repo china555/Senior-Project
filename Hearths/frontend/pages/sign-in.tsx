@@ -33,11 +33,11 @@ const SignIn: NextPage = () => {
       Cookies.set("refreshtoken", data.refreshToken);
       Cookies.set("patient_id", data.patient_id);
       dispatch("auth/setIsAuthenticated", true);
+      router.push("/");
     } catch (error) {
       console.error("Sign-in", error);
       toast({ status: "error", title: "Submit failed" });
     }
-    router.push("/");
   };
   return (
     <HeartsLayouts>
