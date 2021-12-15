@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image, Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, Image, Button, useToast } from "@chakra-ui/react";
 import { HeartsDropzone } from "../common/HeartsDropZone";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { HeartsModal } from "../common/HeartsModal";
@@ -6,12 +6,17 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { first, isEmpty, isNil } from "lodash";
+import axios from "axios";
+import { url } from "../../constant";
+interface IReturnID {
+  patient_id: number;
+}
 
-type PaymentForm = {
-  url: string;
+type submitHandler = {
+  sumbithandler: () => Promise<IReturnID>;
 };
-
-export const HeartsSignUpFee = () => {
+export const HeartsSignUpFee = (props: submitHandler) => {
+  const toast = useToast();
   const router = useRouter();
   const [isClickCancel, setIsClickCancel] = useState(false);
   const [receiptFile, setReceiptFile] = useState<File>();
@@ -36,6 +41,34 @@ export const HeartsSignUpFee = () => {
   const handleClickCancel = () => {
     setIsClickCancel(true);
     onOpen();
+  };
+
+  const onSubmitImageandDataHandler = async () => {
+    try {
+      if (!hasReceipFile && !isClickCancel) onOpen();
+      const id: IReturnID = await props.sumbithandler(); //.patient_id
+      console.log("aaaaaaa", id);
+      const formData = new FormData();
+      if (receiptFile) {
+        formData.append("receipt", receiptFile);
+      }
+      const { data } = await axios.post(url + "/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const paymentData = {
+        patient_id: id.patient_id,
+        payFor: "register",
+        payMethod: "scan",
+        imgPath: data.path,
+      };
+      axios.post(url + "/payment", paymentData);
+      onOpen();
+    } catch (error) {
+      console.error("onSubmitImageandDataHandler", error);
+      toast({ status: "error", title: "Submit failed" });
+    }
   };
 
   const getModalIcon = () => {
@@ -101,6 +134,11 @@ export const HeartsSignUpFee = () => {
           <Image mx="auto" alt="Hearts" src="/images/payment/QRcode.png" />
         </Box>
         <HeartsDropzone onUploadFile={handleUploadFile} />
+        {!isNil(receiptFile) && (
+          <li>
+            {receiptFile.name} - {receiptFile.size} byte
+          </li>
+        )}
         <Heading as="h3" size="sm" fontWeight="medium" color="red">
           *Note: <br />- You cannot skip this process. If you change or close
           this page, this process will be canceled.
@@ -113,7 +151,7 @@ export const HeartsSignUpFee = () => {
           color="white"
           py="35px"
           fontSize="1.6rem"
-          onClick={onOpen}
+          onClick={onSubmitImageandDataHandler}
         >
           Confirm
         </Button>
