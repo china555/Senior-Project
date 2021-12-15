@@ -2,15 +2,32 @@ import { Button, Flex, Heading, Box, Image, Checkbox } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { HeartInput } from "../components/element/HeartsInput";
 import { HeartsLayouts } from "../layouts/layout";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
+import { useForm, SubmitHandler, FieldError } from "react-hook-form";
+import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/router";
 import { HeartsSignUpFee } from "../components/element/HeartsSignUpFee";
+import axios from "axios";
+import { url } from "../constant";
+interface IReturnID {
+  patient_id: number;
+}
 
 type RegisterForm = {
   idCardNumber: string;
-  email: string;
+  username: string;
   password: string;
+  consentAgreement: boolean;
+  newsReceivingAgreement: boolean;
+};
+
+const errorMessages = (fieldName: string, errors: FieldError) => {
+  const errorRequire = errors?.type === "required" ? "* required" : "";
+  const errorMaxLength =
+    errors?.type === "maxLength" || errors?.type === "minLength"
+      ? "* required 13 digits"
+      : "";
+  if (fieldName === "idcard") return [errorRequire, errorMaxLength];
+  if (fieldName === "email" || fieldName === "password") return [errorRequire];
 };
 
 const SignUp: NextPage = () => {
@@ -18,9 +35,27 @@ const SignUp: NextPage = () => {
   const [stepRegister, setstepRegister] = useState(1);
   const idCardToolTip = `It is used for your identification and is used only 
                          in this process. It will not be used for anything else`;
-
+  const [consentFormAgreement, setConsentFormAgreement] = useState(false);
+  const [newsReceivingAgreement, setnewsReceivingAgreement] = useState(false);
+  const [submitData, setSubmitData] = useState<RegisterForm>();
   const closeHanlder = () => {
     router.push("/");
+  };
+
+  const consentFormAgreementOnChangeHandler = (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    setConsentFormAgreement(e.target.checked);
+  };
+  const newsReceivingAgreementOnChangeHandler = (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    setnewsReceivingAgreement(e.target.checked);
+  };
+
+  const submitHandler = async (): Promise<IReturnID> => {
+    const { data } = await axios.post(url + "/register", submitData);
+    return data;
   };
   const consentImg = [
     "/images/consent/consent.png",
@@ -33,10 +68,19 @@ const SignUp: NextPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterForm>();
+  console.log("errors", errors);
 
   const onSubmit = (data: RegisterForm) => {
-    console.log(data);
-    setstepRegister(stepRegister + 1);
+    if (consentFormAgreement) {
+      setSubmitData({
+        ...data,
+        consentAgreement: consentFormAgreement,
+        newsReceivingAgreement,
+      });
+
+      console.log(submitData);
+      setstepRegister(stepRegister + 1);
+    }
   };
   return (
     <HeartsLayouts>
@@ -57,28 +101,47 @@ const SignUp: NextPage = () => {
                   placeholder="ID Card Number"
                   maxLength={13}
                   toolTipText={idCardToolTip}
+                  isRequired={true}
                   {...register("idCardNumber", {
-                    // required: true,
+                    required: true,
                     maxLength: 13,
+                    minLength: 13,
                   })}
+                  isInvalid={errors.idCardNumber?.type === "required"}
+                  errorMessages={errorMessages(
+                    "idcard",
+                    errors.idCardNumber as FieldError
+                  )}
                 />
               </Box>
               <Box pr={{ base: 0, xl: "50px" }}>
                 <HeartInput
-                  {...register("email", {
-                    // required: true,
+                  {...register("username", {
+                    required: true,
                   })}
-                  // type="email"
+                  type="email"
                   placeholder="Email"
+                  isRequired={true}
+                  isInvalid={errors.username?.type === "required"}
+                  errorMessages={errorMessages(
+                    "email",
+                    errors.username as FieldError
+                  )}
                 />
               </Box>
               <Box pr={{ base: 0, xl: "50px" }}>
                 <HeartInput
                   {...register("password", {
-                    // required: true,
+                    required: true,
                   })}
                   placeholder="Password"
                   type="password"
+                  isRequired={true}
+                  isInvalid={errors.password?.type === "required"}
+                  errorMessages={errorMessages(
+                    "password",
+                    errors.password as FieldError
+                  )}
                 />
               </Box>
               <Box w="100%">
@@ -98,10 +161,19 @@ const SignUp: NextPage = () => {
                 *Please read carefully. Click accept before click Sign Up
               </Heading>
               <Flex flexDirection="column" px="10px">
-                <Checkbox colorScheme="#F6F6F6" iconColor="black">
+                <Checkbox
+                  onChange={consentFormAgreementOnChangeHandler}
+                  colorScheme="#F6F6F6"
+                  iconColor="black"
+                  isInvalid={!consentFormAgreement}
+                >
                   Accept
                 </Checkbox>
-                <Checkbox colorScheme="#F6F6F6" iconColor="black">
+                <Checkbox
+                  onChange={newsReceivingAgreementOnChangeHandler}
+                  colorScheme="#F6F6F6"
+                  iconColor="black"
+                >
                   I would like to receive your newsletter and other promotional
                   information.
                 </Checkbox>
@@ -121,7 +193,7 @@ const SignUp: NextPage = () => {
           </form>
         </Flex>
       ) : (
-        <HeartsSignUpFee />
+        <HeartsSignUpFee sumbithandler={submitHandler} />
       )}
     </HeartsLayouts>
   );

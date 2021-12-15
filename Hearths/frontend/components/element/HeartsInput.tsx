@@ -50,7 +50,7 @@ export const HeartInput = forwardRef<HTMLInputElement, IInputProps>(
             <ChakraInput
               size={size}
               errorBorderColor="red.500"
-              focusBorderColor="gray.400"
+              focusBorderColor={!isInvalid ? "gray.400" : undefined}
               backgroundColor="#F6F6F6"
               placeholder={placeholder}
               {...style}
