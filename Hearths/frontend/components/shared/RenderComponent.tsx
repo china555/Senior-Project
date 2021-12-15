@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { AppProps } from "next/app";
 import { useEffect } from "react";
 import { useAppStore } from "../../store";
@@ -11,8 +12,13 @@ function RenderComponent({
   const { dispatch } = useAppStore();
   useEffect(() => {
     const language = localStorage.getItem("language") as Language;
-    if (!language) return;
-    dispatch("locale/changeLocale", language);
+    if (language) {
+      dispatch("locale/changeLocale", language);
+    }
+
+    if (Cookies.get("token")) {
+      dispatch("auth/setIsAuthenticated", true);
+    }
   }, []);
 
   return <Component {...pageProps} />;

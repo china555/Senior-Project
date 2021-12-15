@@ -2,11 +2,12 @@ import { Button, Flex, Heading, Box, Link, useToast } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { HeartInput } from "../components/element/HeartsInput";
 import { HeartsLayouts } from "../layouts/layout";
-import { useForm, SubmitHandler, FieldError } from "react-hook-form";
+import { useForm, FieldError } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { url } from "../constant";
 import Cookies from "js-cookie";
+import { useAppStore } from "../store";
 
 type LogInForm = {
   username: string;
@@ -23,13 +24,15 @@ const SignIn: NextPage = () => {
     formState: { errors },
   } = useForm<LogInForm>();
   const router = useRouter();
-  const toast = useToast;
+  const { dispatch } = useAppStore();
+  const toast = useToast();
   const onSubmit = async (loginData: LogInForm) => {
     try {
       const { data } = await axios.post(url + "/patients/login", loginData);
       Cookies.set("token", data.jwtToken);
       Cookies.set("refreshtoken", data.refreshToken);
       Cookies.set("patient_id", data.patient_id);
+      dispatch("auth/setIsAuthenticated", true);
     } catch (error) {
       console.error("Sign-in", error);
       toast({ status: "error", title: "Submit failed" });
