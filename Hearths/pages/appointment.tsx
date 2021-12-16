@@ -18,6 +18,7 @@ import { HeartsModal } from "../components/common/HeartsModal";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { url } from "../constant";
+import Cookies from "js-cookie";
 
 type Time = {
   start: string;
@@ -51,9 +52,13 @@ const Appointment = () => {
     SetSelectedDate(value);
   };
 
-  const handleSubmitSelectedDateAndTime = () => {
+  const handleSubmitSelectedDateAndTime = async () => {
     if (selectedTime !== "") {
-      // axios.post(url + "appointments");
+      const data = {
+        appointmentDateTime: `${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDay()} ${selectedTime}:00`,
+        patientId: Number(Cookies.get("patient_id")),
+      };
+      await axios.post(url + "/appointments", data);
       onOpen();
     } else {
       alert("please select Time for Appointment");
