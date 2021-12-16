@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { useTranslation } from "../../hooks/useTranslation";
 
 import HeartsContainer from "../common/HeartsContainer";
-const iconOverall = [
-  "/images/icons/appoint.png",
-  "/images/icons/appoint.png",
-  "/images/icons/appoint.png",
-  "/images/icons/appoint.png",
+const iconOverView = [
+  "/images/Overview/solidarity.png",
+  "/images/Overview/people.png",
+  "/images/Overview/knock.png",
+  "/images/Overview/badge.png",
 ];
 export const HeartsOverview = () => {
   const { translations } = useTranslation("Overview", "TopicOverview");
@@ -23,11 +23,7 @@ export const HeartsOverview = () => {
           {translations.Overview.map((ele, index) => (
             <Box w={{ base: "50%", xl: "25%" }} key={`index${index}`}>
               <Box mx="auto" w={"30%"}>
-                <Image
-                  w="100%"
-                  alt="something"
-                  src="/images/icons/appoint.png"
-                />
+                <Image w="100%" alt="something" src={iconOverView[index]} />
               </Box>
               <Box textAlign="center">
                 <Heading color="#003B71" fontSize="20px">

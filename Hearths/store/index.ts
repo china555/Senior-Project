@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { createStoreon } from "storeon";
 import { customContext } from "storeon/react";
-import { authModule, IAuthEvent, IAuthState } from "./auth";
+import { authModule, IAuthEvent, IAuthState } from "./Auth";
 
 import { localeModule } from "./locale";
 import { ILocaleEvent, ILocaleState } from "./locale/@types";
