@@ -41,7 +41,10 @@ export const HeartsBanner = () => {
             <span style={{ color: "#225378" }}>Hea</span>
             <span style={{ color: "#EB7F00" }}>RTS</span>
             <br />
-            HealthcaRe Tele-delivery Service
+            <span style={{ color: "#225378" }}>Hea</span>lthca
+            <span style={{ color: "#EB7F00" }}>R</span>e{" "}
+            <span style={{ color: "#EB7F00" }}>T</span>ele-delivery{" "}
+            <span style={{ color: "#EB7F00" }}>S</span>ervice
           </Box>
           <Box
             textShadow="-1px 1px 0 #FFFFFF,
@@ -50,7 +53,8 @@ export const HeartsBanner = () => {
                         -1px -1px 0 #FFFFFF;"
             fontSize="2xl"
           >
-            One More Reason To Be Healthy
+            Tele-Physical therapy, Tele-occupational therapy, service mind, easy
+            access, anytime, anywhere, designed just for you
           </Box>
           <Box mt="2">
             <Button

@@ -25,7 +25,7 @@ const OurTeam: NextPage = () => {
     },
     {
       name: translations.DepartMentName.MusculoSkeletalSystem,
-      img: "/images/our-team/Logo/OT.jpg",
+      img: "/images/our-team/Logo/Musculo.jpg",
       alt: "Physical Therapy: Musculoskeletal system",
       clickhandler: () => {
         router.push("/our-team/physiotherapist#Neurological");
@@ -65,7 +65,7 @@ const OurTeam: NextPage = () => {
     },
     {
       name: translations.DepartMentName.Community,
-      img: "/images/our-team/Logo/Women.jpg",
+      img: "/images/our-team/Logo/Community.jpg",
       alt: "Physical Therapy: Community",
       clickhandler: () => {
         router.push("/our-team/physiotherapist#Community");

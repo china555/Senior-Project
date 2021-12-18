@@ -19,7 +19,7 @@ export const HeartsNavbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   return (
-    <Box position="sticky" top="0" bg="white" zIndex="10">
+    <Box position="sticky" top="0" bg="white" zIndex="10" mb="5">
       <HearthsDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
 
       <HeartsContainer>

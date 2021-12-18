@@ -1106,7 +1106,7 @@ const PhysiotherapistWomenTH: IPhysiotherapist[] = [
 ];
 const PhysiotherapistWomenENG: IPhysiotherapist[] = [
   {
-    name: "PT. Pakaratee Chaiyawat",
+    name: "Asst. Prof. Dr. Pakaratee Chaiyawat",
     specialty: [
       "Women health",
       "Dynamic Neuromuscular Stabilization course for women health",
@@ -1156,7 +1156,7 @@ const PhysiotherapistCommunityTH: IPhysiotherapist[] = [
 ];
 const PhysiotherapistCommunityENG: IPhysiotherapist[] = [
   {
-    name: "Asst Prof Dr Pakaratee Chaiyawat",
+    name: "Asst. Prof. Dr. Pakaratee Chaiyawat",
     specialty: ["Community Physical Therapy", "Geriatric Physical Therapy"],
     img: "/images/our-team/หมอ_community/ภครตี ชัยวัฒน์.jpg",
   },

@@ -27,20 +27,18 @@ export const enLocale: ILocaleState = {
   TopicOverview: "Overview",
   Overview: [
     {
-      topic: "Tele-Physical therapy, Tele- occupational therapy",
+      topic: "Tele-Physical therapy, Tele-occupational therapy",
       detail: [
         "Less chance of being transmitted by an infectious disease",
         "Less transportation time and costs",
-        "Less burden of caregivers",
         "Continuity of care",
         "Access to specialists",
-        "Better quality of life",
       ],
     },
     {
       topic: "Service mind",
       detail: [
-        "Being service-minded to serve you in a manner that will elicit the best care",
+        "Being service-minded to serve you in a manner that will elicit the best care and less burden of caregivers",
       ],
     },
     {
@@ -52,7 +50,7 @@ export const enLocale: ILocaleState = {
     {
       topic: "Designed just for you",
       detail: [
-        "Tailor-made service delivery to make it the best for you and your family",
+        "Tailor-made service delivery to make it : better quality of life, the best for you and your family",
       ],
     },
   ],
@@ -79,7 +77,7 @@ export const thLocale: ILocaleState = {
   TopicOverview: "ภาพรวม",
   Overview: [
     {
-      topic: "กายภาพบำบัด กิจกรรมบำบัดทางไกล",
+      topic: "กายภาพบำบัด, กิจกรรมบำบัดทางไกล",
       detail: [
         "ลดโอกาสการติดเชื้อ",
         "ลดเวลาการเดินทางและค่าใช้จ่าย",

@@ -13,9 +13,9 @@ export const HeartsOverview = () => {
   const { translations } = useTranslation("Overview", "TopicOverview");
   const router = useRouter();
   return (
-    <HeartsContainer>
-      <Box mt="6rem">
-        <Heading color="#003B71" as="h1" textAlign="center" pt="5">
+    <Box bg="PrimaryColor.bg" mt="4rem" pb="5rem">
+      <HeartsContainer>
+        <Heading color="#003B71" as="h1" textAlign="center" py="3rem">
           {translations.TopicOverview}
         </Heading>
         <Box display="flex" flexWrap="wrap" justifyContent="center">
@@ -27,7 +27,15 @@ export const HeartsOverview = () => {
               </Box>
               <Box textAlign="center">
                 <Heading color="#003B71" fontSize="20px">
-                  {ele.topic}
+                  {index === 0 ? (
+                    <Box>
+                      {ele.topic.split(", ")[0]}
+                      <br />
+                      {ele.topic.split(", ")[1]}
+                    </Box>
+                  ) : (
+                    <Box>{ele.topic}</Box>
+                  )}
                 </Heading>
                 {ele.detail.map((ele: string, index: number) => (
                   <Box key={index}>{ele}</Box>
@@ -36,7 +44,7 @@ export const HeartsOverview = () => {
             </Box>
           ))}
         </Box>
-      </Box>
-    </HeartsContainer>
+      </HeartsContainer>
+    </Box>
   );
 };

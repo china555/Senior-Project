@@ -13,7 +13,7 @@ export const HeartsAboutUs = () => {
   );
   const router = useRouter();
   return (
-    <Box bg="PrimaryColor.bg" mt="6rem" pb="5">
+    <Box mt="6rem" pb="5">
       <HeartsContainer>
         <Heading color="#003B71" as="h1" textAlign="center" pt="5">
           {translations.AboutUs}
@@ -29,19 +29,14 @@ export const HeartsAboutUs = () => {
               <Heading as="h2" size="lg" mt={{ base: "1rem", xl: "0" }}>
                 We are <span style={{ color: "#225378" }}>Hea</span>
                 <span style={{ color: "#EB7F00" }}>RTS</span> a <br />{" "}
-                HealthcaRe Tele-delivery Service
+                <span style={{ color: "#225378" }}>Hea</span>lthca
+                <span style={{ color: "#EB7F00" }}>R</span>e{" "}
+                <span style={{ color: "#EB7F00" }}>T</span>ele-delivery
+                <span style={{ color: "#EB7F00" }}> S</span>ervice
               </Heading>
               <Text>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industrys standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of
-                type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
+                Tele-Physical therapy, Tele-occupational therapy, service mind,
+                easy access, anytime, anywhere, designed just for you
               </Text>
               <Box mt="2rem">
                 <Button
@@ -59,21 +54,7 @@ export const HeartsAboutUs = () => {
                   {translations.Contact}
                 </Button>
                 <Button
-                  py="2rem"
-                  size="lg"
-                  borderRadius="30px"
-                  bg="ThirdColor"
-                  color="white"
-                  boxShadow="xl"
-                  onClick={() => {
-                    router.push("/our-team");
-                  }}
-                >
-                  {translations.OurTeam}
-                </Button>
-                <br />
-                <Button
-                  mt="1rem"
+                  mr="1rem"
                   py="2rem"
                   px="3.2rem"
                   size="lg"
@@ -86,6 +67,19 @@ export const HeartsAboutUs = () => {
                   }}
                 >
                   {translations.FAQ}
+                </Button>
+                <Button
+                  py="2rem"
+                  size="lg"
+                  borderRadius="30px"
+                  bg="ThirdColor"
+                  color="white"
+                  boxShadow="xl"
+                  onClick={() => {
+                    router.push("/our-team");
+                  }}
+                >
+                  {translations.OurTeam}
                 </Button>
               </Box>
             </Box>
