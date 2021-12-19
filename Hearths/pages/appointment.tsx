@@ -6,11 +6,11 @@ import {
   Select,
   Button,
   Image,
+  useToast,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import add from "date-fns/add";
-import { flatMap, range } from "lodash";
 import { HeartsLayouts } from "../layouts/layout";
 import HeartsContainer from "../components/common/HeartsContainer";
 import { useDisclosure } from "@chakra-ui/hooks";
@@ -19,38 +19,120 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { url } from "../constant";
 import Cookies from "js-cookie";
+import { uniq, uniqBy } from "lodash";
 
 type Time = {
   start: string;
-  end: string;
-  isBooked: boolean;
+  stop: string;
+  event_id: number;
+};
+type AppointmentAPI = {
+  FirstName: string;
+  LastName: string;
+  PhysicalType_ID: number;
+  Prefix_Rang: string;
+  User_ID: number;
+  start: Date;
+  stop: Date;
+  event_id: number;
 };
 
+type therapisType = {
+  name: string;
+  user_ID: number;
+};
+const physicalType = [
+  { name: "ORTHO", id: 1 },
+  { name: "NEURO", id: 2 },
+  { name: "PED", id: 3 },
+  { name: "COMMUNITY", id: 5 },
+  { name: "PED", id: 7 },
+  { name: "SCOLIOSIS", id: 12 },
+];
 const Appointment = () => {
   const router = useRouter();
-  const [allTimeLength, setAllTimeLength] = useState<Time[]>(
-    flatMap(
-      range(8, 20)
-        .filter((ele) => {
-          return ele !== 12;
-        })
-        .map((val) => [`${val}:00`, `${val}:30`, `${val}:30`, `${val + 1}:00`])
-        .map(([startA, endA, startB, endB]) => [
-          { start: startA, end: endA, isBooked: false },
-          { start: startB, end: endB, isBooked: false },
-        ])
-    )
-  );
+  const [allTimeLength, setAllTimeLength] = useState<Time[]>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, onChange] = useState(new Date());
   const [selectedDate, SetSelectedDate] = useState<Date>(new Date());
   const [selectedTime, SetSelectedTime] = useState("");
-  const [selectedspecialty, SetSelectedspecialty] = useState("");
-  const [selectedtherapist, SetSelectedtherapist] = useState("");
+  const [specialty, Setspecialty] = useState<number[]>([]);
+  const [therapist, Settherapist] = useState<therapisType[]>([]);
+  const [enabledate, SetEnableDate] = useState<Date[]>([]);
+  const [selectedSpecialty, setSelectedSpecialty] = useState("");
+  const [selectedTherapist, setSelectedTherapist] = useState("");
+  const [appointmentDataAPI, setAppointmentDataAPI] = useState<
+    AppointmentAPI[]
+  >([]);
 
+  const toast = useToast();
   const handleSelectedDate = (value: Date) => {
     SetSelectedDate(value);
   };
+  useEffect(() => {
+    const fetchAPI = async () => {
+      try {
+        const { data } = await axios.get<AppointmentAPI[]>(
+          `${url}/appointment`
+        );
+        console.log(data);
+        setAppointmentDataAPI(data);
+        SetEnableDate(
+          data.map(({ start }) => {
+            return new Date(start);
+          })
+        );
+        const therapistData = data.map(
+          ({ Prefix_Rang, FirstName, LastName, User_ID }) => {
+            return {
+              name: `${Prefix_Rang}${FirstName} ${LastName}`,
+              user_ID: User_ID,
+            };
+          }
+        );
+        Settherapist(uniqBy(therapistData, "user_ID"));
+      } catch (error) {
+        toast({
+          status: "error",
+          title: "Cannot connect to server Please Try again Later",
+        });
+      }
+    };
+    fetchAPI();
+  }, []);
+  const filterAppointment = (data: AppointmentAPI) => {
+    if (selectedSpecialty === "" && selectedTherapist === "") {
+      return selectedDate.getDate() === new Date(data.start).getDate();
+    } else if (selectedSpecialty !== "" && selectedTherapist === "") {
+      return (
+        selectedDate.getDate() === new Date(data.start).getDate() &&
+        Number(selectedSpecialty) === data.PhysicalType_ID
+      );
+    } else if (selectedSpecialty === "" && selectedTherapist !== "") {
+      return (
+        selectedDate.getDate() === new Date(data.start).getDate() &&
+        Number(selectedTherapist) === data.User_ID
+      );
+    } else {
+      return (
+        selectedDate.getDate() === new Date(data.start).getDate() &&
+        Number(selectedTherapist) === data.User_ID &&
+        Number(selectedSpecialty) === data.PhysicalType_ID
+      );
+    }
+  };
+  useEffect(() => {
+    const temp = appointmentDataAPI
+      .filter(filterAppointment)
+      .map(({ start, stop, event_id }) => {
+        return {
+          start: `${new Date(start).getHours()}:00`,
+          stop: `${new Date(stop).getHours()}:00`,
+          event_id: event_id,
+        };
+      });
+    setAllTimeLength(temp);
+  }, [selectedDate, selectedSpecialty, selectedTherapist]);
 
   const handleSubmitSelectedDateAndTime = async () => {
     if (selectedTime !== "") {
@@ -63,6 +145,16 @@ const Appointment = () => {
     } else {
       alert("please select Time for Appointment");
     }
+  };
+
+  const specialtyHandleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
+    setSelectedSpecialty(e.target.value);
+  };
+
+  const therapistHandleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
+    setSelectedTherapist(e.target.value);
   };
   return (
     <Box>
@@ -84,7 +176,6 @@ const Appointment = () => {
           <Box mt="5">
             Your appointment is {selectedTime} on{" "}
             {`${selectedDate?.getDate()}-${selectedDate?.getMonth()}-${selectedDate?.getFullYear()}`}
-            with ...............
           </Box>
         </Box>
         <Button
@@ -108,18 +199,30 @@ const Appointment = () => {
           <Flex flexWrap="wrap" mt="5">
             <Box w={{ base: "100%", xl: "50%" }}>
               <Text fontSize="24px">1.Select Specialty</Text>
-              <Select bg="#F6F6F6" placeholder="Specialty">
-                <option value="option1">Specialty1</option>
-                <option value="option2">Specialty2</option>
-                <option value="option3">Specialty3</option>
+              <Select
+                bg="#F6F6F6"
+                placeholder="Physical Therapist Name"
+                onChange={therapistHandleChange}
+              >
+                {physicalType.map((ele, index) => (
+                  <option value={ele.id} key={`${index}`}>
+                    {ele.name}
+                  </option>
+                ))}
               </Select>
               <Text fontSize="24px" mt="5">
                 2.Name
               </Text>
-              <Select bg="#F6F6F6" placeholder="Physical Therapist Name">
-                <option value="option1">Therapist1</option>
-                <option value="option2">Therapist2</option>
-                <option value="option3">Therapist3</option>
+              <Select
+                bg="#F6F6F6"
+                placeholder="Specialty"
+                onChange={specialtyHandleChange}
+              >
+                {therapist.map((ele, index) => (
+                  <option value={ele.user_ID} key={`${index}`}>
+                    {ele.name}
+                  </option>
+                ))}
               </Select>
               <Heading size="sm" color="#FF0000" as="h1" mt="2">
                 *Note: You can skip step 1 and 2, if you do not know.
@@ -129,21 +232,30 @@ const Appointment = () => {
               <Text fontSize="24px">3.Select Date</Text>
               <Box w={{ base: "100%", xl: "60%" }} mx="auto">
                 <Calendar
-                  onChange={onChange}
-                  value={value}
                   maxDate={add(new Date(), { days: 30 })}
                   minDate={new Date()}
+                  onChange={onChange}
+                  value={value}
                   onClickDay={handleSelectedDate}
+                  tileDisabled={({ view, date }) => {
+                    return (
+                      view === "month" &&
+                      !enabledate.some(
+                        (disabledDate) =>
+                          date.getFullYear() === disabledDate.getFullYear() &&
+                          date.getMonth() === disabledDate.getMonth() &&
+                          date.getDate() === disabledDate.getDate()
+                      )
+                    );
+                  }}
                 />
                 <Box maxH="200px" overflowY="scroll" className="scroll">
-                  {allTimeLength.map((ele, index) => {
+                  {allTimeLength?.map((ele, index) => {
                     return (
                       <Flex
                         key={index}
                         onClick={(index) => {
-                          if (!ele.isBooked) {
-                            SetSelectedTime(`${ele.start}`);
-                          }
+                          SetSelectedTime(`${ele.event_id}`);
                         }}
                         bg="#f6f6f6"
                         borderBottom="1px solid"
@@ -154,7 +266,7 @@ const Appointment = () => {
                           w="100%"
                           style={{
                             background:
-                              selectedTime === `${ele.start}`
+                              selectedTime === `${ele.event_id}`
                                 ? "#DDDCDC"
                                 : "#f6f6f6",
                           }}
@@ -172,9 +284,8 @@ const Appointment = () => {
                             </Box>
                           </Box>
                           <Box w="60%" fontWeight="800">
-                            {ele.start} - {ele.end}
+                            {ele.start} - {ele.stop}
                           </Box>
-                          <Box w="20%">{ele.isBooked ? "Booked" : "Free"}</Box>
                         </Flex>
                       </Flex>
                     );
