@@ -9,7 +9,7 @@ export const HeartsFooter = () => {
             <Box w={{ base: "50%", xl: "30%" }} mx="auto">
               <Image
                 w="100%"
-                src="/images/logo/hearts_logo.png"
+                src="/images/logo/logo tpt.png"
                 alt="Hearts Logo"
               />
             </Box>

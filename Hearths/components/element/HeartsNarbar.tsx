@@ -32,7 +32,7 @@ export const HeartsNavbar = () => {
               }}
               w={["60%", "5rem", "5rem"]}
               alt="Hearts"
-              src="/images/logo/hearts_logo.png"
+              src="/images/logo/logo tpt.png"
             />
           </Box>
           {width > 1024 ? (

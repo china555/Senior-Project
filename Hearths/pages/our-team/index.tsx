@@ -82,8 +82,8 @@ const OurTeam: NextPage = () => {
           mt="2rem"
           textAlign="center"
           mx="auto"
-          w={{ base: "640px", xl: "640px" }}
-          h={{ base: "360px", xl: "360px" }}
+          w={{ base: "320px", lg: "480", xl: "640px" }}
+          h={{ base: "180px", lg: "240", xl: "360px" }}
         >
           <iframe
             src="https://drive.google.com/file/d/1hWJ-3clKQ2NgZz0emJuyKF5vUdZN2HaN/preview"
