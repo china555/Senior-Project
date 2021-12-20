@@ -2,7 +2,7 @@ import { Flex, Image, Box } from "@chakra-ui/react";
 
 export const HeartsFooter = () => {
   return (
-    <Box bg="PrimaryColor.bg" py="2rem">
+    <Box bg="white" py="2rem">
       <Box mx="auto" w={{ base: "80%", lg: "40%", xl: "60%" }}>
         <Flex alignItems="center">
           <Box w="50%">
