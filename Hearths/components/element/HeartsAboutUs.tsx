@@ -13,7 +13,7 @@ export const HeartsAboutUs = () => {
   );
   const router = useRouter();
   return (
-    <Box mt="6rem" pb="5">
+    <Box mt="4rem">
       <HeartsContainer>
         <Heading color="#003B71" as="h1" textAlign="center" pt="5">
           {translations.AboutUs}
@@ -38,10 +38,10 @@ export const HeartsAboutUs = () => {
                 Tele-Physical therapy, Tele-occupational therapy, service mind,
                 easy access, anytime, anywhere, designed just for you
               </Text>
-              <Box mt="2rem">
+              <Box mt="2rem" display="flex" flexWrap="wrap">
                 <Button
-                  mr="1rem"
                   py="2rem"
+                  mx="1"
                   size="lg"
                   borderRadius="30px"
                   bg="white"
@@ -54,7 +54,7 @@ export const HeartsAboutUs = () => {
                   {translations.Contact}
                 </Button>
                 <Button
-                  mr="1rem"
+                  mx="1"
                   py="2rem"
                   px="3.2rem"
                   size="lg"
@@ -69,6 +69,8 @@ export const HeartsAboutUs = () => {
                   {translations.FAQ}
                 </Button>
                 <Button
+                  mx="1"
+                  mt={{ base: "3", sm: "0" }}
                   py="2rem"
                   size="lg"
                   borderRadius="30px"

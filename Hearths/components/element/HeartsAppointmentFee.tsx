@@ -8,14 +8,15 @@ import { useState } from "react";
 import { first, isEmpty, isNil } from "lodash";
 import axios from "axios";
 import { url } from "../../constant";
+import Cookies from "js-cookie";
 interface IReturnID {
   patient_id: number;
 }
 
 type submitHandler = {
-  sumbithandler: () => Promise<IReturnID>;
+  sumbithandler: () => Promise<string>;
 };
-export const HeartsSignUpFee = (props: submitHandler) => {
+export const HeartsAppointmentFee = (props: submitHandler) => {
   const toast = useToast();
   const router = useRouter();
   const [isClickCancel, setIsClickCancel] = useState(false);
@@ -46,7 +47,6 @@ export const HeartsSignUpFee = (props: submitHandler) => {
   const onSubmitImageandDataHandler = async () => {
     try {
       if (!hasReceipFile && !isClickCancel) onOpen();
-      const id: IReturnID = await props.sumbithandler(); //.patient_id
       const formData = new FormData();
       if (receiptFile) {
         formData.append("receipt", receiptFile);
@@ -57,12 +57,15 @@ export const HeartsSignUpFee = (props: submitHandler) => {
         },
       });
       const paymentData = {
-        patient_id: id.patient_id,
-        payFor: "register",
+        patient_id: Number(Cookies.get("patient_id")),
+        payFor: "appointment",
         payMethod: "scan",
         imgPath: data.path,
       };
-      axios.post(url + "/payment", paymentData);
+      await axios.post(url + "/payment", paymentData);
+      const message: string = await props.sumbithandler();
+      console.log(message);
+      toast({ status: "success", title: "Appointment Successful" });
       onOpen();
     } catch (error) {
       console.error("onSubmitImageandDataHandler", error);

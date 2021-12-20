@@ -25,7 +25,7 @@ export const HeartsOverview = () => {
               <Box mx="auto" w={"30%"}>
                 <Image w="100%" alt="something" src={iconOverView[index]} />
               </Box>
-              <Box textAlign="center">
+              <Box mt="5" textAlign="center">
                 <Heading color="#003B71" fontSize="20px">
                   {index === 0 ? (
                     <Box>

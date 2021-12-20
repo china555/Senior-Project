@@ -5,9 +5,9 @@ import HeartsContainer from "../common/HeartsContainer";
 export const HeartsContactUs = () => {
   const { translations } = useTranslation("Contact");
   return (
-    <Box my="6rem">
+    <Box pb="4rem" mt="4rem" bg="PrimaryColor.bg">
       <HeartsContainer>
-        <Heading color="#003B71" as="h1" textAlign="center">
+        <Heading pt="3rem" color="#003B71" as="h1" textAlign="center">
           {translations.Contact}
         </Heading>
         <Flex
@@ -25,7 +25,7 @@ export const HeartsContactUs = () => {
             ></iframe>
           </Box>
           <Box w={{ base: "100%", xl: "49%" }} mt={{ base: "5", xl: "0" }}>
-            <Flex w="100%" bg="PrimaryColor.bg" padding="2" alignItems="center">
+            <Flex w="100%" bg="white" padding="2" alignItems="center">
               <Box w="20%">
                 <Image
                   w="60%"
@@ -45,13 +45,7 @@ export const HeartsContactUs = () => {
                 </Link>
               </Box>
             </Flex>
-            <Flex
-              w="100%"
-              bg="PrimaryColor.bg"
-              padding="2"
-              alignItems="center"
-              mt="4"
-            >
+            <Flex w="100%" bg="white" padding="2" alignItems="center" mt="4">
               <Box w="20%">
                 <Image
                   w="60%"
@@ -73,13 +67,7 @@ export const HeartsContactUs = () => {
                 </Link>
               </Box>
             </Flex>
-            <Flex
-              w="100%"
-              bg="PrimaryColor.bg"
-              padding="2"
-              alignItems="center"
-              mt="4"
-            >
+            <Flex w="100%" bg="white" padding="2" alignItems="center" mt="4">
               <Box w="20%">
                 <Image
                   w="60%"
@@ -93,13 +81,7 @@ export const HeartsContactUs = () => {
                 </Link>
               </Box>
             </Flex>
-            <Flex
-              w="100%"
-              bg="PrimaryColor.bg"
-              padding="2"
-              alignItems="center"
-              mt="4"
-            >
+            <Flex w="100%" bg="white" padding="2" alignItems="center" mt="4">
               <Box w="20%">
                 <Image
                   w="60%"

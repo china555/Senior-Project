@@ -68,7 +68,6 @@ const SignUp: NextPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterForm>();
-  console.log("errors", errors);
 
   const onSubmit = (data: RegisterForm) => {
     if (consentFormAgreement) {
@@ -77,8 +76,6 @@ const SignUp: NextPage = () => {
         consentAgreement: consentFormAgreement,
         newsReceivingAgreement,
       });
-
-      console.log(submitData);
       setstepRegister(stepRegister + 1);
     }
   };

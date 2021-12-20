@@ -10,7 +10,6 @@ import { HeartsOverview } from "../components/element/HeartsOverview";
 
 const Home: NextPage = () => {
   const { translations, changeLocale } = useTranslation("test");
-  console.log("translation-result", translations);
   return (
     <HeartsLayouts>
       <HeartsBanner />
@@ -22,6 +21,9 @@ const Home: NextPage = () => {
       <HeartsAboutUs />
       <Box id="contactus" />
       <HeartsContactUs />
+      <Box bg="PrimaryColor.900" p="2">
+        {""}
+      </Box>
     </HeartsLayouts>
   );
 };
