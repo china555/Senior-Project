@@ -21,6 +21,7 @@
     "framer-motion": "4",
     "js-cookie": "^3.0.1",
     "lodash": "4.17.21",
+    "moment": "^2.29.1",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-calendar": "3.5.0",

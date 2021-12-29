@@ -16,6 +16,7 @@ specifiers:
   framer-motion: '4'
   js-cookie: ^3.0.1
   lodash: 4.17.21
+  moment: ^2.29.1
   next: 11.1.2
   react: 17.0.2
   react-calendar: 3.5.0
@@ -39,6 +40,7 @@ dependencies:
   framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2
   js-cookie: 3.0.1
   lodash: 4.17.21
+  moment: 2.29.1
   next: 11.1.2_bd7797d63db473de6e2318609a63c933
   react: 17.0.2
   react-calendar: 3.5.0_react-dom@17.0.2+react@17.0.2
@@ -3207,6 +3209,10 @@ packages:
 
   /minimist/1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
+
+  /moment/2.29.1:
+    resolution: {integrity: sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==}
+    dev: false
 
   /ms/2.0.0:
     resolution: {integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=}

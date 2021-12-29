@@ -17,7 +17,7 @@ export const enLocale: ILocaleState = {
   Contact: "Contact Us",
   Appointment: "Make an appointment",
   MyAppointment: "My Appointment",
-  RequestDocument: "Request Documet",
+  RequestDocument: "Request Document",
   VDOCallService: "Service",
   FAQ: "FAQ",
   OurTeam: "Our Team",
