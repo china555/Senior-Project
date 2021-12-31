@@ -18,7 +18,7 @@ interface IMyAppointment {
   appoint_datetime: number;
   event_id: number;
   appointment_status: string;
-  meeting_link: string | "https://mahidol.webex.com/meet/somboon.kon";
+  meeting_link: string | undefined;
 }
 const MyAppointment: NextPage = () => {
   const [appointment, setAppointment] = useState<IMyAppointment[]>([]);
@@ -112,8 +112,9 @@ const MyAppointment: NextPage = () => {
                   border="1px solid #E2E8F0"
                   justifyContent="center"
                 >
-                  <Box my="auto" overflow={"hidden"} textOverflow={"ellipsis"}>
+                  <Box my="auto">
                     <Link
+                      target="_blank"
                       href={ele.meeting_link}
                       textDecoration={
                         ele.meeting_link !== null ? "underline" : "none"
