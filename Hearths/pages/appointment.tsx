@@ -21,6 +21,7 @@ import { url } from "../constant";
 import Cookies from "js-cookie";
 import { uniqBy } from "lodash";
 import { HeartsAppointmentFee } from "../components/element/HeartsAppointmentFee";
+import { useTranslation } from "../hooks/useTranslation";
 
 type submit = {
   appointmentDateTime: string;
@@ -72,7 +73,9 @@ const Appointment = () => {
   const [appointmentDataAPI, setAppointmentDataAPI] = useState<
     AppointmentAPI[]
   >([]);
-
+  const { translations, changeLocale } = useTranslation(
+    "ErrorMessageSelectedTime"
+  );
   const toast = useToast();
   const handleSelectedDate = (value: Date) => {
     SetSelectedDate(value);
@@ -147,7 +150,7 @@ const Appointment = () => {
     } else {
       toast({
         status: "error",
-        title: "Please select Time for Appointment",
+        title: translations.ErrorMessageSelectedTime,
       });
     }
   };
@@ -169,9 +172,6 @@ const Appointment = () => {
       patientId: Number(Cookies.get("patient_id")),
       event_id: selectedTime?.event_id,
     };
-    // if (selectedTherapist !== "") {
-    //   submitData.user_id = Number(selectedTherapist);
-    // }
     console.log(submitData);
     const { data } = await axios.post(url + "/appointments", submitData);
     return data;
@@ -225,7 +225,7 @@ const Appointment = () => {
                 <Text fontSize="24px">1.Select Specialty</Text>
                 <Select
                   bg="#F6F6F6"
-                  placeholder="Physical Therapist Name"
+                  placeholder="Specialty"
                   onChange={specialtyHandleChange}
                 >
                   {physicalType.map((ele, index) => (
@@ -239,7 +239,7 @@ const Appointment = () => {
                 </Text>
                 <Select
                   bg="#F6F6F6"
-                  placeholder="Specialty"
+                  placeholder="Physical Therapist Name"
                   onChange={therapistHandleChange}
                 >
                   {therapist.map((ele, index) => (

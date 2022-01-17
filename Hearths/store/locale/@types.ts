@@ -36,6 +36,7 @@ export interface ILocaleState {
   test: string;
   SignIn: string;
   SignUp: string;
+  SignOut: string;
   Home: string;
   Service: string;
   AboutUs: string;
@@ -51,6 +52,7 @@ export interface ILocaleState {
   Question: QuestionAndAnswer[];
   Overview: Overview[];
   TopicOverview: string;
+  ErrorMessageSelectedTime: string;
 }
 
 export interface ILocaleEvent {

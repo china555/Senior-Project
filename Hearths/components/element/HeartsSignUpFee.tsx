@@ -45,25 +45,28 @@ export const HeartsSignUpFee = (props: submitHandler) => {
 
   const onSubmitImageandDataHandler = async () => {
     try {
-      if (!hasReceipFile && !isClickCancel) onOpen();
-      const id: IReturnID = await props.sumbithandler(); //.patient_id
-      const formData = new FormData();
-      if (receiptFile) {
-        formData.append("receipt", receiptFile);
+      if (!hasReceipFile && !isClickCancel) {
+        onOpen();
+      } else if (hasReceipFile) {
+        const id: IReturnID = await props.sumbithandler(); //.patient_id
+        const formData = new FormData();
+        if (receiptFile) {
+          formData.append("receipt", receiptFile);
+        }
+        const { data } = await axios.post(url + "/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        const paymentData = {
+          patient_id: id.patient_id,
+          payFor: "register",
+          payMethod: "scan",
+          imgPath: data.path,
+        };
+        axios.post(url + "/payment", paymentData);
+        onOpen();
       }
-      const { data } = await axios.post(url + "/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      const paymentData = {
-        patient_id: id.patient_id,
-        payFor: "register",
-        payMethod: "scan",
-        imgPath: data.path,
-      };
-      axios.post(url + "/payment", paymentData);
-      onOpen();
     } catch (error) {
       console.error("onSubmitImageandDataHandler", error);
       toast({ status: "error", title: "Submit failed" });

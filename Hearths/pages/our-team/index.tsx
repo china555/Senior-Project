@@ -28,7 +28,7 @@ const OurTeam: NextPage = () => {
       img: "/images/our-team/Logo/Musculo.jpg",
       alt: "Physical Therapy: Musculoskeletal system",
       clickhandler: () => {
-        router.push("/our-team/physiotherapist#Neurological");
+        router.push("/our-team/physiotherapist#Musculoskeletal");
       },
     },
     {
@@ -82,16 +82,18 @@ const OurTeam: NextPage = () => {
           mt="2rem"
           textAlign="center"
           mx="auto"
-          w={{ base: "640px", xl: "640px" }}
+          w={{ base: "90%", xl: "640px" }}
           h={{ base: "360px", xl: "360px" }}
         >
           <iframe
-            src="https://drive.google.com/file/d/1hWJ-3clKQ2NgZz0emJuyKF5vUdZN2HaN/preview"
             width="100%"
             height="100%"
-            allow="autoplay"
+            src="https://www.youtube.com/embed/hrGl0VntS-4"
+            title="YouTube video player"
+            frameBorder={0}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-          />
+          ></iframe>
         </Box>
       </Box>
       <HeartsContainer>
@@ -108,6 +110,7 @@ const OurTeam: NextPage = () => {
                 textAlign="center"
                 mx="auto"
                 p="20px"
+                cursor={"pointer"}
                 key={department.name}
                 onClick={department.clickhandler}
               >

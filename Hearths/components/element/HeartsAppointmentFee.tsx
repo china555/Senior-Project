@@ -46,27 +46,30 @@ export const HeartsAppointmentFee = (props: submitHandler) => {
 
   const onSubmitImageandDataHandler = async () => {
     try {
-      if (!hasReceipFile && !isClickCancel) onOpen();
-      const formData = new FormData();
-      if (receiptFile) {
-        formData.append("receipt", receiptFile);
+      if (!hasReceipFile && !isClickCancel) {
+        onOpen();
+      } else if (hasReceipFile) {
+        const formData = new FormData();
+        if (receiptFile) {
+          formData.append("receipt", receiptFile);
+        }
+        const { data } = await axios.post(url + "/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        const paymentData = {
+          patient_id: Number(Cookies.get("patient_id")),
+          payFor: "appointment",
+          payMethod: "scan",
+          imgPath: data.path,
+        };
+        await axios.post(url + "/payment", paymentData);
+        const message: string = await props.sumbithandler();
+        console.log(message);
+        toast({ status: "success", title: "Appointment Successful" });
+        onOpen();
       }
-      const { data } = await axios.post(url + "/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      const paymentData = {
-        patient_id: Number(Cookies.get("patient_id")),
-        payFor: "appointment",
-        payMethod: "scan",
-        imgPath: data.path,
-      };
-      await axios.post(url + "/payment", paymentData);
-      const message: string = await props.sumbithandler();
-      console.log(message);
-      toast({ status: "success", title: "Appointment Successful" });
-      onOpen();
     } catch (error) {
       console.error("onSubmitImageandDataHandler", error);
       toast({ status: "error", title: "Submit failed" });

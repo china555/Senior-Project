@@ -13,9 +13,9 @@ export const HeartsService = () => {
   );
   return (
     <HeartsContainer>
-      <Box mt="4rem" textAlign="center">
+      <Box mt="4rem" id="services" textAlign="center">
         <Box>
-          <Heading color="#003B71" as="h1">
+          <Heading color="#003B71" as="h1" pt="3rem">
             Our Services
           </Heading>
         </Box>
