@@ -53,6 +53,9 @@ export interface ILocaleState {
   Overview: Overview[];
   TopicOverview: string;
   ErrorMessageSelectedTime: string;
+  IDCard: string;
+  email: string;
+  password: string;
 }
 
 export interface ILocaleEvent {

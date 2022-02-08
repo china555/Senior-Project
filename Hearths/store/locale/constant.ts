@@ -56,6 +56,9 @@ export const enLocale: ILocaleState = {
     },
   ],
   ErrorMessageSelectedTime: "Please select time for appointment",
+  IDCard: "ID Card Number",
+  email: "Email",
+  password: "Password",
 };
 
 export const thLocale: ILocaleState = {
@@ -107,4 +110,7 @@ export const thLocale: ILocaleState = {
     },
   ],
   ErrorMessageSelectedTime: "กรุณาเลือกวันและเวลาในการจอง",
+  IDCard: "หมายเลขบัตรประจำตัวประชาชน",
+  email: "อีเมล",
+  password: "รหัสผ่าน",
 };

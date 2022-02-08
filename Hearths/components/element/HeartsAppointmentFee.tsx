@@ -1,6 +1,5 @@
 import { Box, Flex, Heading, Image, Button, useToast } from "@chakra-ui/react";
 import { HeartsDropzone } from "../common/HeartsDropZone";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { HeartsModal } from "../common/HeartsModal";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useRouter } from "next/router";
@@ -129,15 +128,27 @@ export const HeartsAppointmentFee = (props: submitHandler) => {
       <Flex
         flexDirection="column"
         gridRowGap="15px"
-        w={{ base: "70%", lg: "40%", xl: "30%" }}
+        w={{ base: "90%", lg: "80%", xl: "50%" }}
         mx="auto"
       >
         <Heading color="#003B71" as="h1" textAlign="center">
           Sign Up Fee
         </Heading>
-        <Box w="100%">
-          <Image mx="auto" alt="Hearts" src="/images/payment/QRcode.png" />
-        </Box>
+        <Flex alignItems={"center"}>
+          <Box w="50%">
+            <Image mx="auto" alt="Hearts" src="/images/payment/QRcode.png" />
+          </Box>
+          <Box w="50%" lineHeight={"9"} fontSize={{ base: "17px", xl: "17px" }}>
+            <Box>
+              <b>ชื่อบัญชี:</b> HealthcaRe Tele-delivery Service
+            </Box>
+            <Box>
+              ธนาคารไทยพาณิชย์ จำกัด (มหาชน) SIAM COMMERCIAL BANK PUBLIC COMPANY
+              LIMITED 0333 สาขามหาวิทยาลัยมหิตล
+            </Box>
+            <Box>เลขที่บัญชี ACCOUNT NO. 333-294813-4</Box>
+          </Box>
+        </Flex>
         <HeartsDropzone onUploadFile={handleUploadFile} />
         {!isNil(receiptFile) && (
           <li>
