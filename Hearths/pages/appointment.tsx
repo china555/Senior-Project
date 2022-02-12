@@ -91,7 +91,7 @@ const Appointment = () => {
         setAppointmentDataAPI(data);
         SetEnableDate(
           data.map(({ start }) => {
-            return new Date(String(start).replace("Z", "+07:00"));
+            return new Date(start);
           })
         );
         const therapistData = data.map(
@@ -137,6 +137,7 @@ const Appointment = () => {
     const temp = appointmentDataAPI
       .filter(filterAppointment)
       .map(({ start, stop, event_id }) => {
+        console.log(start);
         return {
           start: `${new Date(
             String(start).replace("Z", "+07:00")
