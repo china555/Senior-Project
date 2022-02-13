@@ -61,6 +61,7 @@ const Users: NextPage = () => {
     "Patient Full Name",
     "Status",
   ];
+
   const getname = (patient: IAppointmentPending) => {
     let name = "";
     if (
@@ -88,14 +89,17 @@ const Users: NextPage = () => {
     }
     return name;
   };
+
   const fetchAPI = async () => {
     const { data } = await axios.get(`${url}/get-all-pending`);
     setStatePending(data);
   };
+
   const confirmAppointment = async (
     data: submitConfirmationAppointmentData
   ) => {
-    await axios.patch(url + "/confirmation-appointment", data);
+    console.log(data);
+    // await axios.patch(url + "/confirmation-appointment", data);
   };
   useEffect(() => {
     fetchAPI();
@@ -175,8 +179,29 @@ const Users: NextPage = () => {
                       <Td>{<Box>{getname(ele)}</Box>}</Td>
                       <Td>
                         <Flex justifyContent={"space-evenly"}>
-                          <Button colorScheme="green">Confirm</Button>
-                          <Button colorScheme="red">Reject</Button>
+                          <Button
+                            colorScheme="green"
+                            onClick={() => {
+                              confirmAppointment({
+                                event_id: ele.event_id,
+                                appointmentStatus: "CONFIRMED",
+                                meetingLink: "adwad",
+                              });
+                            }}
+                          >
+                            Confirm
+                          </Button>
+                          <Button
+                            colorScheme="red"
+                            onClick={() => {
+                              confirmAppointment({
+                                event_id: ele.event_id,
+                                appointmentStatus: "REJECTED",
+                              });
+                            }}
+                          >
+                            Reject
+                          </Button>
                         </Flex>
                       </Td>
                     </Tr>
