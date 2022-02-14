@@ -18,11 +18,17 @@ import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { url } from "../../../constant";
+import { url, webex_token } from "../../../constant";
 import { HeartsModal } from "../../../components/common/HeartsModal";
+import moment from "moment-timezone";
+import {
+  getMomentDateMonthYearFormat,
+  getMomentHourFormat,
+  getMomentNextHourFormat,
+} from "../../../utils";
 interface IAppointmentPending {
   patient_id: string;
-  appoint_datetime: number;
+  appoint_datetime: Date;
   event_id: number;
   hn: string;
   patientPrefix: string | null;
@@ -47,6 +53,7 @@ interface submitConfirmationAppointmentData {
   event_id: number;
   appointmentStatus: "CONFIRMED" | "REJECTED";
   meetingLink?: string;
+  appoint_datetime: Date;
 }
 const Users: NextPage = () => {
   const router = useRouter();
@@ -92,14 +99,47 @@ const Users: NextPage = () => {
 
   const fetchAPI = async () => {
     const { data } = await axios.get(`${url}/get-all-pending`);
+    console.log(data);
     setStatePending(data);
   };
 
   const confirmAppointment = async (
-    data: submitConfirmationAppointmentData
+    submitData: submitConfirmationAppointmentData
   ) => {
-    console.log(data);
-    // await axios.patch(url + "/confirmation-appointment", data);
+    if (submitData.appointmentStatus === "CONFIRMED") {
+      const { appoint_datetime } = submitData;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${webex_token}`,
+        },
+      };
+      const { data } = await axios.post(
+        "https://webexapis.com/v1/meetings",
+        {
+          title: "Appointment Meeting",
+          start: moment.tz(appoint_datetime, "Asia/Bangkok").format(),
+          end: moment
+            .tz(appoint_datetime, "Asia/Bangkok")
+            .add(1, "hour")
+            .format(),
+          timezone: "Asia/Bangkok",
+          enabledAutoRecordMeeting: true,
+          enabledJoinBeforeHost: true,
+          enableConnectAudioBeforeHost: true,
+        },
+        config
+      );
+      await axios.patch(url + "/confirmation-appointment", {
+        event_id: submitData.event_id,
+        appointmentStatus: "CONFIRMED",
+        meetingLink: data.webLink,
+      });
+    } else if (submitData.appointmentStatus === "REJECTED") {
+      await axios.patch(url + "/confirmation-appointment", {
+        event_id: submitData.event_id,
+        appointmentStatus: "REJECTED",
+      });
+    }
   };
   useEffect(() => {
     fetchAPI();
@@ -145,67 +185,61 @@ const Users: NextPage = () => {
             <Tbody>
               {pending.map((ele, index) => {
                 return (
-                  <>
-                    <Tr key={index}>
-                      <Td>
-                        {new Date(ele.appoint_datetime).getDate()}/
-                        {new Date(ele.appoint_datetime).getMonth() + 1}/
-                        {new Date(ele.appoint_datetime).getFullYear()}
-                      </Td>
-                      <Td>
-                        {new Date(ele.appoint_datetime * 1000).getUTCHours()}:00
-                        -
-                        {new Date(ele.appoint_datetime * 1000).getUTCHours() +
-                          1}
-                        :00
-                      </Td>
-                      <Td>
-                        {localStorage.getItem("language") === "th" ? (
-                          <Box>
-                            {ele.userPrefix_Rang !== null
-                              ? ele.userPrefix_Rang
-                              : ele.userPrefix}
-                            {`${ele.userFirstName} ${ele.userLastName}`}
-                          </Box>
-                        ) : (
-                          <Box>
-                            {ele.userPrefix_RangEng !== null
-                              ? ele.userPrefix_RangEng
-                              : ele.userPrefixEng}
-                            {`${ele.userFirstNameEng} ${ele.userLastNameEng}`}
-                          </Box>
-                        )}
-                      </Td>
-                      <Td>{<Box>{getname(ele)}</Box>}</Td>
-                      <Td>
-                        <Flex justifyContent={"space-evenly"}>
-                          <Button
-                            colorScheme="green"
-                            onClick={() => {
-                              confirmAppointment({
-                                event_id: ele.event_id,
-                                appointmentStatus: "CONFIRMED",
-                                meetingLink: "adwad",
-                              });
-                            }}
-                          >
-                            Confirm
-                          </Button>
-                          <Button
-                            colorScheme="red"
-                            onClick={() => {
-                              confirmAppointment({
-                                event_id: ele.event_id,
-                                appointmentStatus: "REJECTED",
-                              });
-                            }}
-                          >
-                            Reject
-                          </Button>
-                        </Flex>
-                      </Td>
-                    </Tr>
-                  </>
+                  <Tr key={index}>
+                    <Td>
+                      {getMomentDateMonthYearFormat(ele.appoint_datetime)}
+                    </Td>
+                    <Td>
+                      {getMomentHourFormat(ele.appoint_datetime)}-
+                      {getMomentNextHourFormat(ele.appoint_datetime)}
+                    </Td>
+                    <Td>
+                      {localStorage.getItem("language") === "th" ? (
+                        <Box>
+                          {ele.userPrefix_Rang !== null
+                            ? ele.userPrefix_Rang
+                            : ele.userPrefix}
+                          {`${ele.userFirstName} ${ele.userLastName}`}
+                        </Box>
+                      ) : (
+                        <Box>
+                          {ele.userPrefix_RangEng !== null
+                            ? ele.userPrefix_RangEng
+                            : ele.userPrefixEng}
+                          {`${ele.userFirstNameEng} ${ele.userLastNameEng}`}
+                        </Box>
+                      )}
+                    </Td>
+                    <Td>{<Box>{getname(ele)}</Box>}</Td>
+                    <Td>
+                      <Flex justifyContent={"space-evenly"}>
+                        <Button
+                          colorScheme="green"
+                          onClick={() => {
+                            confirmAppointment({
+                              event_id: ele.event_id,
+                              appointmentStatus: "CONFIRMED",
+                              appoint_datetime: ele.appoint_datetime,
+                            });
+                          }}
+                        >
+                          Confirm
+                        </Button>
+                        <Button
+                          colorScheme="red"
+                          onClick={() => {
+                            confirmAppointment({
+                              event_id: ele.event_id,
+                              appointmentStatus: "REJECTED",
+                              appoint_datetime: ele.appoint_datetime,
+                            });
+                          }}
+                        >
+                          Reject
+                        </Button>
+                      </Flex>
+                    </Td>
+                  </Tr>
                 );
               })}
             </Tbody>
