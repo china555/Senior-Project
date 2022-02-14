@@ -101,7 +101,7 @@ const PhysioTherapist: NextPage = () => {
         </Box>
         {department.map((d: Department) => (
           <Box id={d.name.split(" ")[0]} key={d.name}>
-            <Box pt="6">
+            <Box pt="100.61px">
               <Box
                 fontSize={{ base: "26px", lg: "30px", xl: "30px" }}
                 fontWeight="800"

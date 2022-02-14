@@ -4,12 +4,10 @@ import { HeartsBanner } from "../components/element/HeartsBanner";
 import { HeartsContactUs } from "../components/element/HeartsContactus";
 import { HeartsService } from "../components/element/HeartsService";
 import { HeartsLayouts } from "../layouts/layout";
-import { useTranslation } from "../hooks/useTranslation";
 import { Box } from "@chakra-ui/react";
 import { HeartsOverview } from "../components/element/HeartsOverview";
 
 const Home: NextPage = () => {
-  const { translations, changeLocale } = useTranslation("test");
   return (
     <HeartsLayouts>
       <HeartsBanner />
@@ -21,9 +19,6 @@ const Home: NextPage = () => {
       <HeartsAboutUs />
       <Box id="contactus" />
       <HeartsContactUs />
-      <Box bg="PrimaryColor.900" p="2">
-        {""}
-      </Box>
     </HeartsLayouts>
   );
 };

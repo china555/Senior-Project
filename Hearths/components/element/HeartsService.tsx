@@ -1,8 +1,10 @@
 import { Box, Heading, Flex, Image, Divider } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useTranslation } from "../../hooks/useTranslation";
 import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsService = () => {
+  const router = useRouter();
   const { translations } = useTranslation(
     "Appointment",
     "MyAppointment",
@@ -11,9 +13,9 @@ export const HeartsService = () => {
   );
   return (
     <HeartsContainer>
-      <Box mt="4rem" textAlign="center">
+      <Box mt="4rem" id="services" textAlign="center">
         <Box>
-          <Heading color="#003B71" as="h1">
+          <Heading color="#003B71" as="h1" pt="3rem">
             Our Services
           </Heading>
         </Box>
@@ -35,8 +37,14 @@ export const HeartsService = () => {
             </Box>
             <Box>{translations.Appointment}</Box>
           </Box>
-          <Box mt={{ base: "2%", xl: "0" }} width={{ base: "100%", xl: "50%" }}>
-            <Box w={{ base: "20%", xl: "20%" }} mx="auto">
+          <Box
+            mt={{ base: "2%", xl: "0" }}
+            width={{ base: "100%", xl: "50%" }}
+            onClick={() => {
+              router.push("/my-appointment");
+            }}
+          >
+            <Box w={{ base: "20%", xl: "20%" }} mx="auto" cursor={"pointer"}>
               <Image
                 w="100%"
                 alt="appointment"

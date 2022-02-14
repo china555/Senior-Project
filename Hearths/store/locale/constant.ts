@@ -11,13 +11,14 @@ export const enLocale: ILocaleState = {
   test: "Test Eng",
   SignIn: "SIGN IN",
   SignUp: "SIGN UP",
+  SignOut: "SIGN OUT",
   Home: "Home",
   Service: "Our Service",
   AboutUs: "About Us",
   Contact: "Contact Us",
   Appointment: "Make an appointment",
   MyAppointment: "My Appointment",
-  RequestDocument: "Request Documet",
+  RequestDocument: "Request Document",
   VDOCallService: "Service",
   FAQ: "FAQ",
   OurTeam: "Our Team",
@@ -54,6 +55,10 @@ export const enLocale: ILocaleState = {
       ],
     },
   ],
+  ErrorMessageSelectedTime: "Please select time for appointment",
+  IDCard: "ID Card Number",
+  email: "Email",
+  password: "Password",
 };
 
 export const thLocale: ILocaleState = {
@@ -61,6 +66,7 @@ export const thLocale: ILocaleState = {
   test: "ทดสอบไทย",
   SignIn: "เข้าสู่ระบบ",
   SignUp: "สมัครสมาชิก",
+  SignOut: "ออกจากระบบ",
   Home: "หน้าหลัก",
   Service: "เซอร์วิส",
   AboutUs: "เกี่ยวกับพวกเรา",
@@ -103,4 +109,8 @@ export const thLocale: ILocaleState = {
       ],
     },
   ],
+  ErrorMessageSelectedTime: "กรุณาเลือกวันและเวลาในการจอง",
+  IDCard: "หมายเลขบัตรประจำตัวประชาชน",
+  email: "อีเมล",
+  password: "รหัสผ่าน",
 };

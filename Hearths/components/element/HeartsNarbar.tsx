@@ -6,6 +6,7 @@ import { HearthsDrawer } from "./HeartsDrawer";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useTranslation } from "../../hooks/useTranslation";
 import { useRouter } from "next/router";
+import { useAppStore } from "../../store";
 
 export const HeartsNavbar = () => {
   const { translations } = useTranslation(
@@ -15,6 +16,7 @@ export const HeartsNavbar = () => {
     "Contact",
     "Appointment"
   );
+  const { isAuthenticated } = useAppStore("isAuthenticated");
   const { width } = useSize();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
@@ -43,11 +45,35 @@ export const HeartsNavbar = () => {
               alignItems="center"
               fontWeight="bold"
             >
-              <Link href="/">{translations.Home}</Link>
-              <Link href="/#services">{translations.Service}</Link>
-              <Link href="/#aboutus">{translations.AboutUs}</Link>
-              <Link href="/#contactus">{translations.Contact}</Link>
-              <Link href="/appointment">
+              <Link
+                onClick={() => {
+                  router.push("/");
+                }}
+              >
+                {translations.Home}
+              </Link>
+              <Link
+                onClick={() => {
+                  router.push("/#services");
+                }}
+              >
+                {translations.Service}
+              </Link>
+              <Link
+                onClick={() => {
+                  router.push("/#aboutus");
+                }}
+              >
+                {translations.AboutUs}
+              </Link>
+              <Link
+                onClick={() => {
+                  router.push("/#contactus");
+                }}
+              >
+                {translations.Contact}
+              </Link>
+              <Link href={isAuthenticated ? "/appointment" : "/sign-in"}>
                 <Button borderRadius="20" color="white" bg="SecondaryColor">
                   {translations.Appointment}
                 </Button>

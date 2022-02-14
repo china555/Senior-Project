@@ -13,9 +13,9 @@ export const HeartsAboutUs = () => {
   );
   const router = useRouter();
   return (
-    <Box mt="4rem">
+    <Box pb="3rem" mt="3rem">
       <HeartsContainer>
-        <Heading color="#003B71" as="h1" textAlign="center" pt="5">
+        <Heading pt="3rem" color="#003B71" as="h1" textAlign="center">
           {translations.AboutUs}
         </Heading>
         <Flex flexWrap="wrap" mt="5">
