@@ -361,7 +361,7 @@ const Appointment = () => {
                     {allTimeLength?.map((ele, index) => {
                       return (
                         <Flex
-                          key={index}
+                          key={`number-${index}`}
                           onClick={() => {
                             SetSelectedTime({
                               start: ele.start,
