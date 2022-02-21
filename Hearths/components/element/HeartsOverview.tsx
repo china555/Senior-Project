@@ -38,7 +38,7 @@ export const HeartsOverview = () => {
                   )}
                 </Heading>
                 {ele.detail.map((ele: string, index: number) => (
-                  <Box key={index}>{ele}</Box>
+                  <Box key={`number-${index}`}>{ele}</Box>
                 ))}
               </Box>
             </Box>

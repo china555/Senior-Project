@@ -1,12 +1,10 @@
 import {
   Box,
   Heading,
-  Text,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  AccordionIcon,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import HeartsContainer from "../components/common/HeartsContainer";
@@ -24,7 +22,7 @@ const FAQ: NextPage = () => {
         <Accordion allowToggle>
           {translations.Question.map(({ Question, Answer }, index) => {
             return (
-              <AccordionItem key={index}>
+              <AccordionItem key={`number-${index}`}>
                 {({ isExpanded }) => (
                   <>
                     <AccordionButton>
