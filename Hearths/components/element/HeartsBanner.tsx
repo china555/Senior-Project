@@ -38,13 +38,11 @@ export const HeartsBanner = () => {
             fontSize="4xl"
             fontWeight="800"
           >
-            <span style={{ color: "#225378" }}>Hea</span>
-            <span style={{ color: "#EB7F00" }}>RTS</span>
+            <span style={{ color: "#EB7F00" }}>TPT</span>
             <br />
-            <span style={{ color: "#225378" }}>Hea</span>lthca
-            <span style={{ color: "#EB7F00" }}>R</span>e{" "}
-            <span style={{ color: "#EB7F00" }}>T</span>ele-delivery{" "}
-            <span style={{ color: "#EB7F00" }}>S</span>ervice
+            <span style={{ color: "#EB7F00" }}>T</span>eleconsultation on
+            <span style={{ color: "#EB7F00" }}> P</span>hysical{" "}
+            <span style={{ color: "#EB7F00" }}> T</span>herapy
           </Box>
           <Box
             textShadow="-1px 1px 0 #FFFFFF,
@@ -53,8 +51,7 @@ export const HeartsBanner = () => {
                         -1px -1px 0 #FFFFFF;"
             fontSize="2xl"
           >
-            Tele-Physical therapy, Tele-occupational therapy, service mind, easy
-            access, anytime, anywhere, designed just for you
+            Tele-Physical therapy, Tele-occupational therapy
           </Box>
           <Box mt="2">
             <Button

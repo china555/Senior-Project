@@ -21,14 +21,14 @@ export const HeartsAboutUs = () => {
         <Flex flexWrap="wrap" mt="5">
           <Box w={{ base: "100%", xl: "50%" }}>
             <Box w={{ base: "50%", xl: "40%" }} mx="auto">
-              <Image w="100%" alt="Hearts" src="/images/logo/hearts_logo.png" />
+              <Image w="100%" alt="Hearts" src="/images/logo/logo tpt.png" />
             </Box>
           </Box>
           <Box w={{ base: "100%", xl: "50%" }}>
             <Box w="90%" mx="auto">
               <Heading as="h2" size="lg" mt={{ base: "1rem", xl: "0" }}>
-                We are <span style={{ color: "#225378" }}>Hea</span>
-                <span style={{ color: "#EB7F00" }}>RTS</span> a <br />{" "}
+                We are
+                <span style={{ color: "#EB7F00" }}> TPT</span> a <br />{" "}
                 <span style={{ color: "#225378" }}>Hea</span>lthca
                 <span style={{ color: "#EB7F00" }}>R</span>e{" "}
                 <span style={{ color: "#EB7F00" }}>T</span>ele-delivery

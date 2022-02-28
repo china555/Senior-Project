@@ -77,7 +77,7 @@ export const HeartsContactUs = () => {
               </Box>
               <Box w="80%">
                 <Link href="mailto:HeaRTS@mahidol.ac.th">
-                  HeaRTS@mahidol.ac.th
+                  TPT@mahidol.ac.th
                 </Link>
               </Box>
             </Flex>
