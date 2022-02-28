@@ -148,6 +148,10 @@ export const UsersAppointmentManagement: NextPage = () => {
         (appoint) => appoint.event_id !== submitData.event_id
       );
       setStatePending(tempPending);
+      toast({
+        status: "success",
+        title: `${submitData.appointmentStatus} Appointment already`,
+      });
     } catch (error) {
       console.error("Confirmation Management", error);
       toast({ status: "error", title: "Appointment Confirmation failed" });
