@@ -23,6 +23,7 @@ import { uniqBy } from "lodash";
 import { useTranslation } from "../hooks/useTranslation";
 import { HeartsDropzone } from "../components/common/HeartsDropZone";
 import { first, isEmpty, isNil } from "lodash";
+import { getMomentHourFormat, getMomentNextHourFormat } from "../utils";
 type submit = {
   appointmentDateTime: string;
   patientId: number;
@@ -51,12 +52,12 @@ type therapisType = {
   user_ID: number;
 };
 const physicalType = [
-  { name: "ORTHO", id: 1 },
-  { name: "NEURO", id: 2 },
-  { name: "PED", id: 3 },
-  { name: "COMMUNITY", id: 5 },
-  { name: "PED", id: 7 },
-  { name: "SCOLIOSIS", id: 12 },
+  { name: "Orthopedic", id: 1 },
+  { name: "Neurological", id: 2 },
+  { name: "Pediatric", id: 3 },
+  { name: "Community", id: 5 },
+  { name: "Ped", id: 7 },
+  { name: "Scoliosis", id: 12 },
 ];
 const Appointment = () => {
   const router = useRouter();
@@ -139,12 +140,8 @@ const Appointment = () => {
       .map(({ start, stop, event_id }) => {
         console.log(start);
         return {
-          start: `${new Date(
-            String(start).replace("Z", "+07:00")
-          ).getHours()}:00`,
-          stop: `${new Date(
-            String(stop).replace("Z", "+07:00")
-          ).getHours()}:00`,
+          start: getMomentHourFormat(start),
+          stop: getMomentHourFormat(stop),
           event_id: event_id,
         };
       });
