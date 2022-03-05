@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { url, webex_token } from "../../../constant";
+import { client_id, client_secret, url, webex_token } from "../../../constant";
 import { HeartsModal } from "../../common/HeartsModal";
 import moment from "moment-timezone";
 import {
@@ -25,6 +25,7 @@ import {
   getMomentHourFormat,
   getMomentNextHourFormat,
 } from "../../../utils";
+import Cookies from "js-cookie";
 interface IAppointmentPending {
   patient_id: string;
   appoint_datetime: Date;
@@ -109,45 +110,85 @@ export const UsersAppointmentManagement: NextPage = () => {
     submitData: submitConfirmationAppointmentData
   ) => {
     try {
-      if (submitData.appointmentStatus === "CONFIRMED") {
-        const { appoint_datetime } = submitData;
-        const config = {
-          headers: {
-            Authorization: `Bearer ${webex_token}`,
-          },
-        };
-        const { data } = await axios.post(
-          "https://webexapis.com/v1/meetings",
-          {
-            //"Appointment 20220214_1430_6-66-6666"
-            title: "Appointment Meeting",
-            start: moment.tz(appoint_datetime, "Asia/Bangkok").format(),
-            end: moment
-              .tz(appoint_datetime, "Asia/Bangkok")
-              .add(1, "hour")
-              .format(),
-            timezone: "Asia/Bangkok",
-            enabledAutoRecordMeeting: true,
-            enabledJoinBeforeHost: true,
-            enableConnectAudioBeforeHost: true,
-          },
-          config
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const code = urlParams.get("code");
+      if (Cookies.get("webex_access_token") === undefined) {
+        if (!code) {
+          router.push(
+            `https://webexapis.com/v1/authorize?client_id=${client_id}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fdashboard&scope=meeting%3Arecordings_read%20spark%3Akms%20meeting%3Acontrols_write%20meeting%3Aschedules_read%20meeting%3Apreferences_write%20meeting%3Arecordings_write%20meeting%3Apreferences_read%20meeting%3Aschedules_write`
+          );
+        } else {
+          const config = {
+            headers: {
+              "Content-Type": `application/x-www-form-urlencoded`,
+            },
+          };
+          console.log(`${code}`);
+          const { data } = await axios.post(
+            `https://webexapis.com/v1/access_token?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=http://localhost:3000/users/dashboard&code=${code}`,
+            null,
+            config
+          );
+          console.log(data);
+          const {
+            access_token,
+            expires_in,
+            refresh_token,
+            refresh_token_expires_in,
+          } = data;
+          Cookies.set("webex_access_token", access_token);
+          Cookies.set("webex_access_token_expires_in", expires_in);
+          Cookies.set("webex_refresh_token", refresh_token);
+          Cookies.set(
+            "webex_refresh_token_expires_in",
+            refresh_token_expires_in
+          );
+        }
+      } else {
+        if (submitData.appointmentStatus === "CONFIRMED") {
+          const { appoint_datetime } = submitData;
+          const config = {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("webex_access_token")}`,
+            },
+          };
+          const { data } = await axios.post(
+            "https://webexapis.com/v1/meetings",
+            {
+              title: "Appointment Meeting",
+              start: moment.tz(appoint_datetime, "Asia/Bangkok").format(),
+              end: moment
+                .tz(appoint_datetime, "Asia/Bangkok")
+                .add(1, "hour")
+                .format(),
+              timezone: "Asia/Bangkok",
+              enabledAutoRecordMeeting: true,
+              enabledJoinBeforeHost: true,
+              enableConnectAudioBeforeHost: true,
+            },
+            config
+          );
+          await axios.patch(url + "/confirmation-appointment", {
+            event_id: submitData.event_id,
+            appointmentStatus: "CONFIRMED",
+            meetingLink: data.webLink,
+          });
+        } else if (submitData.appointmentStatus === "REJECTED") {
+          await axios.patch(url + "/confirmation-appointment", {
+            event_id: submitData.event_id,
+            appointmentStatus: "REJECTED",
+          });
+        }
+        const tempPending = pending.filter(
+          (appoint) => appoint.event_id !== submitData.event_id
         );
-        await axios.patch(url + "/confirmation-appointment", {
-          event_id: submitData.event_id,
-          appointmentStatus: "CONFIRMED",
-          meetingLink: data.webLink,
-        });
-      } else if (submitData.appointmentStatus === "REJECTED") {
-        await axios.patch(url + "/confirmation-appointment", {
-          event_id: submitData.event_id,
-          appointmentStatus: "REJECTED",
+        setStatePending(tempPending);
+        toast({
+          status: "success",
+          title: `Appointment ${submitData.appointmentStatus}`,
         });
       }
-      const tempPending = pending.filter(
-        (appoint) => appoint.event_id !== submitData.event_id
-      );
-      setStatePending(tempPending);
     } catch (error) {
       console.error("Confirmation Management", error);
       toast({ status: "error", title: "Appointment Confirmation failed" });
