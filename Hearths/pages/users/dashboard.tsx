@@ -1,18 +1,20 @@
 import { NextPage } from "next";
-import {
-  Button,
-  Flex,
-  Heading,
-  Box,
-  Link,
-  useToast,
-  Divider,
-  Image,
-} from "@chakra-ui/react";
+import { Button, Flex, Heading, Box, Divider, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { UsersAppointmentManagement } from "../../components/element/appointment/management";
+import { UsersAppointmentManagement } from "../../components/element/users/appointment";
+import { useState } from "react";
+import { UsersRegisterManagement } from "../../components/element/users/register";
 
 const Dashboard: NextPage = () => {
+  const sideBarName = [
+    { name: "Appointment Management", key: "Appointment" },
+    { name: "Register Management", key: "Register" },
+  ];
+  const [selectedTab, setSelectedTab] = useState("Appointment");
+  const selectedTabHandler = async (selected: string): Promise<void> => {
+    console.log(selected);
+    setSelectedTab(selected);
+  };
   const router = useRouter();
   return (
     <Box>
@@ -43,10 +45,19 @@ const Dashboard: NextPage = () => {
             </Box>
             <Box>TPT ADMIN</Box>
           </Flex>
-          <Box my="1.5rem">Appointment</Box>
-          <Divider />
-          <Box my="1.5rem">Payment</Box>
-          <Divider />
+          {sideBarName.map((sideBarElement) => {
+            return (
+              <Box key={sideBarElement.key}>
+                <Box
+                  py="1.5rem"
+                  onClick={() => selectedTabHandler(sideBarElement.key)}
+                >
+                  {sideBarElement.name}
+                </Box>
+                <Divider />
+              </Box>
+            );
+          })}
         </Box>
         {/* right side */}
         <Box
@@ -59,12 +70,13 @@ const Dashboard: NextPage = () => {
           max-height="100%"
           transition="all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)"
         >
-          <Flex mt="1rem" ml="1rem">
-            <Heading size={"md"} as="h3" textAlign="center" mb="2rem">
-              Appointment Confirmation
-            </Heading>
-          </Flex>
-          <UsersAppointmentManagement />
+          {selectedTab === "Appointment" ? (
+            <UsersAppointmentManagement />
+          ) : selectedTab === "Register" ? (
+            <UsersRegisterManagement />
+          ) : (
+            <Box></Box>
+          )}
         </Box>
       </Flex>
     </Box>

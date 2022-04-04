@@ -11,13 +11,14 @@ import {
   useDisclosure,
   Image,
   useToast,
+  Heading,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { client_id, client_secret, url, webex_token } from "../../../constant";
+import { client_id, client_secret, url } from "../../../constant";
 import { HeartsModal } from "../../common/HeartsModal";
 import moment from "moment-timezone";
 import {
@@ -30,6 +31,7 @@ interface IAppointmentPending {
   patient_id: string;
   appoint_datetime: Date;
   event_id: number;
+  receipt_image_path: string;
   hn: string;
   patientPrefix: string | null;
   patientPrefix_Rang: string | null;
@@ -69,6 +71,7 @@ export const UsersAppointmentManagement: NextPage = () => {
     "Time",
     "Physiotherapist Full Name",
     "Patient Full Name",
+    "Receipt",
     "Status",
   ];
 
@@ -174,29 +177,25 @@ export const UsersAppointmentManagement: NextPage = () => {
             appointmentStatus: "CONFIRMED",
             meetingLink: data.webLink,
           });
+          toast({
+            status: "success",
+            title: `Appointment ${submitData.appointmentStatus}`,
+          });
         } else if (submitData.appointmentStatus === "REJECTED") {
           await axios.patch(url + "/confirmation-appointment", {
             event_id: submitData.event_id,
             appointmentStatus: "REJECTED",
+          });
+          toast({
+            status: "error",
+            title: `Appointment ${submitData.appointmentStatus}`,
           });
         }
         const tempPending = pending.filter(
           (appoint) => appoint.event_id !== submitData.event_id
         );
         setStatePending(tempPending);
-        toast({
-          status: "success",
-          title: `Appointment ${submitData.appointmentStatus}`,
-        });
       }
-      const tempPending = pending.filter(
-        (appoint) => appoint.event_id !== submitData.event_id
-      );
-      setStatePending(tempPending);
-      toast({
-        status: "success",
-        title: `${submitData.appointmentStatus} Appointment already`,
-      });
     } catch (error) {
       console.error("Confirmation Management", error);
       toast({ status: "error", title: "Appointment Confirmation failed" });
@@ -234,6 +233,11 @@ export const UsersAppointmentManagement: NextPage = () => {
         </Button>
       </HeartsModal>
       <Box overflow={"auto"}>
+        <Flex mt="1rem" ml="1rem">
+          <Heading size={"md"} as="h3" textAlign="center" mb="2rem">
+            Appointment Confirmation
+          </Heading>
+        </Flex>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -269,6 +273,15 @@ export const UsersAppointmentManagement: NextPage = () => {
                     )}
                   </Td>
                   <Td>{<Box>{getname(ele)}</Box>}</Td>
+                  <Td>
+                    <a
+                      href={`${url}/${ele.receipt_image_path}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Link
+                    </a>
+                  </Td>
                   <Td>
                     <Flex justifyContent={"space-evenly"}>
                       <Button

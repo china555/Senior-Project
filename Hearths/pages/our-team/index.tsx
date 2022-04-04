@@ -20,7 +20,7 @@ const OurTeam: NextPage = () => {
       img: "/images/our-team/Logo/OT.jpg",
       alt: "Occupational Therapy",
       clickhandler: () => {
-        router.push("/our-team/physiotherapist#Occupational");
+        router.push("/our-team/physiotherapist?type=0");
       },
     },
     {
@@ -28,7 +28,7 @@ const OurTeam: NextPage = () => {
       img: "/images/our-team/Logo/Musculo.jpg",
       alt: "Physical Therapy: Musculoskeletal system",
       clickhandler: () => {
-        router.push("/our-team/physiotherapist#Musculoskeletal");
+        router.push("/our-team/physiotherapist?type=1");
       },
     },
     {
@@ -36,7 +36,7 @@ const OurTeam: NextPage = () => {
       img: "/images/our-team/Logo/Neuro.jpg",
       alt: "Physical Therapy: Neurological system",
       clickhandler: () => {
-        router.push("/our-team/physiotherapist#Neurological");
+        router.push("/our-team/physiotherapist?type=2");
       },
     },
     {
@@ -44,7 +44,7 @@ const OurTeam: NextPage = () => {
       img: "/images/our-team/Logo/Pediatric.jpg",
       alt: "Physical Therapy: Pediatric",
       clickhandler: () => {
-        router.push("/our-team/physiotherapist#Pediatric");
+        router.push("/our-team/physiotherapist?type=3");
       },
     },
     {
@@ -52,7 +52,7 @@ const OurTeam: NextPage = () => {
       img: "/images/our-team/Logo/Scoliosis.jpg",
       alt: "Physical Therapy: Scoliosis",
       clickhandler: () => {
-        router.push("/our-team/physiotherapist#Scoliosis");
+        router.push("/our-team/physiotherapist?type=4");
       },
     },
     {
@@ -60,7 +60,7 @@ const OurTeam: NextPage = () => {
       img: "/images/our-team/Logo/Women.jpg",
       alt: "Physical Therapy: Women health",
       clickhandler: () => {
-        router.push("/our-team/physiotherapist#Women");
+        router.push("/our-team/physiotherapist?type=5");
       },
     },
     {
@@ -68,7 +68,7 @@ const OurTeam: NextPage = () => {
       img: "/images/our-team/Logo/Community.jpg",
       alt: "Physical Therapy: Community",
       clickhandler: () => {
-        router.push("/our-team/physiotherapist#Community");
+        router.push("/our-team/physiotherapist?type=6");
       },
     },
   ];

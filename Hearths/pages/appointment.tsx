@@ -29,6 +29,7 @@ type submit = {
   patientId: number;
   event_id: number | undefined;
   user_id?: number;
+  payment_id?: number;
 };
 
 type Time = {
@@ -168,13 +169,14 @@ const Appointment = () => {
     setSelectedTherapist(e.target.value);
   };
 
-  const submitHandler = async (): Promise<string> => {
+  const submitHandler = async (paymentId: number): Promise<string> => {
     const submitData: submit = {
       appointmentDateTime: `${selectedDate.getFullYear()}-${
         selectedDate.getMonth() + 1
       }-${selectedDate.getDate()} ${selectedTime?.start}`,
       patientId: Number(Cookies.get("patient_id")),
       event_id: selectedTime?.event_id,
+      payment_id: paymentId,
     };
     console.log(submitData);
     const { data } = await axios.post(url + "/appointments", submitData);
@@ -224,8 +226,10 @@ const Appointment = () => {
           payMethod: "scan",
           imgPath: data.path,
         };
-        await axios.post(url + "/payment", paymentData);
-        const message: Promise<string> = submitHandler();
+        const paymentInfo = await axios.post(url + "/payment", paymentData);
+        const message: Promise<string> = submitHandler(
+          paymentInfo.data.paymentInfo.payment_id
+        );
         console.log(message);
         toast({ status: "success", title: "Appointment Successful" });
         onOpen();

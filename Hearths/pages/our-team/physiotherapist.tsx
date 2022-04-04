@@ -11,13 +11,13 @@ import {
 import type { NextPage } from "next";
 import { HeartsLayouts } from "../../layouts/layout";
 import HeartsContainer from "../../components/common/HeartsContainer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 import { useTranslation } from "../../hooks/useTranslation";
 import { IPhysiotherapist } from "../../store/locale/@types";
 
 const PhysioTherapist: NextPage = () => {
   const { translations } = useTranslation("Physiotherapist", "DepartMentName");
-  const [selectedDepartMent, setselectedDepartMent] = useState("10");
+  const [selectedDepartMent, setselectedDepartMent] = useState<string>("10");
   const onchangeHandler = (event: any) => {
     setselectedDepartMent(event.target.value);
   };
@@ -59,6 +59,13 @@ const PhysioTherapist: NextPage = () => {
   const [department, setDepartMent] = useState<Department[]>(
     Object.values(departmentofPhysiotherapist)
   );
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get("type") as string;
+    setselectedDepartMent(code);
+    setDepartMent([departmentofPhysiotherapist[Number(selectedDepartMent)]]);
+  }, []);
 
   useEffect(() => {
     if (selectedDepartMent === "10") {
