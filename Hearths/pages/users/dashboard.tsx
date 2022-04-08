@@ -1,14 +1,15 @@
-import { NextPage } from "next";
 import { Button, Flex, Heading, Box, Divider, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { UsersAppointmentManagement } from "../../components/element/users/appointment";
 import { useState } from "react";
 import { UsersRegisterManagement } from "../../components/element/users/register";
+import { UsersAppointment } from "../../components/element/users/my-appointment";
 
-const Dashboard: NextPage = () => {
+const Dashboard = () => {
   const sideBarName = [
     { name: "Appointment Management", key: "Appointment" },
     { name: "Register Management", key: "Register" },
+    { name: "My Appointment", key: "MyAppointment" },
   ];
   const [selectedTab, setSelectedTab] = useState("Appointment");
   const selectedTabHandler = async (selected: string): Promise<void> => {
@@ -74,6 +75,8 @@ const Dashboard: NextPage = () => {
             <UsersAppointmentManagement />
           ) : selectedTab === "Register" ? (
             <UsersRegisterManagement />
+          ) : selectedTab === "MyAppointment" ? (
+            <UsersAppointment />
           ) : (
             <Box></Box>
           )}

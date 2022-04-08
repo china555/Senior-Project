@@ -12,7 +12,6 @@ import {
   useToast,
   Heading,
 } from "@chakra-ui/react";
-import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
@@ -33,14 +32,12 @@ interface IRegisterPending {
   patientLastNameEng: string;
 }
 
-interface submitConfirmationAppointmentData {
-  event_id: number;
-  appointmentStatus: "CONFIRMED" | "REJECTED";
-  meetingLink?: string;
-  appoint_datetime: Date;
+interface submitConfirmationRegisterData {
+  hn: string;
+  registerStatus: "CONFIRMED" | "REJECTED";
 }
 
-export const UsersRegisterManagement: NextPage = () => {
+export const UsersRegisterManagement = () => {
   const toast = useToast();
   const { translations } = useTranslation("DepartMentName");
   const [pending, setStatePending] = useState<IRegisterPending[]>([]);
@@ -82,17 +79,21 @@ export const UsersRegisterManagement: NextPage = () => {
 
   const fetchAPI = async () => {
     const { data } = await axios.get(`${url}/users/confirmation/patient`);
+    console.log(data);
     setStatePending(data);
   };
 
-  const confirmAppointment = async (
-    submitData: submitConfirmationAppointmentData
-  ) => {
+  const onClickHandler = async (submitData: submitConfirmationRegisterData) => {
     try {
-      // const tempPending = pending.filter(
-      //   (appoint) => appoint.event_id !== submitData.event_id
-      // );
-      // setStatePending(tempPending);
+      const { data } = await axios.post(
+        `${url}/users/confirmation/patient`,
+        submitData
+      );
+      const tempPending = pending.filter(
+        (appoint) => appoint.hn !== submitData.hn
+      );
+      toast({ status: "success", title: data.msg });
+      setStatePending(tempPending);
     } catch (error) {
       console.error("Confirmation Management", error);
       toast({ status: "error", title: "Registration Confirmation failed" });
@@ -102,53 +103,67 @@ export const UsersRegisterManagement: NextPage = () => {
     fetchAPI();
   }, []);
   return (
-    <>
-      <Box overflow={"auto"}>
-        <Flex mt="1rem" ml="1rem">
-          <Heading size={"md"} as="h3" textAlign="center" mb="2rem">
-            Registration Confirmation
-          </Heading>
-        </Flex>
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              {header.map((ele, index) => (
-                <Th key={`number-${index}`}>{ele}</Th>
-              ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {pending.map((ele, index) => {
-              return (
-                <Tr key={ele.hn}>
-                  <Td>{ele.hn}</Td>
-                  <Td>{<Box>{getname(ele)}</Box>}</Td>
-                  <Td>{ele.pay_method}</Td>
-                  <Td>
-                    <a
-                      href={`${url}/${ele.receipt_image_path}`}
-                      target="_blank"
-                      rel="noreferrer"
+    <Box overflow={"auto"}>
+      <Flex mt="1rem" ml="1rem">
+        <Heading size={"md"} as="h3" textAlign="center" mb="2rem">
+          Registration Confirmation
+        </Heading>
+      </Flex>
+      <Table variant="simple">
+        <Thead>
+          <Tr>
+            {header.map((ele, index) => (
+              <Th key={`number-${index}`}>{ele}</Th>
+            ))}
+          </Tr>
+        </Thead>
+        <Tbody>
+          {pending.map((ele, index) => {
+            return (
+              <Tr key={ele.hn}>
+                <Td>{ele.hn}</Td>
+                <Td>{<Box>{getname(ele)}</Box>}</Td>
+                <Td>{ele.pay_method}</Td>
+                <Td>
+                  <a
+                    href={`${url}/${ele.receipt_image_path}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Link
+                  </a>
+                </Td>
+                <Td>
+                  <Flex justifyContent={"space-evenly"}>
+                    <Button
+                      colorScheme="green"
+                      onClick={() => {
+                        onClickHandler({
+                          hn: ele.hn,
+                          registerStatus: "CONFIRMED",
+                        });
+                      }}
                     >
-                      Link
-                    </a>
-                  </Td>
-                  <Td>
-                    <Flex justifyContent={"space-evenly"}>
-                      <Button colorScheme="green" onClick={() => {}}>
-                        Confirm
-                      </Button>
-                      <Button colorScheme="red" onClick={() => {}}>
-                        Reject
-                      </Button>
-                    </Flex>
-                  </Td>
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
-      </Box>
-    </>
+                      Confirm
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      onClick={() => {
+                        onClickHandler({
+                          hn: ele.hn,
+                          registerStatus: "REJECTED",
+                        });
+                      }}
+                    >
+                      Reject
+                    </Button>
+                  </Flex>
+                </Td>
+              </Tr>
+            );
+          })}
+        </Tbody>
+      </Table>
+    </Box>
   );
 };

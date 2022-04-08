@@ -63,9 +63,8 @@ export const UsersAppointmentManagement: NextPage = () => {
   const router = useRouter();
   const toast = useToast();
   const { translations } = useTranslation("DepartMentName");
+  const [webexCode, setWebexCode] = useState<string>("");
   const [pending, setStatePending] = useState<IAppointmentPending[]>([]);
-  const [isClickCancel, setIsClickCancel] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const header = [
     "Date",
     "Time",
@@ -74,7 +73,50 @@ export const UsersAppointmentManagement: NextPage = () => {
     "Receipt",
     "Status",
   ];
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    setWebexCode(urlParams.get("code") as string);
 
+    const fetchAPI = async () => {
+      const { data } = await axios.get(`${url}/get-all-pending`);
+      console.log(data);
+      setStatePending(data);
+    };
+
+    fetchAPI();
+  }, []);
+
+  useEffect(() => {
+    console.log("555");
+
+    const getCodeAccessTokenFromWebex = async () => {
+      console.log("HEllo accesstoken webex");
+      const config = {
+        headers: {
+          "Content-Type": `application/x-www-form-urlencoded`,
+        },
+      };
+      console.log(`${webexCode}`);
+      const { data } = await axios.post(
+        `https://webexapis.com/v1/access_token?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=http://localhost:3000/users/dashboard&code=${webexCode}`,
+        null,
+        config
+      );
+      console.log(data);
+      const {
+        access_token,
+        expires_in,
+        refresh_token,
+        refresh_token_expires_in,
+      } = data;
+      Cookies.set("webex_access_token", access_token);
+      Cookies.set("webex_access_token_expires_in", expires_in);
+      Cookies.set("webex_refresh_token", refresh_token);
+      Cookies.set("webex_refresh_token_expires_in", refresh_token_expires_in);
+    };
+    if (webexCode) getCodeAccessTokenFromWebex();
+  }, [webexCode]);
   const getname = (patient: IAppointmentPending) => {
     let name = "";
     if (
@@ -103,49 +145,14 @@ export const UsersAppointmentManagement: NextPage = () => {
     return name;
   };
 
-  const fetchAPI = async () => {
-    const { data } = await axios.get(`${url}/get-all-pending`);
-    console.log(data);
-    setStatePending(data);
-  };
-
   const confirmAppointment = async (
     submitData: submitConfirmationAppointmentData
   ) => {
     try {
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const code = urlParams.get("code");
       if (Cookies.get("webex_access_token") === undefined) {
-        if (!code) {
+        if (!webexCode) {
           router.push(
             `https://webexapis.com/v1/authorize?client_id=${client_id}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fdashboard&scope=meeting%3Arecordings_read%20spark%3Akms%20meeting%3Acontrols_write%20meeting%3Aschedules_read%20meeting%3Apreferences_write%20meeting%3Arecordings_write%20meeting%3Apreferences_read%20meeting%3Aschedules_write`
-          );
-        } else {
-          const config = {
-            headers: {
-              "Content-Type": `application/x-www-form-urlencoded`,
-            },
-          };
-          console.log(`${code}`);
-          const { data } = await axios.post(
-            `https://webexapis.com/v1/access_token?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=http://localhost:3000/users/dashboard&code=${code}`,
-            null,
-            config
-          );
-          console.log(data);
-          const {
-            access_token,
-            expires_in,
-            refresh_token,
-            refresh_token_expires_in,
-          } = data;
-          Cookies.set("webex_access_token", access_token);
-          Cookies.set("webex_access_token_expires_in", expires_in);
-          Cookies.set("webex_refresh_token", refresh_token);
-          Cookies.set(
-            "webex_refresh_token_expires_in",
-            refresh_token_expires_in
           );
         }
       } else {
@@ -172,10 +179,12 @@ export const UsersAppointmentManagement: NextPage = () => {
             },
             config
           );
+          console.log(data);
           await axios.patch(url + "/confirmation-appointment", {
             event_id: submitData.event_id,
             appointmentStatus: "CONFIRMED",
             meetingLink: data.webLink,
+            meetingId: data.id,
           });
           toast({
             status: "success",
@@ -201,121 +210,90 @@ export const UsersAppointmentManagement: NextPage = () => {
       toast({ status: "error", title: "Appointment Confirmation failed" });
     }
   };
-  useEffect(() => {
-    fetchAPI();
-  }, []);
   return (
-    <>
-      <HeartsModal
-        isOpen={isOpen}
-        onClose={() => {
-          onClose();
-        }}
-        isButtonClose={isClickCancel}
-      >
-        <Box w="100%">
-          <Box w="100px" mx="auto">
-            <Image w="100%" alt="icon" src={"/images/icons/warning.png"} />
-          </Box>
-          <Box mt="5">{"Comfirm again!"}</Box>
-        </Box>
-        <Button
-          mt="20px"
-          colorScheme="blue"
-          onClick={() => {
-            onClose();
-          }}
-          w="200px"
-          borderRadius="35px"
-          bg="ButtonColor"
-        >
-          {isClickCancel ? "Confirm" : "Close"}
-        </Button>
-      </HeartsModal>
-      <Box overflow={"auto"}>
-        <Flex mt="1rem" ml="1rem">
-          <Heading size={"md"} as="h3" textAlign="center" mb="2rem">
-            Appointment Confirmation
-          </Heading>
-        </Flex>
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              {header.map((ele, index) => (
-                <Th key={`number-${index}`}>{ele}</Th>
-              ))}
-            </Tr>
-          </Thead>
-          <Tbody>
-            {pending.map((ele, index) => {
-              return (
-                <Tr key={ele.event_id}>
-                  <Td>{getMomentDateMonthYearFormat(ele.appoint_datetime)}</Td>
-                  <Td>
-                    {getMomentHourFormat(ele.appoint_datetime)}-
-                    {getMomentNextHourFormat(ele.appoint_datetime)}
-                  </Td>
-                  <Td>
-                    {localStorage.getItem("language") === "th" ? (
-                      <Box>
-                        {ele.userPrefix_Rang !== null
-                          ? ele.userPrefix_Rang
-                          : ele.userPrefix}
-                        {`${ele.userFirstName} ${ele.userLastName}`}
-                      </Box>
-                    ) : (
-                      <Box>
-                        {ele.userPrefix_RangEng !== null
-                          ? ele.userPrefix_RangEng
-                          : ele.userPrefixEng}
-                        {`${ele.userFirstNameEng} ${ele.userLastNameEng}`}
-                      </Box>
-                    )}
-                  </Td>
-                  <Td>{<Box>{getname(ele)}</Box>}</Td>
-                  <Td>
-                    <a
-                      href={`${url}/${ele.receipt_image_path}`}
-                      target="_blank"
-                      rel="noreferrer"
+    <Box overflow={"auto"}>
+      <Flex mt="1rem" ml="1rem">
+        <Heading size={"md"} as="h3" textAlign="center" mb="2rem">
+          Appointment Confirmation
+        </Heading>
+      </Flex>
+      <Table variant="simple">
+        <Thead>
+          <Tr>
+            {header.map((ele, index) => (
+              <Th key={`number-${index}`}>{ele}</Th>
+            ))}
+          </Tr>
+        </Thead>
+        <Tbody>
+          {pending.map((ele, index) => {
+            return (
+              <Tr key={ele.event_id}>
+                <Td>{getMomentDateMonthYearFormat(ele.appoint_datetime)}</Td>
+                <Td>
+                  {getMomentHourFormat(ele.appoint_datetime)}-
+                  {getMomentNextHourFormat(ele.appoint_datetime)}
+                </Td>
+                <Td>
+                  {localStorage.getItem("language") === "th" ? (
+                    <Box>
+                      {ele.userPrefix_Rang !== null
+                        ? ele.userPrefix_Rang
+                        : ele.userPrefix}
+                      {`${ele.userFirstName} ${ele.userLastName}`}
+                    </Box>
+                  ) : (
+                    <Box>
+                      {ele.userPrefix_RangEng !== null
+                        ? ele.userPrefix_RangEng
+                        : ele.userPrefixEng}
+                      {`${ele.userFirstNameEng} ${ele.userLastNameEng}`}
+                    </Box>
+                  )}
+                </Td>
+                <Td>{<Box>{getname(ele)}</Box>}</Td>
+                <Td>
+                  <a
+                    href={`${url}/${ele.receipt_image_path}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Link
+                  </a>
+                </Td>
+                <Td>
+                  <Flex justifyContent={"space-evenly"}>
+                    <Button
+                      colorScheme="green"
+                      onClick={() => {
+                        confirmAppointment({
+                          event_id: ele.event_id,
+                          appointmentStatus: "CONFIRMED",
+                          appoint_datetime: ele.appoint_datetime,
+                        });
+                      }}
                     >
-                      Link
-                    </a>
-                  </Td>
-                  <Td>
-                    <Flex justifyContent={"space-evenly"}>
-                      <Button
-                        colorScheme="green"
-                        onClick={() => {
-                          confirmAppointment({
-                            event_id: ele.event_id,
-                            appointmentStatus: "CONFIRMED",
-                            appoint_datetime: ele.appoint_datetime,
-                          });
-                        }}
-                      >
-                        Confirm
-                      </Button>
-                      <Button
-                        colorScheme="red"
-                        onClick={() => {
-                          confirmAppointment({
-                            event_id: ele.event_id,
-                            appointmentStatus: "REJECTED",
-                            appoint_datetime: ele.appoint_datetime,
-                          });
-                        }}
-                      >
-                        Reject
-                      </Button>
-                    </Flex>
-                  </Td>
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
-      </Box>
-    </>
+                      Confirm
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      onClick={() => {
+                        confirmAppointment({
+                          event_id: ele.event_id,
+                          appointmentStatus: "REJECTED",
+                          appoint_datetime: ele.appoint_datetime,
+                        });
+                      }}
+                    >
+                      Reject
+                    </Button>
+                  </Flex>
+                </Td>
+              </Tr>
+            );
+          })}
+        </Tbody>
+      </Table>
+    </Box>
   );
 };

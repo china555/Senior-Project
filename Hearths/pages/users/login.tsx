@@ -30,7 +30,7 @@ const UsersLogin: NextPage = () => {
       const { data } = await axios.post(url + "/users/login", loginData);
       Cookies.set("token", data.jwtToken);
       Cookies.set("refreshtoken", data.refreshToken);
-      Cookies.set("user_id", data.user_id);
+      Cookies.set("user_id", data.pt_no);
       dispatch("auth/setIsAuthenticated", true);
       toast({ status: "success", title: "Login successful" });
     } catch (error) {
