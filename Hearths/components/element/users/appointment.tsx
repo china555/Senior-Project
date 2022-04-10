@@ -42,6 +42,7 @@ interface IAppointmentPending {
   patientFirstNameEng: string | null;
   patientMiddleNameEng: string | null;
   patientLastNameEng: string | null;
+  userNo: string;
   userPrefix: string | null;
   userPrefix_Rang: string | null;
   userFirstName: string | null;
@@ -57,6 +58,7 @@ interface submitConfirmationAppointmentData {
   appointmentStatus: "CONFIRMED" | "REJECTED";
   meetingLink?: string;
   appoint_datetime: Date;
+  user_id: string;
 }
 
 export const UsersAppointmentManagement: NextPage = () => {
@@ -91,7 +93,6 @@ export const UsersAppointmentManagement: NextPage = () => {
     console.log("555");
 
     const getCodeAccessTokenFromWebex = async () => {
-      console.log("HEllo accesstoken webex");
       const config = {
         headers: {
           "Content-Type": `application/x-www-form-urlencoded`,
@@ -115,7 +116,9 @@ export const UsersAppointmentManagement: NextPage = () => {
       Cookies.set("webex_refresh_token", refresh_token);
       Cookies.set("webex_refresh_token_expires_in", refresh_token_expires_in);
     };
-    if (webexCode) getCodeAccessTokenFromWebex();
+    if (webexCode && Cookies.get("webex_access_token") === undefined) {
+      getCodeAccessTokenFromWebex();
+    }
   }, [webexCode]);
   const getname = (patient: IAppointmentPending) => {
     let name = "";
@@ -152,7 +155,7 @@ export const UsersAppointmentManagement: NextPage = () => {
       if (Cookies.get("webex_access_token") === undefined) {
         if (!webexCode) {
           router.push(
-            `https://webexapis.com/v1/authorize?client_id=${client_id}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fdashboard&scope=meeting%3Arecordings_read%20spark%3Akms%20meeting%3Acontrols_write%20meeting%3Aschedules_read%20meeting%3Apreferences_write%20meeting%3Arecordings_write%20meeting%3Apreferences_read%20meeting%3Aschedules_write`
+            `https://webexapis.com/v1/authorize?client_id=${client_id}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fdashboard&scope=meeting:schedules_read meeting:schedules_write meeting:recordings_read`
           );
         }
       } else {
@@ -179,12 +182,13 @@ export const UsersAppointmentManagement: NextPage = () => {
             },
             config
           );
-          console.log(data);
           await axios.patch(url + "/confirmation-appointment", {
             event_id: submitData.event_id,
             appointmentStatus: "CONFIRMED",
             meetingLink: data.webLink,
             meetingId: data.id,
+            userId: submitData.user_id,
+            approveByUser_id: Cookies.get("user_id"),
           });
           toast({
             status: "success",
@@ -194,6 +198,8 @@ export const UsersAppointmentManagement: NextPage = () => {
           await axios.patch(url + "/confirmation-appointment", {
             event_id: submitData.event_id,
             appointmentStatus: "REJECTED",
+            userId: submitData.user_id,
+            approveByUser_id: Cookies.get("user_id"),
           });
           toast({
             status: "error",
@@ -270,6 +276,7 @@ export const UsersAppointmentManagement: NextPage = () => {
                           event_id: ele.event_id,
                           appointmentStatus: "CONFIRMED",
                           appoint_datetime: ele.appoint_datetime,
+                          user_id: ele.userNo,
                         });
                       }}
                     >
@@ -282,6 +289,7 @@ export const UsersAppointmentManagement: NextPage = () => {
                           event_id: ele.event_id,
                           appointmentStatus: "REJECTED",
                           appoint_datetime: ele.appoint_datetime,
+                          user_id: ele.userNo,
                         });
                       }}
                     >

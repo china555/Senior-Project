@@ -3,7 +3,7 @@ import HeartsContainer from "../common/HeartsContainer";
 import { Link } from "@chakra-ui/react";
 import { useTranslation } from "../../hooks/useTranslation";
 import { useAppStore } from "../../store";
-import Cookies from "js-cookie";
+import { signout } from "../../utils/helper";
 export const HeartsTopMenu = () => {
   const { translations, changeLocale } = useTranslation(
     "test",
@@ -12,11 +12,7 @@ export const HeartsTopMenu = () => {
     "SignOut"
   );
   const { isAuthenticated } = useAppStore("isAuthenticated");
-  const signout = () => {
-    Object.keys(Cookies.get()).forEach(function (cookieName) {
-      Cookies.remove(cookieName);
-    });
-  };
+
   return (
     <Box bg="PrimaryColor.900" color="white" fontWeight="medium">
       <HeartsContainer>

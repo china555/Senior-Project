@@ -33,6 +33,7 @@ const UsersLogin: NextPage = () => {
       Cookies.set("user_id", data.pt_no);
       dispatch("auth/setIsAuthenticated", true);
       toast({ status: "success", title: "Login successful" });
+      router.push("/users/dashboard");
     } catch (error) {
       console.error("Sign-in", error);
       toast({ status: "error", title: "Please check your email and password" });

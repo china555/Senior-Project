@@ -48,6 +48,7 @@ export const UsersAppointment: NextPage = () => {
   const { translations } = useTranslation("DepartMentName");
   const [pending, setStatePending] = useState<IAppointment[]>([]);
   const header = ["Date", "Time", "Patient Full Name", "Meeting Link"];
+
   useEffect(() => {
     const fetchAPI = async () => {
       const user_id = Cookies.get("user_id");
@@ -90,7 +91,7 @@ export const UsersAppointment: NextPage = () => {
 
   return (
     <Box overflow={"auto"}>
-      <Flex mt="1rem" ml="1rem">
+      {/* <Flex mt="1rem" ml="1rem">
         <Heading size={"md"} as="h3" textAlign="center" mb="2rem">
           Appointment Confirmation
         </Heading>
@@ -129,7 +130,7 @@ export const UsersAppointment: NextPage = () => {
             );
           })}
         </Tbody>
-      </Table>
+      </Table> */}
     </Box>
   );
 };
