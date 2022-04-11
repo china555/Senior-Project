@@ -1,5 +1,5 @@
 import { StoreonModule } from "storeon";
-import { IAuthEvent, IAuthState } from "./@types";
+import { IAuthEvent, IAuthState, IInfoEvent, IInfoState } from "./@types";
 export * from "./@types";
 
 export const authModule: StoreonModule<IAuthState, IAuthEvent> = (store) => {
@@ -8,4 +8,19 @@ export const authModule: StoreonModule<IAuthState, IAuthEvent> = (store) => {
     ...state,
     isAuthenticated,
   }));
+};
+
+export const userInfo: StoreonModule<IInfoState, IInfoEvent> = (store) => {
+  // store.on("@init", () => ({
+  //   patientFirstName: null,
+  //   patientFirstNameEng: null,
+  //   patientLastName: null,
+  //   patientLastNameEng: null,
+  //   patientMiddleNameEng: null,
+  //   patientPrefix: null,
+  //   patientPrefixEng: null,
+  //   patientPrefix_Rang: null,
+  //   patientPrefix_RangEng: null,
+  // }));
+  store.on("auth/setPatientInfo", (state, patientInfo) => ({}));
 };

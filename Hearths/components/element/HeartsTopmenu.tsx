@@ -50,7 +50,8 @@ export const HeartsTopMenu = () => {
             )}
             {isAuthenticated && (
               <>
-                <Link href="/" onClick={signout}>
+                <Box>awdawd</Box>
+                <Link href="/" onClick={signout} ml="2">
                   {translations.SignOut}
                 </Link>
               </>
