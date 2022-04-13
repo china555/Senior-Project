@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { url } from "../constant";
 import { HeartsLayouts } from "../layouts/layout";
 import * as moment from "moment";
+import { useTranslation } from "../hooks/useTranslation";
 interface IMyAppointment {
   appoint_datetime: number;
   event_id: number;
@@ -21,8 +22,34 @@ interface IMyAppointment {
   meeting_link: string | undefined;
 }
 const MyAppointment: NextPage = () => {
+  const { translations } = useTranslation(
+    "MyAppointment",
+    "Date",
+    "Time",
+    "meetingLink",
+    "statusmeeting",
+    "CONFIRMED",
+    "REJECT",
+    "PENDING",
+    "LINK"
+  );
+  interface IApporve {
+    CONFIRMED: string;
+    PENDING: string;
+    REJECT: string;
+  }
+  const temp: IApporve = {
+    CONFIRMED: translations.CONFIRMED,
+    PENDING: translations.PENDING,
+    REJECT: translations.REJECT,
+  };
   const [appointment, setAppointment] = useState<IMyAppointment[]>([]);
-  const headerContent = ["Date", "Time", "Meeting Link", "Appointment Status"];
+  const headerContent = [
+    translations.Date,
+    translations.Time,
+    translations.meetingLink,
+    translations.statusmeeting,
+  ];
   const fetchAPI = async () => {
     const { data } = await axios.post<IMyAppointment[]>(
       `${url}/my-appointment`,
@@ -44,7 +71,7 @@ const MyAppointment: NextPage = () => {
         mx="auto"
       >
         <Heading color="#003B71" as="h1" textAlign="center">
-          My Appointment
+          {translations.MyAppointment}
         </Heading>
         <Grid
           templateColumns="auto auto auto auto"
@@ -121,7 +148,7 @@ const MyAppointment: NextPage = () => {
                       }
                       color={ele.meeting_link !== null ? "blue" : "black"}
                     >
-                      Link
+                      {translations.LINK}
                     </Link>
                   </Box>
                 </GridItem>
@@ -136,7 +163,9 @@ const MyAppointment: NextPage = () => {
                   border="1px solid #E2E8F0"
                   color={"black"}
                 >
-                  <Box my="auto">{ele.appointment_status}</Box>
+                  <Box my="auto">
+                    {temp[ele.appointment_status as keyof IApporve]}
+                  </Box>
                 </GridItem>
               </>
             );

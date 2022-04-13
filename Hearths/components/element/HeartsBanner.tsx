@@ -7,7 +7,7 @@ export const HeartsBanner = () => {
   const appointment = () => {
     router.push("appointment");
   };
-  const { translations } = useTranslation("Appointment");
+  const { translations } = useTranslation("Appointment", "welcome", "slogan");
   return (
     <Box>
       <Box
@@ -28,7 +28,7 @@ export const HeartsBanner = () => {
                         -1px -1px 0 #FFFFFF;"
             fontSize="2xl"
           >
-            Welcome To
+            {translations.welcome}
           </Box>
           <Box
             textShadow="-1px 1px 0 #FFFFFF,
@@ -53,8 +53,7 @@ export const HeartsBanner = () => {
                         -1px -1px 0 #FFFFFF;"
             fontSize="2xl"
           >
-            Tele-Physical therapy, Tele-occupational therapy, service mind, easy
-            access, anytime, anywhere, designed just for you
+            {translations.slogan}
           </Box>
           <Box mt="2">
             <Button

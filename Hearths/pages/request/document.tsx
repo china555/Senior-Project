@@ -23,7 +23,7 @@ import { CheckIcon } from "@chakra-ui/icons";
 
 interface IMyAppointment {
   appoint_datetime: number;
-  event_id: number;
+  appointment_id: number;
   appointment_status: string;
   meeting_link: string | undefined;
 }
@@ -38,25 +38,68 @@ const Document: NextPage = () => {
   const onchangeHandler = (event: any) => {
     setSelectedDate(event.target.value);
   };
-  const submitHandler = () => {
-    if (selectedDate !== "" && selectedDate !== undefined) {
-      console.log(selectedDate);
-      console.log(selectMedical);
-      console.log(selectReferral);
-      console.log(selectHome);
+  const submitHandler = async () => {
+    if (
+      selectedDate !== "" &&
+      selectedDate !== undefined &&
+      (selectHome || selectMedical || selectReferral)
+    ) {
+      try {
+        if (selectMedical) {
+          await axios.post(`${url}/document/request`, {
+            patientId: Cookies.get("patient_id"),
+            appointmentId: selectedDate,
+            req_doc_type_id: 1,
+          });
+        }
+        if (selectReferral) {
+          await axios.post(`${url}/document/request`, {
+            patientId: Cookies.get("patient_id"),
+            appointmentId: selectedDate,
+            req_doc_type_id: 2,
+          });
+        }
+        if (selectHome) {
+          await axios.post(`${url}/document/request`, {
+            patientId: Cookies.get("patient_id"),
+            appointmentId: selectedDate,
+            req_doc_type_id: 3,
+          });
+        }
+        toast({
+          status: "success",
+          title: "Request successful",
+        });
+        router.push("/");
+      } catch (error) {
+        toast({
+          status: "error",
+          title: "Please Do again later",
+        });
+      }
     } else {
-      toast({ status: "error", title: "Please Enter Date before submit" });
+      toast({
+        status: "error",
+        title: "Please select date or form before submit",
+      });
     }
   };
   useEffect(() => {
     const fetchAPI = async () => {
-      const { data } = await axios.get<IMyAppointment[]>(
-        `${url}/appointment/date?patient_id=${Cookies.get("patient_id")}`
-      );
-      const newData = data.filter((ele) => {
-        return new Date(ele.appoint_datetime * 1000) < new Date();
-      });
-      setAppointment(newData);
+      try {
+        const { data } = await axios.get<IMyAppointment[]>(
+          `${url}/appointment/date?patient_id=${Cookies.get("patient_id")}`
+        );
+        const newData = data.filter((ele) => {
+          return new Date(ele.appoint_datetime * 1000) < new Date();
+        });
+        setAppointment(newData);
+      } catch (error) {
+        toast({
+          status: "error",
+          title: "Please Login before fo this process",
+        });
+      }
     };
     try {
       fetchAPI();
@@ -65,18 +108,25 @@ const Document: NextPage = () => {
     }
   }, []);
 
-  const { translations } = useTranslation("Question");
+  const { translations } = useTranslation(
+    "RequestDocument",
+    "homepro",
+    "medical",
+    "refferral",
+    "Confirm",
+    "selectedDateTime"
+  );
   return (
     <HeartsLayouts>
       <HeartsContainer>
         <Heading color="#046483" as="h1" textAlign="center" my="5">
-          Request Document
+          {translations.RequestDocument}
         </Heading>
         <Box w="20rem" mx="auto">
           <Select onChange={onchangeHandler} value={selectedDate}>
-            <option value={""}>Please select date & time</option>
+            <option value={""}>{translations.selectedDateTime}</option>
             {appointment.map((ele, index) => (
-              <option value={ele.event_id} key={`${ele.event_id}`}>
+              <option value={ele.appointment_id} key={`${ele.appointment_id}`}>
                 {`${moment.unix(ele.appoint_datetime).format("DD/MM/YYYY")} `}
                 {new Date(ele.appoint_datetime * 1000).getUTCHours()}:00 -
                 {new Date(ele.appoint_datetime * 1000).getUTCHours() + 1}:00
@@ -99,7 +149,6 @@ const Document: NextPage = () => {
               borderColor={selectMedical ? "#2260ff" : "white"}
               onClick={() => {
                 setSelectMedical(!selectMedical);
-                console.log(selectMedical);
               }}
             >
               {selectMedical ? (
@@ -127,7 +176,7 @@ const Document: NextPage = () => {
                 </Box>
               )}
 
-              <Box mb="2">Medical Certificate</Box>
+              <Box mb="2">{translations.medical}</Box>
               <Box w="6rem" ml="3rem" mx="auto">
                 <Image
                   pointerEvents={"none"}
@@ -153,7 +202,6 @@ const Document: NextPage = () => {
               borderColor={selectReferral ? "#2260ff" : "white"}
               onClick={() => {
                 setSelectReferral(!selectReferral);
-                console.log(selectReferral);
               }}
             >
               {selectReferral ? (
@@ -181,7 +229,7 @@ const Document: NextPage = () => {
                 </Box>
               )}
 
-              <Box mb="2">Referral Form</Box>
+              <Box mb="2">{translations.refferral}</Box>
               <Box w="6rem" ml="3rem" mx="auto">
                 <Image
                   pointerEvents={"none"}
@@ -207,7 +255,6 @@ const Document: NextPage = () => {
               borderColor={selectHome ? "#2260ff" : "white"}
               onClick={() => {
                 setSelectHome(!selectHome);
-                console.log(selectHome);
               }}
             >
               {selectHome ? (
@@ -235,7 +282,7 @@ const Document: NextPage = () => {
                 </Box>
               )}
 
-              <Box mb="2">Home Program/ Progression Note</Box>
+              <Box mb="2">{translations.homepro}</Box>
               <Box w="6rem" ml="3rem" mx="auto">
                 <Image
                   pointerEvents={"none"}
@@ -260,7 +307,7 @@ const Document: NextPage = () => {
               submitHandler();
             }}
           >
-            Confirm
+            {translations.Confirm}
           </Button>
         </Box>
       </HeartsContainer>

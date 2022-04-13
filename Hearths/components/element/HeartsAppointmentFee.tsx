@@ -65,7 +65,6 @@ export const HeartsAppointmentFee = (props: submitHandler) => {
         };
         await axios.post(url + "/payment", paymentData);
         const message: string = await props.sumbithandler();
-        console.log(message);
         toast({ status: "success", title: "Appointment Successful" });
         onOpen();
       }

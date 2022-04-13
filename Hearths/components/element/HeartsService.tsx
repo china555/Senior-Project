@@ -9,14 +9,15 @@ export const HeartsService = () => {
     "Appointment",
     "MyAppointment",
     "RequestDocument",
-    "VDOCallService"
+    "VDOCallService",
+    "Service"
   );
   return (
     <HeartsContainer>
       <Box mt="4rem" id="services" textAlign="center">
         <Box>
           <Heading color="#003B71" as="h1" pt="3rem">
-            Our Services
+            {translations.Service}
           </Heading>
         </Box>
         <Flex

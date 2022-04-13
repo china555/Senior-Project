@@ -13,7 +13,7 @@ interface IDepartment {
 }
 const OurTeam: NextPage = () => {
   const router = useRouter();
-  const { translations } = useTranslation("DepartMentName");
+  const { translations } = useTranslation("DepartMentName", "OurDepartment");
   const department: IDepartment[] = [
     {
       name: translations.DepartMentName.OccupationalTherapy,
@@ -76,7 +76,7 @@ const OurTeam: NextPage = () => {
     <HeartsLayouts>
       <Box bg="PrimaryColor.bg" mt="5" pt="5" pb="10">
         <Heading color="#046483" as="h1" textAlign="center">
-          Our Department
+          {translations.OurDepartment}
         </Heading>
         <Box
           mt="2rem"

@@ -61,7 +61,22 @@ const SignUp: NextPage = () => {
     "SignUp",
     "email",
     "IDCard",
-    "password"
+    "password",
+    "newsletter",
+    "forgetpass",
+    "registerWarning",
+    "accept",
+    "NoteFee",
+    "NoteFee1",
+    "NoteFee2",
+    "accountName",
+    "accountNo",
+    "Confirm",
+    "Cancel",
+    "paymentFee",
+    "clickappointmentcanceled",
+    "clickpleaseUploadPayment",
+    "clickconfirm"
   );
   const resetState = () => {
     setIsClickCancel(false);
@@ -131,12 +146,11 @@ const SignUp: NextPage = () => {
 
   const getModalText = () => {
     if (!hasReceipFile && !isClickCancel)
-      return "Please upload payment recipte before click confirm button";
+      return translations.clickpleaseUploadPayment;
 
-    if (isClickCancel)
-      return "If you click confirm your process of appointment will be canceled";
+    if (isClickCancel) return translations.clickappointmentcanceled;
 
-    return "Please wait for payment confirmation";
+    return translations.clickconfirm;
   };
 
   const handleUploadFile = (files: File[]) => {
@@ -262,7 +276,7 @@ const SignUp: NextPage = () => {
                 })}
               </Box>
               <Heading as="h3" size="sm" fontWeight="medium" color="red">
-                *Please read carefully. Click accept before click Sign Up
+                {translations.registerWarning}
               </Heading>
               <Flex flexDirection="column" px="10px">
                 <Checkbox
@@ -271,15 +285,14 @@ const SignUp: NextPage = () => {
                   iconColor="black"
                   isInvalid={!consentFormAgreement}
                 >
-                  Accept
+                  {translations.accept}
                 </Checkbox>
                 <Checkbox
                   onChange={newsReceivingAgreementOnChangeHandler}
                   colorScheme="#F6F6F6"
                   iconColor="black"
                 >
-                  I would like to receive your newsletter and other promotional
-                  information.
+                  {translations.newsletter}
                 </Checkbox>
                 <Button
                   my="2rem"
@@ -290,7 +303,7 @@ const SignUp: NextPage = () => {
                   fontSize="1.6rem"
                   type="submit"
                 >
-                  Sign Up
+                  {translations.SignUp}
                 </Button>
               </Flex>
             </Flex>
@@ -331,29 +344,30 @@ const SignUp: NextPage = () => {
             mx="auto"
           >
             <Heading color="#003B71" as="h1" textAlign="center">
-              Sign Up Fee
+              {translations.paymentFee}
             </Heading>
             <Flex alignItems={"center"} justifyContent={"center"}>
-              {/* <Box w="50%">
+              <Box w="50%">
                 <Image
                   mx="auto"
                   alt="Hearts"
                   src="/images/payment/QRcode.png"
                 />
-              </Box> */}
+              </Box>
               <Box
                 w="50%"
                 lineHeight={"9"}
                 fontSize={{ base: "17px", xl: "17px" }}
               >
                 <Box>
-                  <b>ชื่อบัญชี:</b> HealthcaRe Tele-delivery Service
+                  <b>{translations.accountName}:</b> HealthcaRe Tele-delivery
+                  Service
                 </Box>
                 <Box>
                   ธนาคารไทยพาณิชย์ จำกัด (มหาชน) SIAM COMMERCIAL BANK PUBLIC
                   COMPANY LIMITED 0333 สาขามหาวิทยาลัยมหิตล
                 </Box>
-                <Box>เลขที่บัญชี ACCOUNT NO. 333-294813-4</Box>
+                <Box>{translations.accountNo} 333-294813-4</Box>
               </Box>
             </Flex>
             <HeartsDropzone onUploadFile={handleUploadFile} />
@@ -363,9 +377,8 @@ const SignUp: NextPage = () => {
               </li>
             )}
             <Heading as="h3" size="sm" fontWeight="medium" color="red">
-              *Note: <br />- You cannot skip this process. If you change or
-              close this page, this process will be canceled.
-              <br />- You must upload the receipt.
+              {translations.NoteFee} <br />- {translations.NoteFee1}
+              <br />- {translations.NoteFee2}
             </Heading>
             <Button
               mt="1rem"
@@ -378,7 +391,7 @@ const SignUp: NextPage = () => {
               mx={"auto"}
               onClick={onSubmitImageandDataHandler}
             >
-              Confirm
+              {translations.Confirm}
             </Button>
             <Heading
               textAlign="center"
@@ -391,7 +404,7 @@ const SignUp: NextPage = () => {
               cursor="pointer"
               onClick={handleClickCancel}
             >
-              Cancel
+              {translations.Cancel}
             </Heading>
           </Flex>
         </Box>

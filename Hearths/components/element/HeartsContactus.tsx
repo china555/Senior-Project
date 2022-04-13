@@ -3,7 +3,7 @@ import { useTranslation } from "../../hooks/useTranslation";
 import HeartsContainer from "../common/HeartsContainer";
 
 export const HeartsContactUs = () => {
-  const { translations } = useTranslation("Contact");
+  const { translations } = useTranslation("Contact", "address1", "address2");
   return (
     <Box pb="4rem" mt="4rem" bg="PrimaryColor.bg">
       <HeartsContainer>
@@ -33,15 +33,13 @@ export const HeartsContactUs = () => {
                   alt="address"
                 />
               </Box>
-              <Box w="80%">
+              <Box w="85%">
                 <Link
                   target="_blank"
                   href="https://www.google.com/maps/place/Faculty+of+Physical+Therapy+(MU)/@13.797518,100.32202,16z/data=!4m12!1m6!3m5!1s0x0:0x13228aa5ea3262e!2sFaculty+of+Medical+Technology+(MU)!8m2!3d13.7985556!4d100.32309!3m4!1s0x30e2938c2967d2e1:0x8c7062528ac85923!8m2!3d13.7975182!4d100.3220195?hl=en"
+                  wordBreak={"break-word"}
                 >
-                  ศูนย์กายภาพบำบัด
-                  <br /> คณะกายภาพบำบัด มหาวิทยาลัยมหิดล
-                  <br />
-                  999 ถนนพุทธมณฑลสาย 4 ตำบล ศาลายา อำเภอพุทธมณฑล นครปฐม 73170
+                  {translations.address1}
                 </Link>
               </Box>
             </Flex>
@@ -53,17 +51,13 @@ export const HeartsContactUs = () => {
                   alt="address"
                 />
               </Box>
-              <Box w="80%">
+              <Box w="85%">
                 <Link
                   target="_blank"
                   href="https://www.google.com/maps/place/%E0%B8%A8%E0%B8%B9%E0%B8%99%E0%B8%A2%E0%B9%8C%E0%B8%81%E0%B8%B2%E0%B8%A2%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9A%E0%B8%B3%E0%B8%9A%E0%B8%B1%E0%B8%94+%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2%E0%B8%A1%E0%B8%AB%E0%B8%B4%E0%B8%94%E0%B8%A5/@13.7636467,100.4878597,17z/data=!3m1!4b1!4m5!3m4!1s0x30e2997408547b8b:0x2deeab2f4c6319b4!8m2!3d13.7636415!4d100.4900484?hl=en"
+                  wordBreak={"break-word"}
                 >
-                  ศูนย์กายภาพบำบัด (เชิงสะพานสมเด็จพระปิ่นเกล้า)
-                  <br />
-                  คณะกายภาพบำบัด มหาวิทยาลัยมหิดล
-                  <br />
-                  198/2 ถนนสมเด็จพระปิ่นเกล้า แขวงบางยี่ขัน เขตบางพลัด กรุงเทพฯ
-                  10700
+                  {translations.address2}
                 </Link>
               </Box>
             </Flex>

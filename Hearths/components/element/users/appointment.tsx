@@ -82,7 +82,6 @@ export const UsersAppointmentManagement: NextPage = () => {
 
     const fetchAPI = async () => {
       const { data } = await axios.get(`${url}/get-all-pending`);
-      console.log(data);
       setStatePending(data);
     };
 
@@ -90,21 +89,17 @@ export const UsersAppointmentManagement: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log("555");
-
     const getCodeAccessTokenFromWebex = async () => {
       const config = {
         headers: {
           "Content-Type": `application/x-www-form-urlencoded`,
         },
       };
-      console.log(`${webexCode}`);
       const { data } = await axios.post(
         `https://webexapis.com/v1/access_token?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=http://localhost:3000/users/dashboard&code=${webexCode}`,
         null,
         config
       );
-      console.log(data);
       const {
         access_token,
         expires_in,

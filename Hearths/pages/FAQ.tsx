@@ -12,12 +12,12 @@ import { useTranslation } from "../hooks/useTranslation";
 import { HeartsLayouts } from "../layouts/layout";
 import { ChevronRightIcon, ChevronDownIcon } from "@chakra-ui/icons";
 const FAQ: NextPage = () => {
-  const { translations } = useTranslation("Question");
+  const { translations } = useTranslation("Question", "FAQ");
   return (
     <HeartsLayouts>
       <HeartsContainer>
         <Heading color="#046483" as="h1" textAlign="center" my="5">
-          FAQ
+          {translations.FAQ}
         </Heading>
         <Accordion allowToggle>
           {translations.Question.map(({ Question, Answer }, index) => {

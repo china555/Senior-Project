@@ -79,7 +79,6 @@ export const UsersRegisterManagement = () => {
 
   const fetchAPI = async () => {
     const { data } = await axios.get(`${url}/users/confirmation/patient`);
-    console.log(data);
     setStatePending(data);
   };
 

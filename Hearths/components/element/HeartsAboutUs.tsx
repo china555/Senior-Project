@@ -9,7 +9,8 @@ export const HeartsAboutUs = () => {
     "FAQ",
     "Contact",
     "OurTeam",
-    "AboutUs"
+    "AboutUs",
+    "slogan"
   );
   const router = useRouter();
   return (
@@ -34,10 +35,7 @@ export const HeartsAboutUs = () => {
                 <span style={{ color: "#EB7F00" }}>T</span>ele-delivery
                 <span style={{ color: "#EB7F00" }}> S</span>ervice
               </Heading>
-              <Text>
-                Tele-Physical therapy, Tele-occupational therapy, service mind,
-                easy access, anytime, anywhere, designed just for you
-              </Text>
+              <Text>{translations.slogan}</Text>
               <Box mt="2rem" display="flex" flexWrap="wrap">
                 <Button
                   py="2rem"

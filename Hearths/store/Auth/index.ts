@@ -11,16 +11,19 @@ export const authModule: StoreonModule<IAuthState, IAuthEvent> = (store) => {
 };
 
 export const userInfo: StoreonModule<IInfoState, IInfoEvent> = (store) => {
-  // store.on("@init", () => ({
-  //   patientFirstName: null,
-  //   patientFirstNameEng: null,
-  //   patientLastName: null,
-  //   patientLastNameEng: null,
-  //   patientMiddleNameEng: null,
-  //   patientPrefix: null,
-  //   patientPrefixEng: null,
-  //   patientPrefix_Rang: null,
-  //   patientPrefix_RangEng: null,
-  // }));
-  store.on("auth/setPatientInfo", (state, patientInfo) => ({}));
+  store.on("@init", () => ({
+    patientFirstName: null,
+    patientFirstNameEng: null,
+    patientLastName: null,
+    patientLastNameEng: null,
+    patientMiddleNameEng: null,
+    patientPrefix: null,
+    patientPrefixEng: null,
+    patientPrefix_Rang: null,
+    patientPrefix_RangEng: null,
+  }));
+  store.on("auth/setPatientInfo", (state, patientInfo) => ({
+    ...state,
+    patientInfo,
+  }));
 };

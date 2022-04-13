@@ -41,6 +41,8 @@ export interface ILocaleState {
   Service: string;
   AboutUs: string;
   Contact: string;
+  Confirm: string;
+  Close: string;
   Appointment: string;
   MyAppointment: string;
   RequestDocument: string;
@@ -56,6 +58,48 @@ export interface ILocaleState {
   IDCard: string;
   email: string;
   password: string;
+  address1: string;
+  address2: string;
+  selectspeacialty: string;
+  Name: string;
+  PTName: string;
+  selectedDate: string;
+  appointmentnote: string;
+  yourAppoint: string;
+  on: string;
+  Cancel: string;
+  paymentFee: string;
+  NoteFee: string;
+  NoteFee1: string;
+  NoteFee2: string;
+  Error: string;
+  successAppoint: string;
+  submitFail: string;
+  clickpleaseUploadPayment: string;
+  clickappointmentcanceled: string;
+  clickconfirm: string;
+  accountName: string;
+  accountNo: string;
+  welcome: string;
+  slogan: string;
+  Date: string;
+  Time: string;
+  meetingLink: string;
+  statusmeeting: string;
+  PENDING: string;
+  CONFIRMED: string;
+  REJECT: string;
+  LINK: string;
+  OurDepartment: string;
+  Profile: string;
+  accept: string;
+  forgetpass: string;
+  registerWarning: string;
+  newsletter: string;
+  medical: string;
+  homepro: string;
+  refferral: string;
+  selectedDateTime: string;
 }
 
 export interface ILocaleEvent {

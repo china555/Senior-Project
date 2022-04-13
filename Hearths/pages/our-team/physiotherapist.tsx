@@ -16,7 +16,11 @@ import { useTranslation } from "../../hooks/useTranslation";
 import { IPhysiotherapist } from "../../store/locale/@types";
 
 const PhysioTherapist: NextPage = () => {
-  const { translations } = useTranslation("Physiotherapist", "DepartMentName");
+  const { translations } = useTranslation(
+    "Physiotherapist",
+    "DepartMentName",
+    "OurTeam"
+  );
   const [selectedDepartMent, setselectedDepartMent] = useState<string>("10");
   const onchangeHandler = (event: any) => {
     setselectedDepartMent(event.target.value);
@@ -87,7 +91,7 @@ const PhysioTherapist: NextPage = () => {
 
         <Box mt="5" w={{ base: "70%", xl: "50%" }} mx="auto">
           <Heading color="#046483" as="h1" textAlign="center" mb="2">
-            Our Team
+            {translations.OurTeam}
           </Heading>
           <Select onChange={onchangeHandler} value={selectedDepartMent}>
             <option value={10}>All</option>

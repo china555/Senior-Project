@@ -52,14 +52,6 @@ type therapisType = {
   name: string;
   user_ID: number;
 };
-const physicalType = [
-  { name: "Orthopedic", id: 1 },
-  { name: "Neurological", id: 2 },
-  { name: "Pediatric", id: 3 },
-  { name: "Community", id: 5 },
-  { name: "Ped", id: 7 },
-  { name: "Scoliosis", id: 12 },
-];
 const Appointment = () => {
   const router = useRouter();
   const [allTimeLength, setAllTimeLength] = useState<Time[]>();
@@ -77,8 +69,38 @@ const Appointment = () => {
   >([]);
   const { translations, changeLocale } = useTranslation(
     "ErrorMessageSelectedTime",
-    "Appointment"
+    "Appointment",
+    "DepartMentName",
+    "selectspeacialty",
+    "Name",
+    "PTName",
+    "selectedDate",
+    "appointmentnote",
+    "Confirm",
+    "Close",
+    "on",
+    "yourAppoint",
+    "Cancel",
+    "paymentFee",
+    "NoteFee",
+    "NoteFee1",
+    "NoteFee2",
+    "Error",
+    "successAppoint",
+    "submitFail",
+    "clickpleaseUploadPayment",
+    "clickappointmentcanceled",
+    "clickconfirm",
+    "accountName",
+    "accountNo"
   );
+  const physicalType = [
+    { name: translations.DepartMentName.OccupationalTherapy, id: 1 },
+    { name: translations.DepartMentName.NeurologicalSystem, id: 2 },
+    { name: translations.DepartMentName.Pediatric, id: 3 },
+    { name: translations.DepartMentName.Community, id: 5 },
+    { name: translations.DepartMentName.Scoliosis, id: 12 },
+  ];
   const toast = useToast();
   const handleSelectedDate = (value: Date) => {
     SetSelectedDate(value);
@@ -90,6 +112,7 @@ const Appointment = () => {
         const { data } = await axios.get<AppointmentAPI[]>(
           `${url}/appointment`
         );
+        console.log(data);
         setAppointmentDataAPI(data);
         SetEnableDate(
           data.map(({ start }) => {
@@ -108,7 +131,7 @@ const Appointment = () => {
       } catch (error) {
         toast({
           status: "error",
-          title: "Cannot connect to server Please Try again Later",
+          title: translations.Error,
         });
       }
     };
@@ -139,7 +162,6 @@ const Appointment = () => {
     const temp = appointmentDataAPI
       .filter(filterAppointment)
       .map(({ start, stop, event_id }) => {
-        console.log(start);
         return {
           start: getMomentHourFormat(start),
           stop: getMomentHourFormat(stop),
@@ -165,7 +187,6 @@ const Appointment = () => {
   };
 
   const therapistHandleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     setSelectedTherapist(e.target.value);
   };
 
@@ -178,7 +199,6 @@ const Appointment = () => {
       event_id: selectedTime?.event_id,
       payment_id: paymentId,
     };
-    console.log(submitData);
     const { data } = await axios.post(url + "/appointments", submitData);
     return data;
   };
@@ -230,13 +250,12 @@ const Appointment = () => {
         const message: Promise<string> = submitHandler(
           paymentInfo.data.paymentInfo.payment_id
         );
-        console.log(message);
-        toast({ status: "success", title: "Appointment Successful" });
+        toast({ status: "success", title: translations.successAppoint });
         onOpen();
       }
     } catch (error) {
       console.error("onSubmitImageandDataHandler", error);
-      toast({ status: "error", title: "Submit failed" });
+      toast({ status: "error", title: translations.submitFail });
     }
   };
 
@@ -248,12 +267,11 @@ const Appointment = () => {
 
   const getModalText = () => {
     if (!hasReceipFile && !isClickCancel)
-      return "Please upload payment recipte before click confirm button";
+      return translations.clickpleaseUploadPayment;
 
-    if (isClickCancel)
-      return "If you click confirm your process of appointment will be canceled";
+    if (isClickCancel) return translations.clickappointmentcanceled;
 
-    return "Please wait for payment confirmation";
+    return translations.clickconfirm;
   };
 
   const handleUploadFile = (files: File[]) => {
@@ -280,7 +298,8 @@ const Appointment = () => {
               />
             </Box>
             <Box mt="5">
-              Your appointment is {selectedTime?.start}-{selectedTime?.stop} on{" "}
+              {translations.yourAppoint} {selectedTime?.start}-
+              {selectedTime?.stop} {translations.on}{" "}
               {`${selectedDate?.getDate()}-${
                 selectedDate?.getMonth() + 1
               }-${selectedDate?.getFullYear()}`}
@@ -297,7 +316,7 @@ const Appointment = () => {
               onClose();
             }}
           >
-            Confirm
+            {translations.Confirm}
           </Button>
         </HeartsModal>
         {step === 1 ? (
@@ -307,10 +326,10 @@ const Appointment = () => {
             </Heading>
             <Flex flexWrap="wrap" mt="5">
               <Box w={{ base: "100%", xl: "50%" }}>
-                <Text fontSize="24px">1.Select Specialty</Text>
+                <Text fontSize="24px">1.{translations.selectspeacialty}</Text>
                 <Select
                   bg="#F6F6F6"
-                  placeholder="Specialty"
+                  placeholder={translations.selectspeacialty}
                   onChange={specialtyHandleChange}
                 >
                   {physicalType.map((ele, index) => (
@@ -320,11 +339,11 @@ const Appointment = () => {
                   ))}
                 </Select>
                 <Text fontSize="24px" mt="5">
-                  2.Name
+                  2.{translations.Name}
                 </Text>
                 <Select
                   bg="#F6F6F6"
-                  placeholder="Physical Therapist Name"
+                  placeholder={translations.PTName}
                   onChange={therapistHandleChange}
                 >
                   {therapist.map((ele, index) => (
@@ -334,11 +353,11 @@ const Appointment = () => {
                   ))}
                 </Select>
                 <Heading size="sm" color="#FF0000" as="h1" mt="2">
-                  *Note: You can skip step 1 and 2, if you do not know.
+                  {translations.appointmentnote}
                 </Heading>
               </Box>
               <Box w={{ base: "100%", xl: "50%" }} mt={{ base: "5", xl: "0" }}>
-                <Text fontSize="24px">3.Select Date</Text>
+                <Text fontSize="24px">3.{translations.selectedDate}</Text>
                 <Box w={{ base: "100%", xl: "60%" }} mx="auto">
                   <Calendar
                     maxDate={add(new Date(), { days: 30 })}
@@ -418,7 +437,7 @@ const Appointment = () => {
                 w={{ base: "60%", xl: "40%" }}
                 onClick={handleSubmitSelectedDateAndTime}
               >
-                Confirm
+                {translations.Confirm}
               </Button>
             </Box>
           </HeartsContainer>
@@ -446,7 +465,7 @@ const Appointment = () => {
                 borderRadius="35px"
                 bg="ButtonColor"
               >
-                {isClickCancel ? "Confirm" : "Close"}
+                {isClickCancel ? translations.Confirm : translations.Close}
               </Button>
             </HeartsModal>
 
@@ -457,29 +476,30 @@ const Appointment = () => {
               mx="auto"
             >
               <Heading color="#003B71" as="h1" textAlign="center">
-                Sign Up Fee
+                {translations.paymentFee}
               </Heading>
               <Flex alignItems={"center"} justifyContent={"center"}>
-                {/* <Box w="50%">
+                <Box w="50%">
                   <Image
                     mx="auto"
                     alt="Hearts"
                     src="/images/payment/QRcode.png"
                   />
-                </Box> */}
+                </Box>
                 <Box
                   w="50%"
                   lineHeight={"9"}
                   fontSize={{ base: "17px", xl: "17px" }}
                 >
                   <Box>
-                    <b>ชื่อบัญชี:</b> HealthcaRe Tele-delivery Service
+                    <b>{translations.accountName}:</b> HealthcaRe Tele-delivery
+                    Service
                   </Box>
                   <Box>
                     ธนาคารไทยพาณิชย์ จำกัด (มหาชน) SIAM COMMERCIAL BANK PUBLIC
                     COMPANY LIMITED 0333 สาขามหาวิทยาลัยมหิตล
                   </Box>
-                  <Box>เลขที่บัญชี ACCOUNT NO. 333-294813-4</Box>
+                  <Box>{translations.accountNo} 333-294813-4</Box>
                 </Box>
               </Flex>
               <HeartsDropzone onUploadFile={handleUploadFile} />
@@ -489,9 +509,8 @@ const Appointment = () => {
                 </li>
               )}
               <Heading as="h3" size="sm" fontWeight="medium" color="red">
-                *Note: <br />- You cannot skip this process. If you change or
-                close this page, this process will be canceled.
-                <br />- You must upload the receipt.
+                {translations.NoteFee} <br />- {translations.NoteFee1}
+                <br />- {translations.NoteFee2}
               </Heading>
               <Button
                 mt="1rem"
@@ -502,7 +521,7 @@ const Appointment = () => {
                 fontSize="1.6rem"
                 onClick={onSubmitImageandDataHandler}
               >
-                Confirm
+                {translations.Confirm}
               </Button>
               <Heading
                 textAlign="center"
@@ -515,7 +534,7 @@ const Appointment = () => {
                 cursor="pointer"
                 onClick={handleClickCancel}
               >
-                Cancel
+                {translations.Cancel}
               </Heading>
             </Flex>
           </Box>

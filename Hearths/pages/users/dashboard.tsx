@@ -14,26 +14,20 @@ import { UsersRegisterManagement } from "../../components/element/users/register
 import { UsersAppointment } from "../../components/element/users/my-appointment";
 import { useAppStore } from "../../store";
 import { signout } from "../../utils/helper";
+import { UsersRequestDocument } from "../../components/element/users/requestdocument";
 
 const Dashboard = () => {
   const sideBarName = [
     { name: "Appointment Management", key: "Appointment" },
     { name: "Register Management", key: "Register" },
     { name: "My Appointment", key: "MyAppointment" },
+    { name: "Request Document", key: "ReqDoc" },
   ];
   const { isAuthenticated } = useAppStore("isAuthenticated");
   const [selectedTab, setSelectedTab] = useState("Appointment");
   const selectedTabHandler = async (selected: string): Promise<void> => {
-    console.log(selected);
     setSelectedTab(selected);
   };
-  // useEffect(() => {
-  //   console.log(isAuthenticated);
-  //   if (!isAuthenticated) {
-  //     console.log("dd");
-  //     router.push("/users/login");
-  //   }
-  // }, []);
 
   const router = useRouter();
   return (
@@ -99,6 +93,8 @@ const Dashboard = () => {
               <UsersRegisterManagement />
             ) : selectedTab === "MyAppointment" ? (
               <UsersAppointment />
+            ) : selectedTab === "ReqDoc" ? (
+              <UsersRequestDocument />
             ) : (
               <Box></Box>
             )}

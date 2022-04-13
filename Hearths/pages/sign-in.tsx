@@ -8,6 +8,7 @@ import axios from "axios";
 import { url } from "../constant";
 import Cookies from "js-cookie";
 import { useAppStore } from "../store";
+import { useTranslation } from "../hooks/useTranslation";
 
 type LogInForm = {
   username: string;
@@ -18,6 +19,7 @@ const errorMessages = (fieldName: string, errors: FieldError) => {
   if (fieldName === "email" || fieldName === "password") return [errorRequire];
 };
 const SignIn: NextPage = () => {
+  const { translations } = useTranslation("SignIn", "forgetpass");
   const {
     register,
     handleSubmit,
@@ -34,6 +36,13 @@ const SignIn: NextPage = () => {
       Cookies.set("refreshtoken", data.refreshToken);
       Cookies.set("patient_id", data.patient_id);
       dispatch("auth/setIsAuthenticated", true);
+      Cookies.set(
+        "name",
+        `${data.user.patientFirstName} ${data.user.patientLastName}`
+      );
+      if (data.img) {
+        Cookies.set("profileImg", data.img);
+      }
       // dispatch("auth/setPatientInfo", {
       //   patientFirstName: data.user.patientFirstName,
       //   patientFirstNameEng: data.user.patientFirstNameEng,
@@ -61,7 +70,7 @@ const SignIn: NextPage = () => {
         mx="auto"
       >
         <Heading color="#003B71" as="h1" textAlign="center">
-          Sign In
+          {translations.SignIn}
         </Heading>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Flex flexDirection="column" gridRowGap="15px">
@@ -101,10 +110,10 @@ const SignIn: NextPage = () => {
                 fontSize="1.6rem"
                 type="submit"
               >
-                Sign In
+                {translations.SignIn}
               </Button>
               <Link textAlign="center" as="h3" size="sm" fontWeight="medium">
-                Forgot your password?
+                {translations.forgetpass}
               </Link>
             </Flex>
           </Flex>
