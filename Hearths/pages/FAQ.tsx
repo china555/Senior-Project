@@ -13,6 +13,7 @@ import { HeartsLayouts } from "../layouts/layout";
 import { ChevronRightIcon, ChevronDownIcon } from "@chakra-ui/icons";
 const FAQ: NextPage = () => {
   const { translations } = useTranslation("Question", "FAQ");
+  const temp = translations.Question as [];
   return (
     <HeartsLayouts>
       <HeartsContainer>
@@ -20,7 +21,7 @@ const FAQ: NextPage = () => {
           {translations.FAQ}
         </Heading>
         <Accordion allowToggle>
-          {translations.Question.map(({ Question, Answer }, index) => {
+          {temp.map(({ Question, Answer }, index) => {
             return (
               <AccordionItem key={`number-${index}`}>
                 {({ isExpanded }) => (
