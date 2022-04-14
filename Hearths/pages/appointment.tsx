@@ -92,7 +92,8 @@ const Appointment = () => {
     "clickappointmentcanceled",
     "clickconfirm",
     "accountName",
-    "accountNo"
+    "accountNo",
+    "selectspeacialty1"
   );
   const physicalType = [
     { name: translations.DepartMentName.OccupationalTherapy, id: 1 },
@@ -329,7 +330,7 @@ const Appointment = () => {
                 <Text fontSize="24px">1.{translations.selectspeacialty}</Text>
                 <Select
                   bg="#F6F6F6"
-                  placeholder={translations.selectspeacialty}
+                  placeholder={translations.selectspeacialty1}
                   onChange={specialtyHandleChange}
                 >
                   {physicalType.map((ele, index) => (

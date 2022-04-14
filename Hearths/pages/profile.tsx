@@ -14,7 +14,12 @@ interface IPatient {
   hn: string;
 }
 const Profile: NextPage = () => {
-  const { translations } = useTranslation("Question");
+  const { translations } = useTranslation(
+    "Profile",
+    "hn",
+    "patientName",
+    "email"
+  );
   const toast = useToast();
   const [patientInfo, setPatientInfo] = useState<IPatient>();
   useEffect(() => {
@@ -35,9 +40,9 @@ const Profile: NextPage = () => {
     <HeartsLayouts>
       <HeartsContainer>
         <Heading color="#046483" as="h1" textAlign="center" my="5">
-          Profile
+          {translations.Profile}
         </Heading>
-        <Flex justifyContent={"center"}>
+        <Flex flexWrap={"wrap"} justifyContent={"center"}>
           <Box>
             <Box w={"15rem"}>
               <Image
@@ -49,10 +54,16 @@ const Profile: NextPage = () => {
               />
             </Box>
           </Box>
-          <Box>
-            <Box>Name: {Cookies.get("name")}</Box>
-            <Box mt="5px">HN: {patientInfo?.hn}</Box>
-            <Box mt="5px">Email: {patientInfo?.username}</Box>
+          <Box pt="3rem" pl="2rem" fontSize={"20px"}>
+            <Box>
+              {translations.patientName}: {Cookies.get("name")}
+            </Box>
+            <Box mt="10px">
+              {translations.hn}: {patientInfo?.hn}
+            </Box>
+            <Box mt="10px">
+              {translations.email}: {patientInfo?.username}
+            </Box>
           </Box>
         </Flex>
       </HeartsContainer>

@@ -100,6 +100,9 @@ export interface ILocaleState {
   homepro: string;
   refferral: string;
   selectedDateTime: string;
+  selectspeacialty1: string;
+  hn: string;
+  patientName: string;
 }
 
 export interface ILocaleEvent {

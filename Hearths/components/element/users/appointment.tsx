@@ -197,7 +197,7 @@ export const UsersAppointmentManagement: NextPage = () => {
             approveByUser_id: Cookies.get("user_id"),
           });
           toast({
-            status: "error",
+            status: "success",
             title: `Appointment ${submitData.appointmentStatus}`,
           });
         }

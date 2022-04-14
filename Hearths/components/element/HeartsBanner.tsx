@@ -12,6 +12,7 @@ export const HeartsBanner = () => {
     <Box>
       <Box
         w="100%"
+        h="35rem"
         bgImg="url('/images/banner/banner-image.png')"
         bgRepeat="no-repeat"
         bgSize="cover"

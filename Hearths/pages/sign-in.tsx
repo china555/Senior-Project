@@ -19,7 +19,12 @@ const errorMessages = (fieldName: string, errors: FieldError) => {
   if (fieldName === "email" || fieldName === "password") return [errorRequire];
 };
 const SignIn: NextPage = () => {
-  const { translations } = useTranslation("SignIn", "forgetpass");
+  const { translations } = useTranslation(
+    "SignIn",
+    "forgetpass",
+    "email",
+    "password"
+  );
   const {
     register,
     handleSubmit,
@@ -78,7 +83,7 @@ const SignIn: NextPage = () => {
               <HeartInput
                 {...register("username", { required: true })}
                 type="email"
-                placeholder="Email"
+                placeholder={translations.email}
                 isRequired={true}
                 isInvalid={errors.username?.type === "required"}
                 errorMessages={errorMessages(
@@ -90,7 +95,7 @@ const SignIn: NextPage = () => {
             <Box mx={{ base: 0, xl: "30px" }}>
               <HeartInput
                 {...register("password", { required: true })}
-                placeholder="Password"
+                placeholder={translations.password}
                 type="password"
                 isRequired={true}
                 isInvalid={errors.password?.type === "required"}

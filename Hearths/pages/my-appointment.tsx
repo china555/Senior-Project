@@ -36,12 +36,12 @@ const MyAppointment: NextPage = () => {
   interface IApporve {
     CONFIRMED: string;
     PENDING: string;
-    REJECT: string;
+    REJECTED: string;
   }
   const temp: IApporve = {
     CONFIRMED: translations.CONFIRMED,
     PENDING: translations.PENDING,
-    REJECT: translations.REJECT,
+    REJECTED: translations.REJECT,
   };
   const [appointment, setAppointment] = useState<IMyAppointment[]>([]);
   const headerContent = [
@@ -60,6 +60,7 @@ const MyAppointment: NextPage = () => {
   };
   useEffect(() => {
     fetchAPI();
+    console.log();
   }, []);
   return (
     <HeartsLayouts>

@@ -15,6 +15,7 @@ import { UsersAppointment } from "../../components/element/users/my-appointment"
 import { useAppStore } from "../../store";
 import { signout } from "../../utils/helper";
 import { UsersRequestDocument } from "../../components/element/users/requestdocument";
+import { UsersSearch } from "../../components/element/users/search";
 
 const Dashboard = () => {
   const sideBarName = [
@@ -22,6 +23,7 @@ const Dashboard = () => {
     { name: "Register Management", key: "Register" },
     { name: "My Appointment", key: "MyAppointment" },
     { name: "Request Document", key: "ReqDoc" },
+    { name: "Search Patient", key: "search" },
   ];
   const { isAuthenticated } = useAppStore("isAuthenticated");
   const [selectedTab, setSelectedTab] = useState("Appointment");
@@ -95,6 +97,8 @@ const Dashboard = () => {
               <UsersAppointment />
             ) : selectedTab === "ReqDoc" ? (
               <UsersRequestDocument />
+            ) : selectedTab === "search" ? (
+              <UsersSearch />
             ) : (
               <Box></Box>
             )}
