@@ -1,12 +1,14 @@
 import { Box, Image, Link, Button } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import HeartsContainer from "../common/HeartsContainer";
-import { useSize } from "../../hooks/index";
+// import { useSize } from "../../hooks/index";
 import { HearthsDrawer } from "./HeartsDrawer";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useTranslation } from "../../hooks/useTranslation";
 import { useRouter } from "next/router";
 import { useAppStore } from "../../store";
+import useSize from "@react-hook/size";
+import { useRef } from "react";
 
 export const HeartsNavbar = () => {
   const { translations } = useTranslation(
@@ -17,11 +19,15 @@ export const HeartsNavbar = () => {
     "Appointment"
   );
   const { isAuthenticated } = useAppStore("isAuthenticated");
-  const { width } = useSize();
+  const target = useRef(null);
+  const [width, height] = useSize(target, {
+    initialHeight: 0,
+    initialWidth: 0,
+  });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   return (
-    <Box position="sticky" top="0" bg="white" zIndex="10" mb="5">
+    <Box ref={target} position="sticky" top="0" bg="white" zIndex="10" mb="5">
       <HearthsDrawer isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
 
       <HeartsContainer>
