@@ -52,7 +52,7 @@ const MyAppointment: NextPage = () => {
   ];
   const fetchAPI = async () => {
     const { data } = await axios.post<IMyAppointment[]>(
-      `${url}/my-appointment`,
+      `${url}/patient/appointment`,
       { patient_id: Cookies.get("patient_id") }
     );
     console.log(data);

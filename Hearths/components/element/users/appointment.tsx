@@ -81,7 +81,7 @@ export const UsersAppointmentManagement: NextPage = () => {
     setWebexCode(urlParams.get("code") as string);
 
     const fetchAPI = async () => {
-      const { data } = await axios.get(`${url}/get-all-pending`);
+      const { data } = await axios.get(`${url}/appointment/status/pending`);
       setStatePending(data);
     };
 
@@ -96,7 +96,7 @@ export const UsersAppointmentManagement: NextPage = () => {
         },
       };
       const { data } = await axios.post(
-        `https://webexapis.com/v1/access_token?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=http://localhost:3000/users/dashboard&code=${webexCode}`,
+        `https://webexapis.com/v1/access_token?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=https://hearts.chinaapanda.com/users/dashboard&code=${webexCode}`,
         null,
         config
       );
@@ -177,7 +177,7 @@ export const UsersAppointmentManagement: NextPage = () => {
             },
             config
           );
-          await axios.patch(url + "/confirmation-appointment", {
+          await axios.patch(url + "/confirmation/appointment", {
             event_id: submitData.event_id,
             appointmentStatus: "CONFIRMED",
             meetingLink: data.webLink,
@@ -190,7 +190,7 @@ export const UsersAppointmentManagement: NextPage = () => {
             title: `Appointment ${submitData.appointmentStatus}`,
           });
         } else if (submitData.appointmentStatus === "REJECTED") {
-          await axios.patch(url + "/confirmation-appointment", {
+          await axios.patch(url + "/confirmation/appointment", {
             event_id: submitData.event_id,
             appointmentStatus: "REJECTED",
             userId: submitData.user_id,

@@ -52,7 +52,7 @@ export const UsersAppointment: NextPage = () => {
     const fetchAPI = async () => {
       const user_id = Cookies.get("user_id");
       const { data } = await axios.get(
-        `${url}/confirmation/appointment?user_id=${user_id}`
+        `${url}/user/confirmation/appointment?user_id=${user_id}`
       );
       setStatePending(data);
     };

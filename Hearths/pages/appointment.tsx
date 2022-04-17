@@ -111,7 +111,7 @@ const Appointment = () => {
     const fetchAPI = async () => {
       try {
         const { data } = await axios.get<AppointmentAPI[]>(
-          `${url}/appointment`
+          `${url}/patient/appointment`
         );
         console.log(data);
         setAppointmentDataAPI(data);
@@ -200,7 +200,7 @@ const Appointment = () => {
       event_id: selectedTime?.event_id,
       payment_id: paymentId,
     };
-    const { data } = await axios.post(url + "/appointments", submitData);
+    const { data } = await axios.post(url + "/create/appointment", submitData);
     return data;
   };
   const [isClickCancel, setIsClickCancel] = useState(false);
