@@ -150,7 +150,7 @@ export const UsersAppointmentManagement: NextPage = () => {
       if (Cookies.get("webex_access_token") === undefined) {
         if (!webexCode) {
           router.push(
-            `https://webexapis.com/v1/authorize?client_id=${client_id}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fdashboard&scope=meeting:schedules_read meeting:schedules_write meeting:recordings_read`
+            `https://webexapis.com/v1/authorize?client_id=${client_id}&response_type=code&redirect_uri=https://hearts.chinaapanda.com/users/dashboard&scope=meeting:schedules_read meeting:schedules_write meeting:recordings_read`
           );
         }
       } else {
