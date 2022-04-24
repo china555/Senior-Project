@@ -1,24 +1,25 @@
-import { Box, Flex, Heading, Image, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, useToast } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import HeartsContainer from "../components/common/HeartsContainer";
 import { useTranslation } from "../hooks/useTranslation";
 import { HeartsLayouts } from "../layouts/layout";
-import { ChevronRightIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { headers, url } from "../constant";
-
+import { useRouter } from "next/router";
 interface IPatient {
   username: string;
   hn: string;
 }
 const Profile: NextPage = () => {
+  const router = useRouter();
   const { translations } = useTranslation(
     "Profile",
     "hn",
     "patientName",
-    "email"
+    "email",
+    "MyAppointment"
   );
   const toast = useToast();
   const [patientInfo, setPatientInfo] = useState<IPatient>();
@@ -68,6 +69,19 @@ const Profile: NextPage = () => {
             <Box mt="10px">
               {translations.email}: {patientInfo?.username}
             </Box>
+            <Button
+              mt={"4"}
+              size="lg"
+              borderRadius="30px"
+              bg="SecondaryColor"
+              color="white"
+              boxShadow="xl"
+              onClick={() => {
+                router.push("/my-appointment");
+              }}
+            >
+              {translations.MyAppointment}
+            </Button>
           </Box>
         </Flex>
       </HeartsContainer>

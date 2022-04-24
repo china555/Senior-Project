@@ -6,28 +6,21 @@ import {
   Tr,
   Th,
   Td,
-  Button,
   Flex,
-  useDisclosure,
-  Image,
   useToast,
   Heading,
-  Link,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { client_id, client_secret, headers, url } from "../../../constant";
-import { HeartsModal } from "../../common/HeartsModal";
-import moment from "moment-timezone";
+import { headers, url } from "../../../constant";
 import {
   getMomentDateMonthYearFormat,
   getMomentHourFormat,
   getMomentNextHourFormat,
 } from "../../../utils";
-import Cookies from "js-cookie";
 interface IRequestDocument {
   created_at: Date;
   doc_type_name: string;
