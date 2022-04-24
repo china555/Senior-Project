@@ -70,7 +70,7 @@ const Profile: NextPage = () => {
               {translations.email}: {patientInfo?.username}
             </Box>
             <Button
-              mt={"4"}
+              my={"4"}
               size="lg"
               borderRadius="30px"
               bg="SecondaryColor"
