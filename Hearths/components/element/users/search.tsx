@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
-import { url } from "../../../constant";
+import { headers, url } from "../../../constant";
 interface IPatientInfo {
   username: string;
   hn: string;
@@ -61,7 +61,7 @@ export const UsersSearch: NextPage = () => {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const { data } = await axios.get(`${url}/search/patient`);
+      const { data } = await axios.get(`${url}/search/patient`, headers);
       setStatePatientList(data);
       setStateTempPatientList(data);
     };

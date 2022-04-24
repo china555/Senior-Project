@@ -16,7 +16,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import HeartsContainer from "../../components/common/HeartsContainer";
-import { url } from "../../constant";
+import { headers, url } from "../../constant";
 import { useTranslation } from "../../hooks/useTranslation";
 import { HeartsLayouts } from "../../layouts/layout";
 import { CheckIcon } from "@chakra-ui/icons";
@@ -46,25 +46,37 @@ const Document: NextPage = () => {
     ) {
       try {
         if (selectMedical) {
-          await axios.post(`${url}/document/request`, {
-            patientId: Cookies.get("patient_id"),
-            appointmentId: selectedDate,
-            req_doc_type_id: 1,
-          });
+          await axios.post(
+            `${url}/document/request`,
+            {
+              patientId: Cookies.get("patient_id"),
+              appointmentId: selectedDate,
+              req_doc_type_id: 1,
+            },
+            headers
+          );
         }
         if (selectReferral) {
-          await axios.post(`${url}/document/request`, {
-            patientId: Cookies.get("patient_id"),
-            appointmentId: selectedDate,
-            req_doc_type_id: 2,
-          });
+          await axios.post(
+            `${url}/document/request`,
+            {
+              patientId: Cookies.get("patient_id"),
+              appointmentId: selectedDate,
+              req_doc_type_id: 2,
+            },
+            headers
+          );
         }
         if (selectHome) {
-          await axios.post(`${url}/document/request`, {
-            patientId: Cookies.get("patient_id"),
-            appointmentId: selectedDate,
-            req_doc_type_id: 3,
-          });
+          await axios.post(
+            `${url}/document/request`,
+            {
+              patientId: Cookies.get("patient_id"),
+              appointmentId: selectedDate,
+              req_doc_type_id: 3,
+            },
+            headers
+          );
         }
         toast({
           status: "success",
@@ -88,7 +100,8 @@ const Document: NextPage = () => {
     const fetchAPI = async () => {
       try {
         const { data } = await axios.get<IMyAppointment[]>(
-          `${url}/appointment/date?patient_id=${Cookies.get("patient_id")}`
+          `${url}/appointment/date?patient_id=${Cookies.get("patient_id")}`,
+          headers
         );
         const newData = data.filter((ele) => {
           return new Date(ele.appoint_datetime * 1000) < new Date();

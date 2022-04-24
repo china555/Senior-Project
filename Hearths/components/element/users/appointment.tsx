@@ -8,8 +8,6 @@ import {
   Td,
   Button,
   Flex,
-  useDisclosure,
-  Image,
   useToast,
   Heading,
 } from "@chakra-ui/react";
@@ -18,7 +16,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { client_id, client_secret, url } from "../../../constant";
+import { client_id, client_secret, headers, url } from "../../../constant";
 import { HeartsModal } from "../../common/HeartsModal";
 import moment from "moment-timezone";
 import {
@@ -81,8 +79,15 @@ export const UsersAppointmentManagement: NextPage = () => {
     setWebexCode(urlParams.get("code") as string);
 
     const fetchAPI = async () => {
-      const { data } = await axios.get(`${url}/appointment/status/pending`);
-      setStatePending(data);
+      try {
+        const { data } = await axios.get(
+          `${url}/appointment/status/pending`,
+          headers
+        );
+        setStatePending(data);
+      } catch (error) {
+        toast({ status: "error", title: "Please try again later" });
+      }
     };
 
     fetchAPI();
@@ -177,25 +182,33 @@ export const UsersAppointmentManagement: NextPage = () => {
             },
             config
           );
-          await axios.patch(url + "/confirmation/appointment", {
-            event_id: submitData.event_id,
-            appointmentStatus: "CONFIRMED",
-            meetingLink: data.webLink,
-            meetingId: data.id,
-            userId: submitData.user_id,
-            approveByUser_id: Cookies.get("user_id"),
-          });
+          await axios.patch(
+            url + "/confirmation/appointment",
+            {
+              event_id: submitData.event_id,
+              appointmentStatus: "CONFIRMED",
+              meetingLink: data.webLink,
+              meetingId: data.id,
+              userId: submitData.user_id,
+              approveByUser_id: Cookies.get("user_id"),
+            },
+            headers
+          );
           toast({
             status: "success",
             title: `Appointment ${submitData.appointmentStatus}`,
           });
         } else if (submitData.appointmentStatus === "REJECTED") {
-          await axios.patch(url + "/confirmation/appointment", {
-            event_id: submitData.event_id,
-            appointmentStatus: "REJECTED",
-            userId: submitData.user_id,
-            approveByUser_id: Cookies.get("user_id"),
-          });
+          await axios.patch(
+            url + "/confirmation/appointment",
+            {
+              event_id: submitData.event_id,
+              appointmentStatus: "REJECTED",
+              userId: submitData.user_id,
+              approveByUser_id: Cookies.get("user_id"),
+            },
+            headers
+          );
           toast({
             status: "success",
             title: `Appointment ${submitData.appointmentStatus}`,

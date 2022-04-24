@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { url } from "../../../constant";
+import { headers, url } from "../../../constant";
 interface IRegisterPending {
   hn: string;
   receipt_image_path: string;
@@ -78,15 +78,23 @@ export const UsersRegisterManagement = () => {
   };
 
   const fetchAPI = async () => {
-    const { data } = await axios.get(`${url}/users/confirmation/patient`);
-    setStatePending(data);
+    try {
+      const { data } = await axios.get(
+        `${url}/users/confirmation/patient`,
+        headers
+      );
+      setStatePending(data);
+    } catch (error) {
+      toast({ status: "error", title: "Please try again later" });
+    }
   };
 
   const onClickHandler = async (submitData: submitConfirmationRegisterData) => {
     try {
       const { data } = await axios.post(
         `${url}/users/confirmation/patient`,
-        submitData
+        submitData,
+        headers
       );
       const tempPending = pending.filter(
         (appoint) => appoint.hn !== submitData.hn

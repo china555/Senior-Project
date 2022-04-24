@@ -17,7 +17,7 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import { HeartsModal } from "../components/common/HeartsModal";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { url } from "../constant";
+import { headers, url } from "../constant";
 import Cookies from "js-cookie";
 import { uniqBy } from "lodash";
 import { useTranslation } from "../hooks/useTranslation";
@@ -111,7 +111,8 @@ const Appointment = () => {
     const fetchAPI = async () => {
       try {
         const { data } = await axios.get<AppointmentAPI[]>(
-          `${url}/patient/appointment`
+          `${url}/patient/appointment`,
+          headers
         );
         console.log(data);
         setAppointmentDataAPI(data);
@@ -200,7 +201,11 @@ const Appointment = () => {
       event_id: selectedTime?.event_id,
       payment_id: paymentId,
     };
-    const { data } = await axios.post(url + "/create/appointment", submitData);
+    const { data } = await axios.post(
+      url + "/create/appointment",
+      submitData,
+      headers
+    );
     return data;
   };
   const [isClickCancel, setIsClickCancel] = useState(false);

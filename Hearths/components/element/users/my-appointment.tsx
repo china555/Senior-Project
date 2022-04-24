@@ -6,10 +6,7 @@ import {
   Tr,
   Th,
   Td,
-  Button,
   Flex,
-  useDisclosure,
-  Image,
   useToast,
   Heading,
   Link,
@@ -19,9 +16,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { client_id, client_secret, url } from "../../../constant";
-import { HeartsModal } from "../../common/HeartsModal";
-import moment from "moment-timezone";
+import { headers, url } from "../../../constant";
 import {
   getMomentDateMonthYearFormat,
   getMomentHourFormat,
@@ -52,7 +47,8 @@ export const UsersAppointment: NextPage = () => {
     const fetchAPI = async () => {
       const user_id = Cookies.get("user_id");
       const { data } = await axios.get(
-        `${url}/user/confirmation/appointment?user_id=${user_id}`
+        `${url}/user/confirmation/appointment?user_id=${user_id}`,
+        headers
       );
       setStatePending(data);
     };

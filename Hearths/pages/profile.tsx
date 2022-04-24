@@ -7,7 +7,7 @@ import { ChevronRightIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { url } from "../constant";
+import { headers, url } from "../constant";
 
 interface IPatient {
   username: string;
@@ -25,9 +25,13 @@ const Profile: NextPage = () => {
   useEffect(() => {
     const fetchAPI = async () => {
       try {
-        const { data } = await axios.post(`${url}/users/profile`, {
-          patient_id: Cookies.get("patient_id"),
-        });
+        const { data } = await axios.post(
+          `${url}/users/profile`,
+          {
+            patient_id: Cookies.get("patient_id"),
+          },
+          headers
+        );
         setPatientInfo(data);
       } catch (error) {
         toast({ status: "error", title: "Please Try Again Later" });

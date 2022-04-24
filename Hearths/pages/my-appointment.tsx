@@ -6,12 +6,13 @@ import {
   Flex,
   GridItem,
   Link,
+  toast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { url } from "../constant";
+import { headers, url } from "../constant";
 import { HeartsLayouts } from "../layouts/layout";
 import * as moment from "moment";
 import { useTranslation } from "../hooks/useTranslation";
@@ -22,6 +23,7 @@ interface IMyAppointment {
   meeting_link: string | undefined;
 }
 const MyAppointment: NextPage = () => {
+  const toast = useToast();
   const { translations } = useTranslation(
     "MyAppointment",
     "Date",
@@ -51,12 +53,17 @@ const MyAppointment: NextPage = () => {
     translations.statusmeeting,
   ];
   const fetchAPI = async () => {
-    const { data } = await axios.post<IMyAppointment[]>(
-      `${url}/patient/appointment`,
-      { patient_id: Cookies.get("patient_id") }
-    );
-    console.log(data);
-    setAppointment(data);
+    try {
+      const { data } = await axios.post<IMyAppointment[]>(
+        `${url}/patient/appointment`,
+        { patient_id: Cookies.get("patient_id") },
+        headers
+      );
+      setAppointment(data);
+    } catch (error) {
+      console.log(error);
+      toast({ status: "error", title: "Please Try Again later" });
+    }
   };
   useEffect(() => {
     fetchAPI();

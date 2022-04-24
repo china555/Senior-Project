@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { client_id, client_secret, url } from "../../../constant";
+import { client_id, client_secret, headers, url } from "../../../constant";
 import { HeartsModal } from "../../common/HeartsModal";
 import moment from "moment-timezone";
 import {
@@ -60,7 +60,10 @@ export const UsersRequestDocument: NextPage = () => {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const { data } = await axios.get(`${url}/confirm/document/request`);
+      const { data } = await axios.get(
+        `${url}/confirm/document/request`,
+        headers
+      );
       setStatePending(data);
     };
 
