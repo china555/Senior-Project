@@ -36,7 +36,6 @@ const SignIn: NextPage = () => {
   const onSubmit = async (loginData: LogInForm) => {
     try {
       const { data } = await axios.post(url + "/patients/login", loginData);
-      console.log(data);
       Cookies.set("token", data.jwtToken);
       Cookies.set("refreshtoken", data.refreshToken);
       Cookies.set("patient_id", data.patient_id);

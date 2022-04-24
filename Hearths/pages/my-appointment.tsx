@@ -6,7 +6,6 @@ import {
   Flex,
   GridItem,
   Link,
-  toast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -61,13 +60,11 @@ const MyAppointment: NextPage = () => {
       );
       setAppointment(data);
     } catch (error) {
-      console.log(error);
       toast({ status: "error", title: "Please Try Again later" });
     }
   };
   useEffect(() => {
     fetchAPI();
-    console.log();
   }, []);
   return (
     <HeartsLayouts>

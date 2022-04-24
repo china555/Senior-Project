@@ -109,6 +109,9 @@ export const enLocale: ILocaleState = {
   selectedDateTime: "Please select date & time",
   hn: "Hospital Number",
   patientName: "Name",
+  selectPaymentMethod: "Select Payment Methods",
+  payByCredit: "PAY BY CREDIT CARD",
+  payByQR: "PAY BY QR CODE",
 };
 
 export const thLocale: ILocaleState = {
@@ -211,4 +214,7 @@ export const thLocale: ILocaleState = {
   selectedDateTime: "โปรดเลือกวันและเวลา",
   hn: "เลขบัตรประจำตัวผู้ป่วย",
   patientName: "ชื่อ",
+  selectPaymentMethod: "เลือกวิธีชำระเงิน",
+  payByCredit: "จ่ายผ่านบัตรเครดิต",
+  payByQR: "จ่ายผ่านสแกนคิวอาร์โค๊ด",
 };

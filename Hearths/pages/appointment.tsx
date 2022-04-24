@@ -24,6 +24,7 @@ import { useTranslation } from "../hooks/useTranslation";
 import { HeartsDropzone } from "../components/common/HeartsDropZone";
 import { first, isEmpty, isNil } from "lodash";
 import { getMomentHourFormat, getMomentNextHourFormat } from "../utils";
+import { HeartsOmise } from "../components/element/HeartsOmisePayment";
 type submit = {
   appointmentDateTime: string;
   patientId: number;
@@ -93,7 +94,9 @@ const Appointment = () => {
     "clickconfirm",
     "accountName",
     "accountNo",
-    "selectspeacialty1"
+    "selectspeacialty1",
+    "selectPaymentMethod",
+    "payByQR"
   );
   const physicalType = [
     { name: translations.DepartMentName.OccupationalTherapy, id: 1 },
@@ -114,7 +117,6 @@ const Appointment = () => {
           `${url}/patient/appointment`,
           headers
         );
-        console.log(data);
         setAppointmentDataAPI(data);
         SetEnableDate(
           data.map(({ start }) => {
@@ -447,6 +449,38 @@ const Appointment = () => {
               </Button>
             </Box>
           </HeartsContainer>
+        ) : step === 2 ? (
+          <Box>
+            <Flex
+              flexDirection="column"
+              gridRowGap="15px"
+              w={{ base: "90%", lg: "80%", xl: "50%" }}
+              mx="auto"
+            >
+              <Heading color="#003B71" as="h1" textAlign="center">
+                {translations.selectPaymentMethod}
+              </Heading>
+              <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                flexDirection={"column"}
+              >
+                <HeartsOmise
+                  selectedDate={selectedDate}
+                  selectedTime={selectedTime}
+                />
+                <Button
+                  mt="2"
+                  onClick={() => {
+                    setStep(step + 1);
+                  }}
+                  w={{ base: "70%", xl: "50%" }}
+                >
+                  {translations.payByQR}
+                </Button>
+              </Flex>
+            </Flex>
+          </Box>
         ) : (
           <Box>
             <HeartsModal

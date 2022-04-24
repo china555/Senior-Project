@@ -103,6 +103,9 @@ export interface ILocaleState {
   selectspeacialty1: string;
   hn: string;
   patientName: string;
+  selectPaymentMethod: string;
+  payByCredit: string;
+  payByQR: string;
 }
 
 export interface ILocaleEvent {
