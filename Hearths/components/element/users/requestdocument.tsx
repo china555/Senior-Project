@@ -21,6 +21,7 @@ import {
   getMomentHourFormat,
   getMomentNextHourFormat,
 } from "../../../utils";
+import Cookies from "js-cookie";
 interface IRequestDocument {
   created_at: Date;
   doc_type_name: string;
@@ -53,10 +54,11 @@ export const UsersRequestDocument: NextPage = () => {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const { data } = await axios.get(
-        `${url}/confirm/document/request`,
-        headers
-      );
+      const { data } = await axios.get(`${url}/confirm/document/request`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
       setStatePending(data);
     };
 

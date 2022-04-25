@@ -115,7 +115,11 @@ const Appointment = () => {
       try {
         const { data } = await axios.get<AppointmentAPI[]>(
           `${url}/patient/appointment`,
-          headers
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
         );
         setAppointmentDataAPI(data);
         SetEnableDate(
@@ -203,11 +207,11 @@ const Appointment = () => {
       event_id: selectedTime?.event_id,
       payment_id: paymentId,
     };
-    const { data } = await axios.post(
-      url + "/create/appointment",
-      submitData,
-      headers
-    );
+    const { data } = await axios.post(url + "/create/appointment", submitData, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    });
     return data;
   };
   const [isClickCancel, setIsClickCancel] = useState(false);

@@ -53,7 +53,11 @@ const Document: NextPage = () => {
               appointmentId: selectedDate,
               req_doc_type_id: 1,
             },
-            headers
+            {
+              headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+              },
+            }
           );
         }
         if (selectReferral) {
@@ -64,7 +68,11 @@ const Document: NextPage = () => {
               appointmentId: selectedDate,
               req_doc_type_id: 2,
             },
-            headers
+            {
+              headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+              },
+            }
           );
         }
         if (selectHome) {
@@ -75,7 +83,11 @@ const Document: NextPage = () => {
               appointmentId: selectedDate,
               req_doc_type_id: 3,
             },
-            headers
+            {
+              headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+              },
+            }
           );
         }
         toast({
@@ -101,7 +113,11 @@ const Document: NextPage = () => {
       try {
         const { data } = await axios.get<IMyAppointment[]>(
           `${url}/appointment/date?patient_id=${Cookies.get("patient_id")}`,
-          headers
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
         );
         const newData = data.filter((ele) => {
           return new Date(ele.appoint_datetime * 1000) < new Date();

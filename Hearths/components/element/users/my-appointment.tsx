@@ -48,7 +48,11 @@ export const UsersAppointment: NextPage = () => {
       const user_id = Cookies.get("user_id");
       const { data } = await axios.get(
         `${url}/user/confirmation/appointment?user_id=${user_id}`,
-        headers
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
       );
       setStatePending(data);
     };

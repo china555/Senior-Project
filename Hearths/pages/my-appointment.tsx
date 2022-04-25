@@ -56,7 +56,11 @@ const MyAppointment: NextPage = () => {
       const { data } = await axios.post<IMyAppointment[]>(
         `${url}/patient/appointment`,
         { patient_id: Cookies.get("patient_id") },
-        headers
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
       );
       setAppointment(data);
     } catch (error) {

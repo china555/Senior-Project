@@ -80,10 +80,11 @@ export const UsersAppointmentManagement: NextPage = () => {
 
     const fetchAPI = async () => {
       try {
-        const { data } = await axios.get(
-          `${url}/appointment/status/pending`,
-          headers
-        );
+        const { data } = await axios.get(`${url}/appointment/status/pending`, {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        });
         setStatePending(data);
       } catch (error) {
         toast({ status: "error", title: "Please try again later" });
@@ -192,7 +193,11 @@ export const UsersAppointmentManagement: NextPage = () => {
               userId: submitData.user_id,
               approveByUser_id: Cookies.get("user_id"),
             },
-            headers
+            {
+              headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+              },
+            }
           );
           toast({
             status: "success",
@@ -207,7 +212,11 @@ export const UsersAppointmentManagement: NextPage = () => {
               userId: submitData.user_id,
               approveByUser_id: Cookies.get("user_id"),
             },
-            headers
+            {
+              headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+              },
+            }
           );
           toast({
             status: "success",

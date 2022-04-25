@@ -17,6 +17,7 @@ import { useTranslation } from "../../../hooks/useTranslation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { headers, url } from "../../../constant";
+import Cookies from "js-cookie";
 interface IRegisterPending {
   hn: string;
   receipt_image_path: string;
@@ -79,10 +80,11 @@ export const UsersRegisterManagement = () => {
 
   const fetchAPI = async () => {
     try {
-      const { data } = await axios.get(
-        `${url}/users/confirmation/patient`,
-        headers
-      );
+      const { data } = await axios.get(`${url}/users/confirmation/patient`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
       setStatePending(data);
     } catch (error) {
       toast({ status: "error", title: "Please try again later" });
@@ -94,7 +96,11 @@ export const UsersRegisterManagement = () => {
       const { data } = await axios.post(
         `${url}/users/confirmation/patient`,
         submitData,
-        headers
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
       );
       const tempPending = pending.filter(
         (appoint) => appoint.hn !== submitData.hn

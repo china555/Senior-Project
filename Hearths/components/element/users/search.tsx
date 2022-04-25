@@ -20,6 +20,7 @@ import { useTranslation } from "../../../hooks/useTranslation";
 import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
 import { headers, url } from "../../../constant";
+import Cookies from "js-cookie";
 interface IPatientInfo {
   username: string;
   hn: string;
@@ -61,7 +62,11 @@ export const UsersSearch: NextPage = () => {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const { data } = await axios.get(`${url}/search/patient`, headers);
+      const { data } = await axios.get(`${url}/search/patient`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
       setStatePatientList(data);
       setStateTempPatientList(data);
     };

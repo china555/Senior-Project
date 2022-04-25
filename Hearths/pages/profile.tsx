@@ -31,7 +31,11 @@ const Profile: NextPage = () => {
           {
             patient_id: Cookies.get("patient_id"),
           },
-          headers
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
         );
         setPatientInfo(data);
       } catch (error) {
