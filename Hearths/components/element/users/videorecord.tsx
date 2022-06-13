@@ -28,19 +28,7 @@ import {
   getMomentNextHourFormat,
 } from "../../../utils";
 import Cookies from "js-cookie";
-interface IAppointment {
-  appoint_datetime: Date;
-  meeting_link: string;
-  patientPrefix: string | null;
-  patientPrefix_Rang: string | null;
-  patientFirstName: string | null;
-  patientLastName: string | null;
-  patientPrefixEng: string | null;
-  patientPrefix_RangEng: string | null;
-  patientFirstNameEng: string | null;
-  patientMiddleNameEng: string | null;
-  patientLastNameEng: string | null;
-}
+import { IAppointment } from "../../../utils/type";
 
 export const UsersAppointment: NextPage = () => {
   const router = useRouter();
@@ -60,34 +48,6 @@ export const UsersAppointment: NextPage = () => {
 
     fetchAPI();
   }, []);
-
-  const getname = (patient: IAppointment) => {
-    let name = "";
-    if (
-      patient.patientPrefix_Rang === null &&
-      patient.patientPrefix_RangEng === null
-    ) {
-      if (patient.patientPrefix === null) {
-        name = name + patient.patientPrefixEng;
-      } else {
-        name = name + patient.patientPrefix;
-      }
-    } else {
-      if (patient.patientPrefix_Rang === null) {
-        name = name + patient.patientPrefix_RangEng;
-      } else {
-        name = name + patient.patientPrefix_Rang;
-      }
-    }
-    if (patient.patientFirstName === null) {
-      name =
-        name +
-        `${patient.patientFirstNameEng} ${patient.patientMiddleNameEng} ${patient.patientLastNameEng}`;
-    } else {
-      name = name + `${patient.patientFirstName} ${patient.patientLastName}`;
-    }
-    return name;
-  };
 
   return (
     <Box overflow={"auto"}>
@@ -113,7 +73,7 @@ export const UsersAppointment: NextPage = () => {
                   {getMomentHourFormat(ele.appoint_datetime)}-
                   {getMomentNextHourFormat(ele.appoint_datetime)}
                 </Td>
-                <Td>{<Box>{getname(ele)}</Box>}</Td>
+                <Td>{<Box>{showNameForPatient(ele)}</Box>}</Td>
                 <Td>
                   <Link
                     target="_blank"
