@@ -12,3 +12,9 @@ export interface IAppointment {
   patientMiddleNameEng: string | null;
   patientLastNameEng: string | null;
 }
+
+export enum AppointmentStatus {
+  PENDING = "PENDING",
+  CONFIRM = "CONFIRMED",
+  REJECTED = "REJECTED",
+}

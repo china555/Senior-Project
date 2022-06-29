@@ -47,17 +47,6 @@ const SignIn: NextPage = () => {
       if (data.img) {
         Cookies.set("profileImg", data.img);
       }
-      // dispatch("auth/setPatientInfo", {
-      //   patientFirstName: data.user.patientFirstName,
-      //   patientFirstNameEng: data.user.patientFirstNameEng,
-      //   patientLastName: data.user.patientLastName,
-      //   patientLastNameEng: data.user.patientLastNameEng,
-      //   patientMiddleNameEng: data.user.patientMiddleNameEng,
-      //   patientPrefix: data.user.patientPrefix,
-      //   patientPrefixEng: data.user.patientPrefixEng,
-      //   patientPrefix_Rang: data.user.patientPrefix_Rang,
-      //   patientPrefix_RangEng: data.user.patientPrefix_Rang,
-      // });
       router.push("/");
     } catch (error) {
       console.error("Sign-in", error);

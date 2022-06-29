@@ -14,7 +14,7 @@ import {
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { client_id, client_secret, headers, url } from "../../../constant";
 import { HeartsModal } from "../../common/HeartsModal";
@@ -25,6 +25,9 @@ import {
   getMomentNextHourFormat,
 } from "../../../utils";
 import Cookies from "js-cookie";
+import { HeartsFilter } from "../HeartsFilter";
+import { showNameForPatient } from "../../../utils/helper";
+import { HeartsPagination } from "../HeartsPagination";
 interface IAppointmentPending {
   patient_id: string;
   appoint_datetime: Date;
@@ -73,6 +76,21 @@ export const UsersAppointmentManagement: NextPage = () => {
     "Receipt",
     "Status",
   ];
+  const inputDateRef = useRef<HTMLInputElement>(null);
+  const selectStatusRef = useRef<HTMLSelectElement>(null);
+  const inputPatientNameRef = useRef<HTMLInputElement>(null);
+  const inputPhysiotherapistsNameRef = useRef<HTMLInputElement>(null);
+
+  function handleClick() {
+    if (inputDateRef.current !== null)
+      console.log("value 👉️", inputDateRef.current.value);
+    if (selectStatusRef.current !== null)
+      console.log("value 👉️", selectStatusRef.current.value);
+    if (inputPatientNameRef.current !== null)
+      console.log("value 👉️", inputPatientNameRef.current.value);
+    if (inputPhysiotherapistsNameRef.current !== null)
+      console.log("value 👉️", inputPhysiotherapistsNameRef.current.value);
+  }
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -121,33 +139,6 @@ export const UsersAppointmentManagement: NextPage = () => {
       getCodeAccessTokenFromWebex();
     }
   }, [webexCode]);
-  const getname = (patient: IAppointmentPending) => {
-    let name = "";
-    if (
-      patient.patientPrefix_Rang === null &&
-      patient.patientPrefix_RangEng === null
-    ) {
-      if (patient.patientPrefix === null) {
-        name = name + patient.patientPrefixEng;
-      } else {
-        name = name + patient.patientPrefix;
-      }
-    } else {
-      if (patient.patientPrefix_Rang === null) {
-        name = name + patient.patientPrefix_RangEng;
-      } else {
-        name = name + patient.patientPrefix_Rang;
-      }
-    }
-    if (patient.patientFirstName === null) {
-      name =
-        name +
-        `${patient.patientFirstNameEng} ${patient.patientMiddleNameEng} ${patient.patientLastNameEng}`;
-    } else {
-      name = name + `${patient.patientFirstName} ${patient.patientLastName}`;
-    }
-    return name;
-  };
 
   const confirmAppointment = async (
     submitData: submitConfirmationAppointmentData
@@ -240,6 +231,12 @@ export const UsersAppointmentManagement: NextPage = () => {
           Appointment Confirmation
         </Heading>
       </Flex>
+      <HeartsFilter
+        dateRef={inputDateRef}
+        patientNameRef={inputPatientNameRef}
+        physiotherapistsNameRef={inputPhysiotherapistsNameRef}
+        statusRef={selectStatusRef}
+      />
       <Table variant="simple">
         <Thead>
           <Tr>
@@ -274,7 +271,7 @@ export const UsersAppointmentManagement: NextPage = () => {
                     </Box>
                   )}
                 </Td>
-                <Td>{<Box>{getname(ele)}</Box>}</Td>
+                <Td>{<Box>{showNameForPatient(ele)}</Box>}</Td>
                 <Td>
                   <a
                     href={`${url}/${ele.receipt_image_path}`}
@@ -318,6 +315,7 @@ export const UsersAppointmentManagement: NextPage = () => {
             );
           })}
         </Tbody>
+        <HeartsPagination />
       </Table>
     </Box>
   );

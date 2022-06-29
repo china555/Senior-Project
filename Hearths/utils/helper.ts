@@ -6,7 +6,7 @@ export const signout = () => {
   });
 };
 
-export const showNameForPatient = (patient: IAppointment) => {
+export const showNameForPatient = (patient: any) => {
   let name = "";
   if (
     patient.patientPrefix_Rang === null &&
