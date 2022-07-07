@@ -28,9 +28,11 @@ import Cookies from "js-cookie";
 import { HeartsFilter } from "../HeartsFilter";
 import { showNameForPatient } from "../../../utils/helper";
 import { HeartsPagination } from "../HeartsPagination";
+import { AppointmentStatus } from "../../../utils/type";
 interface IAppointmentPending {
   patient_id: string;
   appoint_datetime: Date;
+  appointment_status: string;
   event_id: number;
   receipt_image_path: string;
   hn: string;
@@ -67,7 +69,9 @@ export const UsersAppointmentManagement: NextPage = () => {
   const toast = useToast();
   const { translations } = useTranslation("DepartMentName");
   const [webexCode, setWebexCode] = useState<string>("");
-  const [pending, setStatePending] = useState<IAppointmentPending[]>([]);
+  const [appointment, setStateAppointment] = useState<IAppointmentPending[]>(
+    []
+  );
   const header = [
     "Date",
     "Time",
@@ -76,34 +80,54 @@ export const UsersAppointmentManagement: NextPage = () => {
     "Receipt",
     "Status",
   ];
-  const inputDateRef = useRef<HTMLInputElement>(null);
-  const selectStatusRef = useRef<HTMLSelectElement>(null);
-  const inputPatientNameRef = useRef<HTMLInputElement>(null);
-  const inputPhysiotherapistsNameRef = useRef<HTMLInputElement>(null);
+  const [inputStartDate, setInputStartDate] = useState<string>("");
+  const [inputEndDate, setInputEndDate] = useState<string>("");
+  const [selectStatus, setSelectStatus] = useState<string>("");
+  const [inputPatientName, setInputPatientName] = useState<string>("");
+  const [inputPhysiotherapistsNameRef, setInputPhysiotherapistsNameRef] =
+    useState<string>("");
 
-  function handleClick() {
-    if (inputDateRef.current !== null)
-      console.log("value 👉️", inputDateRef.current.value);
-    if (selectStatusRef.current !== null)
-      console.log("value 👉️", selectStatusRef.current.value);
-    if (inputPatientNameRef.current !== null)
-      console.log("value 👉️", inputPatientNameRef.current.value);
-    if (inputPhysiotherapistsNameRef.current !== null)
-      console.log("value 👉️", inputPhysiotherapistsNameRef.current.value);
+  async function handlerSubmitFilterResult() {
+    try {
+      const { data } = await axios.get(
+        `${url}/appointment/status?start_date=${inputStartDate}&end_date=${inputEndDate}&status=${selectStatus}&patient_name=${inputPatientName}&physio_name=${inputPhysiotherapistsNameRef}`,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
+      );
+      console.log(data);
+      setStateAppointment(data);
+    } catch (error) {
+      toast({ status: "error", title: "Please try again later" });
+    }
   }
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     setWebexCode(urlParams.get("code") as string);
-
+    const startDate = moment(new Date(), "YYYY-MM-DD").subtract(30, "days");
+    const endDate = moment(new Date(), "YYYY-MM-DD").add(30, "days");
+    setInputStartDate(startDate.format("YYYY-MM-DD"));
+    setInputEndDate(endDate.format("YYYY-MM-DD"));
     const fetchAPI = async () => {
       try {
-        const { data } = await axios.get(`${url}/appointment/status/pending`, {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("token")}`,
-          },
-        });
-        setStatePending(data);
+        const { data } = await axios.get(
+          `${url}/appointment/status?start_date=${startDate.format(
+            "YYYY-MM-DD"
+          )}&end_date=${endDate.format(
+            "YYYY-MM-DD"
+          )}&status=${selectStatus}&patient_name=${inputPatientName}&physio_name=${inputPhysiotherapistsNameRef}`,
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
+        );
+        console.log(data);
+
+        setStateAppointment(data);
       } catch (error) {
         toast({ status: "error", title: "Please try again later" });
       }
@@ -139,7 +163,9 @@ export const UsersAppointmentManagement: NextPage = () => {
       getCodeAccessTokenFromWebex();
     }
   }, [webexCode]);
-
+  useEffect(() => {
+    // appointment.filter();
+  }, []);
   const confirmAppointment = async (
     submitData: submitConfirmationAppointmentData
   ) => {
@@ -232,10 +258,14 @@ export const UsersAppointmentManagement: NextPage = () => {
         </Heading>
       </Flex>
       <HeartsFilter
-        dateRef={inputDateRef}
-        patientNameRef={inputPatientNameRef}
-        physiotherapistsNameRef={inputPhysiotherapistsNameRef}
-        statusRef={selectStatusRef}
+        setStartDate={setInputStartDate}
+        setEndDate={setInputEndDate}
+        setPatientName={setInputPatientName}
+        setStatus={setSelectStatus}
+        setPhysiotherapistsName={setInputPhysiotherapistsNameRef}
+        handler={handlerSubmitFilterResult}
+        defalutEndDate={inputEndDate}
+        defalutStartDate={inputStartDate}
       />
       <Table variant="simple">
         <Thead>
@@ -246,9 +276,9 @@ export const UsersAppointmentManagement: NextPage = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {pending.map((ele, index) => {
+          {appointment.map((ele, index) => {
             return (
-              <Tr key={ele.event_id}>
+              <Tr key={`${index}-key!`}>
                 <Td>{getMomentDateMonthYearFormat(ele.appoint_datetime)}</Td>
                 <Td>
                   {getMomentHourFormat(ele.appoint_datetime)}-
@@ -283,39 +313,64 @@ export const UsersAppointmentManagement: NextPage = () => {
                 </Td>
                 <Td>
                   <Flex justifyContent={"space-evenly"}>
-                    <Button
-                      colorScheme="green"
-                      onClick={() => {
-                        confirmAppointment({
-                          event_id: ele.event_id,
-                          appointmentStatus: "CONFIRMED",
-                          appoint_datetime: ele.appoint_datetime,
-                          user_id: ele.userNo,
-                        });
-                      }}
-                    >
-                      Confirm
-                    </Button>
-                    <Button
-                      colorScheme="red"
-                      onClick={() => {
-                        confirmAppointment({
-                          event_id: ele.event_id,
-                          appointmentStatus: "REJECTED",
-                          appoint_datetime: ele.appoint_datetime,
-                          user_id: ele.userNo,
-                        });
-                      }}
-                    >
-                      Reject
-                    </Button>
+                    {ele.appointment_status === AppointmentStatus.CONFIRM ? (
+                      <Box
+                        bg={"#38a169"}
+                        px="5"
+                        py="2"
+                        borderRadius={"2em"}
+                        color="white"
+                      >
+                        Confirm
+                      </Box>
+                    ) : ele.appointment_status ===
+                      AppointmentStatus.REJECTED ? (
+                      <Box
+                        bg={"#e53e3e"}
+                        px="5"
+                        py="2"
+                        borderRadius={"2em"}
+                        color="white"
+                      >
+                        Reject
+                      </Box>
+                    ) : (
+                      <>
+                        <Button
+                          colorScheme="green"
+                          onClick={() => {
+                            confirmAppointment({
+                              event_id: ele.event_id,
+                              appointmentStatus: "CONFIRMED",
+                              appoint_datetime: ele.appoint_datetime,
+                              user_id: ele.userNo,
+                            });
+                          }}
+                        >
+                          Confirm
+                        </Button>
+                        <Button
+                          colorScheme="red"
+                          onClick={() => {
+                            confirmAppointment({
+                              event_id: ele.event_id,
+                              appointmentStatus: "REJECTED",
+                              appoint_datetime: ele.appoint_datetime,
+                              user_id: ele.userNo,
+                            });
+                          }}
+                        >
+                          Reject
+                        </Button>
+                      </>
+                    )}
                   </Flex>
                 </Td>
               </Tr>
             );
           })}
         </Tbody>
-        <HeartsPagination />
+        {/* <HeartsPagination /> */}
       </Table>
     </Box>
   );

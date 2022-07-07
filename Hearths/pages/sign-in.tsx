@@ -16,7 +16,7 @@ type LogInForm = {
 };
 const errorMessages = (fieldName: string, errors: FieldError) => {
   const errorRequire = errors?.type === "required" ? "* required" : "";
-  if (fieldName === "email" || fieldName === "password") return [errorRequire];
+  if (fieldName === "name" || fieldName === "surname") return [errorRequire];
 };
 const SignIn: NextPage = () => {
   const { translations } = useTranslation(
