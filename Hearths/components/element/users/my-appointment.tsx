@@ -36,6 +36,8 @@ import Cookies from "js-cookie";
 import { IAppointment } from "../../../utils/type";
 import { showNameForPatient } from "../../../utils/helper";
 import Calendar from "react-calendar";
+import { HeartsFilter } from "../HeartsFilter";
+import moment from "moment";
 interface IUserAppointment {
   start: Date;
   stop: Date;
@@ -60,7 +62,14 @@ export const UsersAppointment: NextPage = () => {
   const toast = useToast();
   const { translations } = useTranslation("DepartMentName");
   const [pending, setStatePending] = useState<IAppointment[]>([]);
-  const header = ["Date", "Time", "Patient Full Name", "Meeting Link", ""];
+  const header = [
+    "Date",
+    "Time",
+    "Patient Full Name",
+    "Meeting Link",
+    "Change",
+    "status",
+  ];
   const [enabledate, SetEnableDate] = useState<Date[]>([]);
   const [calendarValue, setCalendarValue] = useState(new Date());
   const [appointmentDataAPI, setAppointmentDataAPI] = useState<
@@ -70,6 +79,20 @@ export const UsersAppointment: NextPage = () => {
   const [allTimeLength, setAllTimeLength] = useState<Time[]>();
   const [selectedDate, SetSelectedDate] = useState<Date>(new Date());
   const [selectedAppointment, setSelectedAppointment] = useState<number>();
+  const [inputStartDate, setInputStartDate] = useState<string>(
+    moment(new Date(), "YYYY-MM-DD").subtract(30, "days").format("YYYY-MM-DD")
+  );
+  const [inputEndDate, setInputEndDate] = useState<string>(
+    moment(new Date(), "YYYY-MM-DD").add(30, "days").format("YYYY-MM-DD")
+  );
+  const [selectStatus, setSelectStatus] = useState<string>("");
+  const [inputPatientName, setInputPatientName] = useState<string>("");
+  const [paginationPage, setPaginationPage] = useState<number>(1);
+  const [paginationPageSize, setPaginationPageSize] = useState<number>(10);
+  const [paginationSize, setPaginationSize] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
+  let pageNumber = 1;
+  const handlerSubmitRenderResult = () => {};
   const handleSelectedDate = (value: Date) => {
     SetSelectedDate(value);
     SetSelectedTime(undefined);
@@ -104,7 +127,7 @@ export const UsersAppointment: NextPage = () => {
     const fetchAPI = async () => {
       const user_id = Cookies.get("user_id");
       const { data } = await axios.get(
-        `${url}/user/confirmation/appointment?user_id=${user_id}`,
+        `${url}/user/appointment?user_id=${user_id}&start_date=${inputStartDate}&end_date=${inputEndDate}&status=${selectStatus}&patient_name=${inputPatientName}&page=${pageNumber}&size=${paginationPageSize}`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,
@@ -163,6 +186,17 @@ export const UsersAppointment: NextPage = () => {
           My Appointment
         </Heading>
       </Flex>
+      <HeartsFilter
+        setStartDate={setInputStartDate}
+        setEndDate={setInputEndDate}
+        setPatientName={setInputPatientName}
+        setStatus={setSelectStatus}
+        handler={() => {
+          // handlerSubmitRenderResult("search");
+        }}
+        defalutEndDate={inputEndDate}
+        defalutStartDate={inputStartDate}
+      />
       <Table variant="simple">
         <Thead>
           <Tr>

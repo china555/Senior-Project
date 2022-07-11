@@ -2,6 +2,8 @@ import {
   Box,
   Button,
   Flex,
+  Grid,
+  GridItem,
   Input,
   InputGroup,
   InputLeftAddon,
@@ -23,7 +25,7 @@ interface IFilter {
   setEndDate: Dispatch<SetStateAction<any>>;
   setStatus: Dispatch<SetStateAction<string>>;
   setPatientName: Dispatch<SetStateAction<string>>;
-  setPhysiotherapistsName: Dispatch<SetStateAction<string>>;
+  setPhysiotherapistsName?: Dispatch<SetStateAction<string>>;
   defalutStartDate: string;
   defalutEndDate: string;
   handler: () => void;
@@ -55,39 +57,25 @@ export const HeartsFilter = (props: IFilter) => {
   const onChangeHandlerPhysiotherapistsName = (
     e: ChangeEvent<HTMLInputElement>
   ) => {
-    setPhysiotherapistsName(e.target.value);
+    if (setPhysiotherapistsName) setPhysiotherapistsName(e.target.value);
   };
 
   return (
     <Box>
-      <InputGroup justifyContent="space-between">
-        <Flex wrap="wrap">
-          <Flex>
-            <InputLeftAddon w={"6.8em"}>Start Date: </InputLeftAddon>
-            <Input
-              onChange={onChangeHandlerStartDate}
-              borderTopLeftRadius={0}
-              borderBottomLeftRadius={0}
-              minWidth="auto"
-              type="date"
-              value={defalutStartDate}
-            />
-          </Flex>
-          <Flex mt="3">
-            <InputLeftAddon w={"6.8em"}>End Date: </InputLeftAddon>
-            <Input
-              onChange={onChangeHandlerEndDate}
-              borderTopLeftRadius={0}
-              borderBottomLeftRadius={0}
-              w="100"
-              minWidth="auto"
-              type="date"
-              value={defalutEndDate}
-            />
-          </Flex>
+      <InputGroup>
+        <Flex mr="2">
+          <InputLeftAddon w={"6.8em"}>Start Date: </InputLeftAddon>
+          <Input
+            onChange={onChangeHandlerStartDate}
+            borderTopLeftRadius={0}
+            borderBottomLeftRadius={0}
+            minWidth="auto"
+            type="date"
+            value={defalutStartDate}
+          />
         </Flex>
 
-        <Flex>
+        <Flex mr="2">
           <InputLeftAddon>Patient: </InputLeftAddon>
           <Input
             w="100"
@@ -97,17 +85,41 @@ export const HeartsFilter = (props: IFilter) => {
             onChange={onChangeHandlerPatientName}
           />
         </Flex>
+        {setPhysiotherapistsName ? (
+          <Flex mr="2">
+            <InputLeftAddon>PHYSIOTHERAPISTS: </InputLeftAddon>
+            <Input
+              w="100"
+              placeholder="Name"
+              borderTopLeftRadius={0}
+              borderBottomLeftRadius={0}
+              onChange={onChangeHandlerPhysiotherapistsName}
+            />
+          </Flex>
+        ) : (
+          <Flex></Flex>
+        )}
+
         <Flex>
-          <InputLeftAddon>PHYSIOTHERAPISTS: </InputLeftAddon>
+          <Button onClick={handler} colorScheme="blue" w="100%">
+            Button
+          </Button>
+        </Flex>
+      </InputGroup>
+      <InputGroup mt="3">
+        <Flex mr="2">
+          <InputLeftAddon w={"6.8em"}>End Date: </InputLeftAddon>
           <Input
-            w="100"
-            placeholder="Name"
+            onChange={onChangeHandlerEndDate}
             borderTopLeftRadius={0}
             borderBottomLeftRadius={0}
-            onChange={onChangeHandlerPhysiotherapistsName}
+            w="100"
+            minWidth="auto"
+            type="date"
+            value={defalutEndDate}
           />
         </Flex>
-        <Flex>
+        <Flex mr="2">
           <InputLeftAddon>Status: </InputLeftAddon>
           <Select
             placeholder="Status"
@@ -122,9 +134,6 @@ export const HeartsFilter = (props: IFilter) => {
             <option value={AppointmentStatus.REJECTED}>REJECTED</option>
           </Select>
         </Flex>
-        <Button onClick={handler} colorScheme="blue" w="100%">
-          Button
-        </Button>
       </InputGroup>
     </Box>
   );
