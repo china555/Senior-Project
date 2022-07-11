@@ -227,10 +227,10 @@ export const UsersAppointmentManagement: NextPage = () => {
             title: `Appointment ${submitData.appointmentStatus}`,
           });
         }
-        const tempPending = pending.filter(
+        const tempPending = appointment.filter(
           (appoint) => appoint.event_id !== submitData.event_id
         );
-        setStatePending(tempPending);
+        setStateAppointment(tempPending);
       }
     } catch (error) {
       console.error("Confirmation Management", error);
