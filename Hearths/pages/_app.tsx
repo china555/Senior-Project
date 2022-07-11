@@ -1,13 +1,13 @@
 import type { AppProps } from "next/app";
 import "../styles/Calendar.css";
 import "../styles/globals.css";
+import "../styles/pagination.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../utils/";
 import React from "react";
 import { store, StoreonContext, useAppStore } from "../store";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-
 const RenderComponent = dynamic(import("../components/shared/RenderComponent"));
 
 function MyApp({ Component, pageProps }: AppProps) {
