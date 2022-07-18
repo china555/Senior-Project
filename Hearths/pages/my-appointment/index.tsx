@@ -179,17 +179,16 @@ const MyAppointment: NextPage = () => {
                   color={"black"}
                 >
                   <Box my="auto">
-                    {temp[ele.appointment_status as keyof IApporve] ===
-                    AppointmentStatus.CONFIRM ? (
+                    {ele.appointment_status === AppointmentStatus.CONFIRM ? (
                       <Box
                         bg={"#38a169"}
                         px="5"
                         borderRadius={"2em"}
                         color="white"
                       >
-                        Confirm
+                        {temp[ele.appointment_status as keyof IApporve]}
                       </Box>
-                    ) : temp[ele.appointment_status as keyof IApporve] ===
+                    ) : ele.appointment_status ===
                       AppointmentStatus.REJECTED ? (
                       <Box
                         bg={"#e53e3e"}
@@ -197,7 +196,7 @@ const MyAppointment: NextPage = () => {
                         borderRadius={"2em"}
                         color="white"
                       >
-                        Reject
+                        {temp[ele.appointment_status as keyof IApporve]}
                       </Box>
                     ) : (
                       <Box
@@ -206,7 +205,7 @@ const MyAppointment: NextPage = () => {
                         borderRadius={"2em"}
                         color="white"
                       >
-                        Pending
+                        {temp[ele.appointment_status as keyof IApporve]}
                       </Box>
                     )}
                   </Box>
