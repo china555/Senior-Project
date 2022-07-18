@@ -126,15 +126,19 @@ export const UsersAppointment: NextPage = () => {
   useEffect(() => {
     const fetchAPI = async () => {
       const user_id = Cookies.get("user_id");
-      const { data } = await axios.get(
-        `${url}/user/appointment?user_id=${user_id}&start_date=${inputStartDate}&end_date=${inputEndDate}&status=${selectStatus}&patient_name=${inputPatientName}&page=${pageNumber}&size=${paginationPageSize}`,
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("token")}`,
-          },
-        }
-      );
-      setStatePending(data);
+      try {
+        const { data } = await axios.get(
+          `${url}/user/appointment?user_id=${user_id}&start_date=${inputStartDate}&end_date=${inputEndDate}&status=${selectStatus}&patient_name=${inputPatientName}&page=${pageNumber}&size=${paginationPageSize}`,
+          {
+            headers: {
+              Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+          }
+        );
+        setStatePending(data);
+      } catch (error) {
+        toast({ status: "error", title: "Something Wrong" });
+      }
     };
 
     fetchAPI();

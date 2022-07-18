@@ -51,7 +51,7 @@ const Dashboard = () => {
             borderRight="rgba(149, 157, 165, 0.2) 1px solid"
           >
             <Flex alignItems={"center"}>
-              <Box w={{ base: "10%", xl: "10%" }}>
+              <Box w={{ base: "20%", xl: "20%" }}>
                 <Image
                   cursor="pointer"
                   onClick={() => {
@@ -62,7 +62,7 @@ const Dashboard = () => {
                   src="/images/logo/hearts_logo.png"
                 />
               </Box>
-              <Box>TPT ADMIN</Box>
+              <Box>HeaRTS ADMIN</Box>
             </Flex>
             {sideBarName.map((sideBarElement) => {
               return (
