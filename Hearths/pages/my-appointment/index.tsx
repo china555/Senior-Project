@@ -11,10 +11,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { headers, url } from "../constant";
-import { HeartsLayouts } from "../layouts/layout";
+import { headers, url } from "../../constant";
+import { HeartsLayouts } from "../../layouts/layout";
 import * as moment from "moment";
-import { useTranslation } from "../hooks/useTranslation";
+import { useTranslation } from "../../hooks/useTranslation";
+import { AppointmentStatus } from "../../utils/type";
+import { useRouter } from "next/router";
 interface IMyAppointment {
   appoint_datetime: number;
   event_id: number;
@@ -23,6 +25,8 @@ interface IMyAppointment {
 }
 const MyAppointment: NextPage = () => {
   const toast = useToast();
+  const router = useRouter();
+
   const { translations } = useTranslation(
     "MyAppointment",
     "Date",
@@ -50,6 +54,8 @@ const MyAppointment: NextPage = () => {
     translations.Time,
     translations.meetingLink,
     translations.statusmeeting,
+    "Physical Therapist",
+    "Home Program",
   ];
   const fetchAPI = async () => {
     try {
@@ -83,7 +89,7 @@ const MyAppointment: NextPage = () => {
           {translations.MyAppointment}
         </Heading>
         <Grid
-          templateColumns="auto auto auto auto"
+          templateColumns="auto auto auto auto auto auto"
           color={"white"}
           fontSize={{ base: "14px", xl: "20px" }}
         >
@@ -173,7 +179,70 @@ const MyAppointment: NextPage = () => {
                   color={"black"}
                 >
                   <Box my="auto">
-                    {temp[ele.appointment_status as keyof IApporve]}
+                    {temp[ele.appointment_status as keyof IApporve] ===
+                    AppointmentStatus.CONFIRM ? (
+                      <Box
+                        bg={"#38a169"}
+                        px="5"
+                        borderRadius={"2em"}
+                        color="white"
+                      >
+                        Confirm
+                      </Box>
+                    ) : temp[ele.appointment_status as keyof IApporve] ===
+                      AppointmentStatus.REJECTED ? (
+                      <Box
+                        bg={"#e53e3e"}
+                        px="5"
+                        borderRadius={"2em"}
+                        color="white"
+                      >
+                        Reject
+                      </Box>
+                    ) : (
+                      <Box
+                        bg={"orange"}
+                        px="5"
+                        borderRadius={"2em"}
+                        color="white"
+                      >
+                        Pending
+                      </Box>
+                    )}
+                  </Box>
+                </GridItem>
+                <GridItem
+                  w="100%"
+                  h="100%"
+                  bg="white"
+                  m="auto"
+                  d="flex"
+                  justifyContent="center"
+                  border="1px solid #E2E8F0"
+                  color={"black"}
+                >
+                  <Box my="auto">Test01</Box>
+                </GridItem>
+                <GridItem
+                  w="100%"
+                  h="100%"
+                  bg="white"
+                  m="auto"
+                  d="flex"
+                  justifyContent="center"
+                  border="1px solid #E2E8F0"
+                  color={"black"}
+                >
+                  <Box
+                    my="auto"
+                    textDecoration={"underline"}
+                    color="blue"
+                    cursor="pointer"
+                    onClick={() => {
+                      router.push("/my-appointment/home/program");
+                    }}
+                  >
+                    View task list
                   </Box>
                 </GridItem>
               </>

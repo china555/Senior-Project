@@ -102,7 +102,7 @@ export const HeartsFilter = (props: IFilter) => {
 
         <Flex>
           <Button onClick={handler} colorScheme="blue" w="100%">
-            Button
+            Search
           </Button>
         </Flex>
       </InputGroup>
