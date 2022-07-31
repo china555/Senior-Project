@@ -238,7 +238,9 @@ const MyAppointment: NextPage = () => {
                     color="blue"
                     cursor="pointer"
                     onClick={() => {
-                      router.push("/my-appointment/home/program");
+                      router.push(
+                        `/my-appointment/home/program/${ele.event_id}`
+                      );
                     }}
                   >
                     View task list

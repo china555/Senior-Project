@@ -24,7 +24,7 @@ import add from "date-fns/add";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useTranslation } from "../../../hooks/useTranslation";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { headers, url } from "../../../constant";
 import {
@@ -33,11 +33,12 @@ import {
   getMomentNextHourFormat,
 } from "../../../utils";
 import Cookies from "js-cookie";
-import { IAppointment } from "../../../utils/type";
+import { AppointmentStatus, IAppointment } from "../../../utils/type";
 import { showNameForPatient } from "../../../utils/helper";
 import Calendar from "react-calendar";
 import { HeartsFilter } from "../HeartsFilter";
 import moment from "moment";
+import HeartsLoading from "../../common/HeartsLoading";
 interface IUserAppointment {
   start: Date;
   stop: Date;
@@ -48,14 +49,17 @@ type Time = {
   stop: string;
   event_id: number;
 };
-
+type Tab = {
+  setNameTab: Dispatch<SetStateAction<string>>;
+};
 type submit = {
   appointmentDateTime: string;
   event_id: number | undefined;
   user_id?: string;
   oldEventId: number | undefined;
 };
-export const UsersAppointment: NextPage = () => {
+export const UsersAppointment = (props: Tab) => {
+  const { setNameTab } = props;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
   const router = useRouter();
@@ -69,7 +73,11 @@ export const UsersAppointment: NextPage = () => {
     "Meeting Link",
     "Change",
     "status",
+    "home program",
   ];
+  const changeTabNameHandler = () => {
+    setNameTab("program");
+  };
   const [enabledate, SetEnableDate] = useState<Date[]>([]);
   const [calendarValue, setCalendarValue] = useState(new Date());
   const [appointmentDataAPI, setAppointmentDataAPI] = useState<
@@ -91,8 +99,11 @@ export const UsersAppointment: NextPage = () => {
   const [paginationPageSize, setPaginationPageSize] = useState<number>(10);
   const [paginationSize, setPaginationSize] = useState<number>(0);
   const [loading, setLoading] = useState(false);
+
   let pageNumber = 1;
-  const handlerSubmitRenderResult = () => {};
+  const handlerSubmitRenderResult = () => {
+    fetchMyAppointmentAPI();
+  };
   const handleSelectedDate = (value: Date) => {
     SetSelectedDate(value);
     SetSelectedTime(undefined);
@@ -123,26 +134,25 @@ export const UsersAppointment: NextPage = () => {
     console.log(data);
     return "";
   };
-  useEffect(() => {
-    const fetchAPI = async () => {
-      const user_id = Cookies.get("user_id");
-      try {
-        const { data } = await axios.get(
-          `${url}/user/appointment?user_id=${user_id}&start_date=${inputStartDate}&end_date=${inputEndDate}&status=${selectStatus}&patient_name=${inputPatientName}&page=${pageNumber}&size=${paginationPageSize}`,
-          {
-            headers: {
-              Authorization: `Bearer ${Cookies.get("token")}`,
-            },
-          }
-        );
-        setStatePending(data);
-      } catch (error) {
-        toast({ status: "error", title: "Something Wrong" });
-      }
-    };
-
-    fetchAPI();
-  }, []);
+  const fetchMyAppointmentAPI = async () => {
+    const user_id = Cookies.get("user_id");
+    try {
+      setLoading(false);
+      const { data } = await axios.get(
+        `${url}/user/appointment?user_id=${user_id}&start_date=${inputStartDate}&end_date=${inputEndDate}&status=${selectStatus}&patient_name=${inputPatientName}&page=${pageNumber}&size=${paginationPageSize}`,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
+      );
+      console.log(data);
+      setStatePending(data);
+      setLoading(true);
+    } catch (error) {
+      toast({ status: "error", title: "Something Wrong" });
+    }
+  };
 
   useEffect(() => {
     const fetchGetAvailableDateOfUser = async () => {
@@ -155,16 +165,14 @@ export const UsersAppointment: NextPage = () => {
           },
         }
       );
-      console.log(data);
       setAppointmentDataAPI(data);
-
       SetEnableDate(
         data.map(({ start }) => {
           return new Date(start);
         })
       );
     };
-
+    fetchMyAppointmentAPI();
     fetchGetAvailableDateOfUser();
   }, []);
   useEffect(() => {
@@ -196,7 +204,7 @@ export const UsersAppointment: NextPage = () => {
         setPatientName={setInputPatientName}
         setStatus={setSelectStatus}
         handler={() => {
-          // handlerSubmitRenderResult("search");
+          handlerSubmitRenderResult();
         }}
         defalutEndDate={inputEndDate}
         defalutStartDate={inputStartDate}
@@ -210,44 +218,107 @@ export const UsersAppointment: NextPage = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {pending.map((ele, index) => {
-            return (
-              <Tr key={`${index}$-key`}>
-                <Td>{getMomentDateMonthYearFormat(ele.appoint_datetime)}</Td>
-                <Td>
-                  {getMomentHourFormat(ele.appoint_datetime)}-
-                  {getMomentNextHourFormat(ele.appoint_datetime)}
-                </Td>
-                <Td>{<Box>{showNameForPatient(ele)}</Box>}</Td>
-                <Td>
-                  <Link
-                    target="_blank"
-                    href={ele.meeting_link}
-                    textDecoration={
-                      ele.meeting_link !== null ? "underline" : "none"
-                    }
-                    color={ele.meeting_link !== null ? "blue" : "black"}
-                  >
-                    Link
-                  </Link>
-                </Td>
-                <Td>
-                  <Button
-                    ref={btnRef as any}
-                    colorScheme="orange"
-                    onClick={() => {
-                      setSelectedAppointment(ele.event_id);
-                      onOpen();
-                    }}
-                  >
-                    Change
-                  </Button>
-                </Td>
-              </Tr>
-            );
-          })}
+          {loading ? (
+            <>
+              {pending.map((ele, index) => {
+                return (
+                  <Tr key={`${index}$-key`}>
+                    <Td>
+                      {getMomentDateMonthYearFormat(ele.appoint_datetime)}
+                    </Td>
+                    <Td>
+                      {getMomentHourFormat(ele.appoint_datetime)}-
+                      {getMomentNextHourFormat(ele.appoint_datetime)}
+                    </Td>
+                    <Td>{<Box>{showNameForPatient(ele)}</Box>}</Td>
+                    <Td>
+                      <Link
+                        target="_blank"
+                        href={ele.meeting_link}
+                        textDecoration={
+                          ele.meeting_link !== null ? "underline" : "none"
+                        }
+                        color={ele.meeting_link !== null ? "blue" : "black"}
+                      >
+                        Link
+                      </Link>
+                    </Td>
+                    <Td>
+                      <Button
+                        ref={btnRef as any}
+                        colorScheme="orange"
+                        onClick={() => {
+                          setSelectedAppointment(ele.event_id);
+                          onOpen();
+                        }}
+                      >
+                        Change
+                      </Button>
+                    </Td>
+                    <Td>
+                      <Flex justifyContent={"center"}>
+                        <Box w="100%" textAlign={"center"}>
+                          {ele.appointment_status ===
+                          AppointmentStatus.CONFIRM ? (
+                            <Box
+                              bg={"#38a169"}
+                              px="5"
+                              py="2"
+                              borderRadius={"2em"}
+                              color="white"
+                            >
+                              Confirm
+                            </Box>
+                          ) : ele.appointment_status ===
+                            AppointmentStatus.REJECTED ? (
+                            <Box
+                              bg={"#e53e3e"}
+                              px="5"
+                              py="2"
+                              borderRadius={"2em"}
+                              color="white"
+                            >
+                              Reject
+                            </Box>
+                          ) : (
+                            <Box
+                              bg={"orange"}
+                              px="5"
+                              py="2"
+                              borderRadius={"2em"}
+                              color="white"
+                            >
+                              PENDING
+                            </Box>
+                          )}
+                        </Box>
+                      </Flex>
+                    </Td>
+                    <Td>
+                      <Button
+                        disabled={
+                          ele.appointment_status !== AppointmentStatus.CONFIRM
+                        }
+                        onClick={() => {
+                          Cookies.set("Apmt", String(ele.event_id));
+                          changeTabNameHandler();
+                        }}
+                        colorScheme="blue"
+                        w="100%"
+                      >
+                        Assign
+                      </Button>
+                    </Td>
+                  </Tr>
+                );
+              })}
+            </>
+          ) : (
+            <Box></Box>
+          )}
         </Tbody>
       </Table>
+      {loading ? <></> : <HeartsLoading />}
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>

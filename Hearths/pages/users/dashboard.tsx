@@ -16,6 +16,7 @@ import { useAppStore } from "../../store";
 import { signout } from "../../utils/helper";
 import { UsersRequestDocument } from "../../components/element/users/requestdocument";
 import { UsersSearch } from "../../components/element/users/search";
+import { UsersHomeProgram } from "../../components/element/users/home/program";
 
 const Dashboard = () => {
   const sideBarName = [
@@ -24,6 +25,7 @@ const Dashboard = () => {
     { name: "My Appointment", key: "MyAppointment" },
     { name: "Request Document", key: "ReqDoc" },
     { name: "Search Patient", key: "search" },
+    { name: "Home Program", key: "program" },
   ];
   const { isAuthenticated } = useAppStore("isAuthenticated");
   const [selectedTab, setSelectedTab] = useState("Appointment");
@@ -64,8 +66,8 @@ const Dashboard = () => {
               </Box>
               <Box>HeaRTS ADMIN</Box>
             </Flex>
-            {sideBarName.map((sideBarElement) => {
-              return (
+            {sideBarName.map((sideBarElement, index) => {
+              return index !== sideBarName.length - 1 ? (
                 <Box key={sideBarElement.key} _hover={{ cursor: "pointer" }}>
                   <Box
                     py="1.5rem"
@@ -75,6 +77,8 @@ const Dashboard = () => {
                   </Box>
                   <Divider />
                 </Box>
+              ) : (
+                <Box></Box>
               );
             })}
           </Box>
@@ -94,11 +98,13 @@ const Dashboard = () => {
             ) : selectedTab === "Register" ? (
               <UsersRegisterManagement />
             ) : selectedTab === "MyAppointment" ? (
-              <UsersAppointment />
+              <UsersAppointment setNameTab={setSelectedTab} />
             ) : selectedTab === "ReqDoc" ? (
               <UsersRequestDocument />
             ) : selectedTab === "search" ? (
               <UsersSearch />
+            ) : selectedTab === "program" ? (
+              <UsersHomeProgram />
             ) : (
               <Box></Box>
             )}

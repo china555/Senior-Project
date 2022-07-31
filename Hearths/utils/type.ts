@@ -1,4 +1,5 @@
 export interface IAppointment {
+  appointment_status: string;
   appoint_datetime: Date;
   event_id: number;
   meeting_link: string;
