@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import "../styles/Calendar.css";
 import "../styles/globals.css";
 import "../styles/pagination.css";
+import "react-dropzone-uploader/dist/styles.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "../utils/";
 import React from "react";

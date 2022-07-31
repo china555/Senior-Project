@@ -148,7 +148,10 @@ export const HeartsAppointmentFee = (props: submitHandler) => {
             <Box>เลขที่บัญชี ACCOUNT NO. 333-294813-4</Box>
           </Box>
         </Flex>
-        <HeartsDropzone onUploadFile={handleUploadFile} />
+        <HeartsDropzone
+          onUploadFile={handleUploadFile}
+          acceptType={"image/*"}
+        />
         {!isNil(receiptFile) && (
           <li>
             {receiptFile.name} - {receiptFile.size} byte

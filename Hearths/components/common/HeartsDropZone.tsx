@@ -4,8 +4,12 @@ import { useDropzone } from "react-dropzone";
 
 interface IHeartsDropzoneProps {
   onUploadFile: (files: File[]) => void;
+  acceptType: string;
 }
-export const HeartsDropzone = ({ onUploadFile }: IHeartsDropzoneProps) => {
+export const HeartsDropzone = ({
+  onUploadFile,
+  acceptType,
+}: IHeartsDropzoneProps) => {
   const onDrop = useCallback((acceptedFiles) => {
     onUploadFile(acceptedFiles);
     // Do something with the files
@@ -16,7 +20,7 @@ export const HeartsDropzone = ({ onUploadFile }: IHeartsDropzoneProps) => {
     isDragActive,
     isDragAccept,
     isDragReject,
-  } = useDropzone({ accept: "image/*", onDrop });
+  } = useDropzone({ accept: acceptType, onDrop });
 
   const baseStyle = {
     flex: 1,

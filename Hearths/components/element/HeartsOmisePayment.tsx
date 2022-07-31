@@ -10,7 +10,6 @@ import {
 import { useRouter } from "next/router";
 import { useTranslation } from "../../hooks/useTranslation";
 import Script from "next/script";
-import HeartsContainer from "../common/HeartsContainer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { headers, url } from "../../constant";

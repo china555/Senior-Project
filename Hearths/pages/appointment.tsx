@@ -546,7 +546,10 @@ const Appointment = () => {
                   <Box>{translations.accountNo} 333-294813-4</Box>
                 </Box>
               </Flex>
-              <HeartsDropzone onUploadFile={handleUploadFile} />
+              <HeartsDropzone
+                onUploadFile={handleUploadFile}
+                acceptType={"image/*"}
+              />
               {!isNil(receiptFile) && (
                 <li>
                   {receiptFile.name} - {receiptFile.size} byte
