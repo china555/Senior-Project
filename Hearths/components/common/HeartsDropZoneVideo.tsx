@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { Dispatch, SetStateAction } from "react";
-import Dropzone, { IDropzoneProps } from "react-dropzone-uploader";
+//@ts-ignore
+import Dropzone from "react-dropzone-uploader";
 import { url } from "../../constant";
 interface IDropzone {
   setvideoPath: Dispatch<SetStateAction<string>>;
@@ -8,10 +9,7 @@ interface IDropzone {
 }
 export const HeartsDropzoneVideo = (props: IDropzone) => {
   const { setuploadStatus, setvideoPath } = props;
-  const getUploadParams: IDropzoneProps["getUploadParams"] = ({
-    file,
-    meta,
-  }) => {
+  const getUploadParams = ({ file }: any) => {
     const body = new FormData();
     body.append("videoUpload", file);
     return {
@@ -20,10 +18,7 @@ export const HeartsDropzoneVideo = (props: IDropzone) => {
       headers: { Authorization: `Bearer ${Cookies.get("token")}` },
     };
   };
-  const handleChangeStatus: IDropzoneProps["onChangeStatus"] = (
-    { meta, file, xhr },
-    status
-  ) => {
+  const handleChangeStatus = ({ meta, file, xhr }: any, status: any) => {
     if (status === "done") {
       let response = JSON.parse(xhr?.response);
       setvideoPath(response.path);
@@ -31,9 +26,9 @@ export const HeartsDropzoneVideo = (props: IDropzone) => {
     }
   };
 
-  const handleSubmit: IDropzoneProps["onSubmit"] = (files, allFiles) => {
-    console.log(files.map((f) => f.meta));
-    allFiles.forEach((f) => f.remove());
+  const handleSubmit = (files: any, allFiles: any) => {
+    console.log(files.map((f: any) => f.meta));
+    allFiles.forEach((f: any) => f.remove());
   };
 
   return (
@@ -42,12 +37,13 @@ export const HeartsDropzoneVideo = (props: IDropzone) => {
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}
       accept="video/*"
-      inputContent={(files, extra) =>
+      inputContent={(files: any, extra: any) =>
         extra.reject ? "video files only" : "Drag Files"
       }
       styles={{
         dropzoneReject: { borderColor: "red", backgroundColor: "#DAA" },
-        inputLabel: (files, extra) => (extra.reject ? { color: "red" } : {}),
+        inputLabel: (files: any, extra: any) =>
+          extra.reject ? { color: "red" } : {},
       }}
     />
   );
