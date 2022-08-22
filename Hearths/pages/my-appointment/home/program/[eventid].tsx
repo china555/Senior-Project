@@ -208,11 +208,13 @@ const HomeProgram: NextPage = () => {
                         >
                           upload
                         </Button>
-                        <Link
+                        <a
                           href={`http://localhost:3030/${appointmentPrograms.video_url}`}
+                          target="_blank"
+                          rel="noreferrer"
                         >
                           download
-                        </Link>
+                        </a>
                       </GridItem>
                     </>
                   );
