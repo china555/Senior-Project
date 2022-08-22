@@ -209,7 +209,7 @@ const HomeProgram: NextPage = () => {
                           upload
                         </Button>
                         <a
-                          href={`http://localhost:3030/${appointmentPrograms.video_url}`}
+                          href={`${url}/${ele.video_url}`}
                           target="_blank"
                           rel="noreferrer"
                         >
