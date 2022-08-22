@@ -60,6 +60,7 @@ const HomeProgram: NextPage = () => {
           },
         }
       );
+      console.log(data);
       setAppointmentProgram(data);
     } catch (error) {
       toast({ status: "error", title: "Please Try Again later" });
@@ -80,6 +81,7 @@ const HomeProgram: NextPage = () => {
           Authorization: `Bearer ${Cookies.get("token")}`,
         },
       });
+      console.log(data);
       toast({ status: "success", title: "Upload Successful" });
     } catch (error) {
       toast({ status: "error", title: "Please Try Again later" });
@@ -136,7 +138,7 @@ const HomeProgram: NextPage = () => {
               <>
                 <GridItem
                   py="2"
-                  rowSpan={appointmentPrograms.length + 1}
+                  rowSpan={appointmentPrograms.length}
                   w="100%"
                   h="100%"
                   bg="white"
@@ -195,19 +197,22 @@ const HomeProgram: NextPage = () => {
                         bg="white"
                         m="auto"
                         d="flex"
-                        justifyContent="center"
+                        justifyContent="space-evenly"
                         border="1px solid #E2E8F0"
                         color={"black"}
                       >
-                        <Box my="auto">
-                          <Button
-                            onClick={() =>
-                              uploadHandler(ele.task_number, ele.step_number)
-                            }
-                          >
-                            upload
-                          </Button>
-                        </Box>
+                        <Button
+                          onClick={() =>
+                            uploadHandler(ele.task_number, ele.step_number)
+                          }
+                        >
+                          upload
+                        </Button>
+                        <Link
+                          href={`http://localhost:3030/${appointmentPrograms.video_url}`}
+                        >
+                          download
+                        </Link>
                       </GridItem>
                     </>
                   );
