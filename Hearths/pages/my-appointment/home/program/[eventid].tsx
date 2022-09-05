@@ -20,6 +20,8 @@ import { HeartsDropzoneVideo } from "../../../../components/common/HeartsDropZon
 import { HeartsModal } from "../../../../components/common/HeartsModal";
 import { url } from "../../../../constant";
 import { HeartsLayouts } from "../../../../layouts/layout";
+import { CheckIcon } from "@chakra-ui/icons";
+import { getMomentDateMonthYearFormat } from "../../../../utils";
 interface IMyAppointmentProgram {
   task_number: number;
   task_description: string;
@@ -109,9 +111,12 @@ const HomeProgram: NextPage = () => {
         </Heading>
         <Box>
           <b>Appointment Detail</b>
-          <Box>Date : 20 March 2022</Box>
-          <Box>Time: 09:00 - 10:00</Box>
-          <Box> Physical Therapist : OT. China Panda</Box>
+          <Box>
+            Date:{" "}
+            {getMomentDateMonthYearFormat(appointmentProgram[0].start_date)}
+          </Box>
+          {/* <Box>Time: 09:00 - 10:00</Box> */}
+          {/* <Box> Physical Therapist : OT. China Panda</Box> */}
         </Box>
         <Grid
           templateColumns="5% 5% 50% auto auto"
@@ -189,7 +194,9 @@ const HomeProgram: NextPage = () => {
                         border="1px solid #E2E8F0"
                         justifyContent="center"
                       >
-                        <Box my="auto">{ele.start_date}</Box>
+                        <Box my="auto">
+                          {getMomentDateMonthYearFormat(ele.start_date)}
+                        </Box>
                       </GridItem>
                       <GridItem
                         w="100%"
@@ -202,19 +209,26 @@ const HomeProgram: NextPage = () => {
                         color={"black"}
                       >
                         <Button
+                          style={
+                            ele.video_url
+                              ? { backgroundColor: "#22c35e", color: "white" }
+                              : {}
+                          }
                           onClick={() =>
                             uploadHandler(ele.task_number, ele.step_number)
                           }
                         >
                           upload
                         </Button>
-                        <a
-                          href={`${url}/${ele.video_url}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          download
-                        </a>
+                        {ele.video_url && (
+                          <a
+                            href={`${url}/${ele.video_url}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            download
+                          </a>
+                        )}
                       </GridItem>
                     </>
                   );

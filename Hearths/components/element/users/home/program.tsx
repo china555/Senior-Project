@@ -70,7 +70,7 @@ export const UsersHomeProgram: NextPage = () => {
     setDate(e.target.value);
   };
   const handleDurationChange = (e: any) => {
-    setDuration(e.target.value);
+    setDuration(e);
   };
   const clearInput = () => {
     setTaskDescription1("");
@@ -190,7 +190,7 @@ export const UsersHomeProgram: NextPage = () => {
                       <Tr key={`data-in-rows${index1}${index}`}>
                         <Td>{ele.step_number}</Td>
                         <Td>{ele.task_description}</Td>
-                        <Td>{ele.start_date}</Td>
+                        <Td>{getMomentDateMonthYearFormat(ele.start_date)}</Td>
                         <Td>
                           <Link
                             target="_blank"
