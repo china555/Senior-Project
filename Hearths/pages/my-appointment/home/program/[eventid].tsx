@@ -113,7 +113,7 @@ const HomeProgram: NextPage = () => {
           <b>Appointment Detail</b>
           <Box>
             Date:{" "}
-            {getMomentDateMonthYearFormat(appointmentProgram[0].start_date)}
+            {getMomentDateMonthYearFormat(appointmentProgram[0]?.start_date)}
           </Box>
           {/* <Box>Time: 09:00 - 10:00</Box> */}
           {/* <Box> Physical Therapist : OT. China Panda</Box> */}
