@@ -109,7 +109,6 @@ export const UsersAppointmentManagement: NextPage = () => {
           },
         }
       );
-      console.log(data);
       setStateAppointment(data.sortAllappointmentStatusPending);
       setPaginationSize(data.size);
       setLoading(true);

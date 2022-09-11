@@ -29,7 +29,6 @@ export const HeartsDropzoneVideo = (props: IDropzone) => {
   };
 
   const handleSubmit = (files: any, allFiles: any) => {
-    console.log(files.map((f: any) => f.meta));
     allFiles.forEach((f: any) => f.remove());
   };
 

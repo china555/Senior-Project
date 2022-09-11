@@ -131,7 +131,6 @@ export const UsersAppointment = (props: Tab) => {
         },
       }
     );
-    console.log(data);
     return "";
   };
   const fetchMyAppointmentAPI = async () => {
@@ -146,7 +145,6 @@ export const UsersAppointment = (props: Tab) => {
           },
         }
       );
-      console.log(data);
       setStatePending(data);
       setLoading(true);
     } catch (error) {

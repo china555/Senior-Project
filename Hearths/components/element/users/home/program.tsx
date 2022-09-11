@@ -97,7 +97,6 @@ export const UsersHomeProgram: NextPage = () => {
           Authorization: `Bearer ${Cookies.get("token")}`,
         },
       });
-      console.log(data);
       fetchAPI();
       onClose();
       clearInput();
@@ -118,7 +117,6 @@ export const UsersHomeProgram: NextPage = () => {
           },
         }
       );
-      console.log(data);
       setData(data);
       setTask(data.length + 1);
     } catch (error) {
