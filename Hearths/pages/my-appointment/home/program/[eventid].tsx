@@ -75,6 +75,7 @@ const HomeProgram: NextPage = () => {
     setStep(undefined);
     setuploadStatus("");
     setvideoPath("");
+    setSelectedDate("");
   };
   const fetchAPI = async () => {
     try {
@@ -114,6 +115,8 @@ const HomeProgram: NextPage = () => {
           }).length !== 0
       );
       setAppointmentProgramFilter(temp);
+    } else {
+      setAppointmentProgramFilter(appointmentProgram?.homeprogram);
     }
   }, [selectedDate]);
 
