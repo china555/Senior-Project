@@ -75,7 +75,7 @@ const HomeProgram: NextPage = () => {
     setStep(undefined);
     setuploadStatus("");
     setvideoPath("");
-    setSelectedDate("");
+    setSelectedDate(selectedDate);
   };
   const fetchAPI = async () => {
     try {
@@ -90,11 +90,21 @@ const HomeProgram: NextPage = () => {
           },
         }
       );
+      console.log(data.homeprogram);
       let tempDate = [] as any;
       data.homeprogram.map((ele) => {
+        if (
+          moment(ele[0].start_date, "YYYY-MM-DD").format("YYYY-MM-DD") ===
+          moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD")
+        ) {
+          setSelectedDate(String(ele[0].start_date));
+        }
         tempDate.push(ele[0].start_date);
       });
-      setDate(tempDate);
+      const uniqueDate = tempDate.filter((item: string, pos: number) => {
+        return tempDate.indexOf(item) == pos;
+      });
+      setDate(uniqueDate);
       setAppointmentProgram(data);
       setAppointmentProgramFilter(data.homeprogram);
     } catch (error) {
@@ -182,12 +192,12 @@ const HomeProgram: NextPage = () => {
           </Box>
           <Box w="20rem" mx="auto">
             <Select onChange={onchangeHandler} value={selectedDate}>
-              <option value={""}>Selected Date</option>
               {date?.map((ele, index) => (
                 <option value={String(ele)} key={`${ele}-${index}`}>
                   {`${getMomentDateMonthYearFormat(ele ?? new Date())} `}
                 </option>
               ))}
+              <option value={""}>all date</option>
             </Select>
           </Box>
         </Box>

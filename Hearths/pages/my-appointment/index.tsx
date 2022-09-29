@@ -22,6 +22,7 @@ interface IMyAppointment {
   event_id: number;
   appointment_status: string;
   meeting_link: string | undefined;
+  count: number;
 }
 const MyAppointment: NextPage = () => {
   const toast = useToast();
@@ -232,25 +233,27 @@ const MyAppointment: NextPage = () => {
                   border="1px solid #E2E8F0"
                   color={"black"}
                 >
-                  {ele.event_id && ele.appointment_status === temp.CONFIRMED && (
-                    <Box
-                      my="auto"
-                      textDecoration={"underline"}
-                      color="blue"
-                      cursor="pointer"
-                      onClick={() => {
-                        router.push(
-                          `/my-appointment/home/program/${ele.event_id}`
-                        );
-                        localStorage.setItem(
-                          "home_program_event",
-                          `${ele.event_id}`
-                        );
-                      }}
-                    >
-                      View task list
-                    </Box>
-                  )}
+                  {ele.event_id &&
+                    ele.appointment_status === temp.CONFIRMED &&
+                    ele.count > 0 && (
+                      <Box
+                        my="auto"
+                        textDecoration={"underline"}
+                        color="blue"
+                        cursor="pointer"
+                        onClick={() => {
+                          router.push(
+                            `/my-appointment/home/program/${ele.event_id}`
+                          );
+                          localStorage.setItem(
+                            "home_program_event",
+                            `${ele.event_id}`
+                          );
+                        }}
+                      >
+                        View task list
+                      </Box>
+                    )}
                 </GridItem>
               </>
             );
