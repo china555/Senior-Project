@@ -90,7 +90,6 @@ const HomeProgram: NextPage = () => {
           },
         }
       );
-      console.log(data.homeprogram);
       let tempDate = [] as any;
       data.homeprogram.map((ele) => {
         if (
@@ -106,7 +105,7 @@ const HomeProgram: NextPage = () => {
       });
       setDate(uniqueDate);
       setAppointmentProgram(data);
-      setAppointmentProgramFilter(data.homeprogram);
+      filterHandler();
     } catch (error) {
       toast({ status: "error", title: "Please Try Again later" });
     }
@@ -115,8 +114,7 @@ const HomeProgram: NextPage = () => {
   const onchangeHandler = (event: any) => {
     setSelectedDate(event.target.value);
   };
-
-  useEffect(() => {
+  const filterHandler = () => {
     if (selectedDate !== "") {
       const temp = appointmentProgram?.homeprogram.filter(
         (ele) =>
@@ -128,6 +126,9 @@ const HomeProgram: NextPage = () => {
     } else {
       setAppointmentProgramFilter(appointmentProgram?.homeprogram);
     }
+  };
+  useEffect(() => {
+    filterHandler();
   }, [selectedDate]);
 
   const updateVideoPath = async () => {
