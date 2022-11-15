@@ -26,6 +26,7 @@ import {
   getMomentNextHourFormat,
 } from "../../../../utils";
 interface IMyAppointmentProgramDetailed {
+  home_program_task_id: string;
   date: Date;
   video_url: null;
   task_number: number;
@@ -63,12 +64,18 @@ const HomeProgram: NextPage = () => {
   const [uploadStatus, setuploadStatus] = useState<string>("");
   const [task, setTask] = useState<number>();
   const [step, setStep] = useState<number>();
+  const [homeProgramTaskId, sethomeProgramTaskId] = useState<string>();
   const router = useRouter();
   const toast = useToast();
-  const uploadHandler = (task_number: number, step_number: number) => {
+  const uploadHandler = (
+    task_number: number,
+    step_number: number,
+    home_program_task_id: string
+  ) => {
     onOpen();
     setTask(task_number);
     setStep(step_number);
+    sethomeProgramTaskId(home_program_task_id);
   };
 
   const resetState = () => {
@@ -151,12 +158,9 @@ const HomeProgram: NextPage = () => {
 
   const updateVideoPath = async () => {
     try {
-      const { eventid } = router.query;
       const sentData = {
         video_link: videoPath,
-        event_id: eventid,
-        task_number: task,
-        step_number: step,
+        home_program_task_id: homeProgramTaskId,
       };
       await axios.patch(`${url}/update/video/link`, sentData, {
         headers: {
@@ -273,7 +277,7 @@ const HomeProgram: NextPage = () => {
                         <b>{appointmentPrograms[0].task_number}</b>
                       </Box>
                     </GridItem>
-                    {appointmentPrograms.map((ele: any) => {
+                    {appointmentPrograms.map((ele) => {
                       return (
                         <>
                           <GridItem
@@ -332,7 +336,8 @@ const HomeProgram: NextPage = () => {
                                 onClick={() =>
                                   uploadHandler(
                                     ele.task_number,
-                                    ele.step_number
+                                    ele.step_number,
+                                    ele.home_program_task_id
                                   )
                                 }
                               >
@@ -372,7 +377,8 @@ const HomeProgram: NextPage = () => {
                                 onClick={() =>
                                   uploadHandler(
                                     ele.task_number,
-                                    ele.step_number
+                                    ele.step_number,
+                                    ele.home_program_task_id
                                   )
                                 }
                               >
