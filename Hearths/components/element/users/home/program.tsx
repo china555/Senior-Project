@@ -19,10 +19,12 @@ import {
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
-  FormHelperText,
-  FormErrorMessage,
-  Grid,
   Link,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -38,33 +40,42 @@ import {
 import Cookies from "js-cookie";
 import { HeartsModal } from "../../../common/HeartsModal";
 import moment from "moment";
+import { AddIcon } from "@chakra-ui/icons";
 
+interface ISubmitTaskData {
+  taskDescription1: string;
+  taskDescription2: string;
+  taskDescription3: string;
+}
 export const UsersHomeProgram: NextPage = () => {
   const router = useRouter();
   const toast = useToast();
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<any>();
   const [isClickCancel, setIsClickCancel] = useState(true);
-  const [taskDescription1, setTaskDescription1] = useState<string>("");
-  const [taskDescription2, setTaskDescription2] = useState<string>("");
-  const [taskDescription3, setTaskDescription3] = useState<string>("");
+  const [submitTaskData, setSubmitTaskData] = useState<ISubmitTaskData[]>([]);
   const [duration, setDuration] = useState(30);
   const [date, setDate] = useState<string>(
     moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD")
   );
-  const isError = taskDescription1 === "";
   const { translations } = useTranslation("DepartMentName");
   const header = ["Task", "Step", "Description", "Date", "Video link"];
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [task, setTask] = useState(1);
+  const [task, setTask] = useState<Number>(1);
 
-  const handleTaskDescription1Change = (e: any) => {
-    setTaskDescription1(e.target.value);
+  const handleTaskDescription1Change = (e: any, index: number) => {
+    const tempSubmitTaskData = [...submitTaskData];
+    tempSubmitTaskData[index].taskDescription1 = e.target.value;
+    setSubmitTaskData(tempSubmitTaskData);
   };
-  const handleTaskDescription2Change = (e: any) => {
-    setTaskDescription2(e.target.value);
+  const handleTaskDescription2Change = (e: any, index: number) => {
+    const tempSubmitTaskData = [...submitTaskData];
+    tempSubmitTaskData[index].taskDescription2 = e.target.value;
+    setSubmitTaskData(tempSubmitTaskData);
   };
-  const handleTaskDescription3Change = (e: any) => {
-    setTaskDescription3(e.target.value);
+  const handleTaskDescription3Change = (e: any, index: number) => {
+    const tempSubmitTaskData = [...submitTaskData];
+    tempSubmitTaskData[index].taskDescription3 = e.target.value;
+    setSubmitTaskData(tempSubmitTaskData);
   };
   const handleDateChange = (e: any) => {
     setDate(e.target.value);
@@ -73,15 +84,30 @@ export const UsersHomeProgram: NextPage = () => {
     setDuration(e);
   };
   const clearInput = () => {
-    setTaskDescription1("");
-    setTaskDescription2("");
-    setTaskDescription3("");
+    setSubmitTaskData([]);
+  };
+  const onClickAddTaskHandler = () => {
+    setSubmitTaskData([
+      ...submitTaskData,
+      { taskDescription1: "", taskDescription2: "", taskDescription3: "" },
+    ]);
+  };
+
+  const validateTaskIsNotEmpty = () => {
+    const tasks = submitTaskData.map((task) => {
+      const tempTaskArray = [];
+      if (task.taskDescription1 !== "")
+        tempTaskArray.push(task.taskDescription1);
+      if (task.taskDescription2 !== "")
+        tempTaskArray.push(task.taskDescription2);
+      if (task.taskDescription3 !== "")
+        tempTaskArray.push(task.taskDescription3);
+      return tempTaskArray;
+    });
+    return tasks;
   };
   const handleSubmit = async () => {
-    const tasks = [];
-    if (taskDescription1 !== "") tasks.push(taskDescription1);
-    if (taskDescription2 !== "") tasks.push(taskDescription2);
-    if (taskDescription3 !== "") tasks.push(taskDescription3);
+    const tasks = validateTaskIsNotEmpty();
     const user_id = Cookies.get("user_id");
     try {
       const submitData = {
@@ -118,7 +144,9 @@ export const UsersHomeProgram: NextPage = () => {
         }
       );
       setData(data);
-      setTask(data.length + 1);
+      setDuration(data.duration);
+      setDate(moment(data.start_date, "YYYY-MM-DD").format("YYYY-MM-DD"));
+      setTask(data?.homeprogram.length + 1);
     } catch (error) {
       toast({ status: "error", title: "Something Wrong" });
     }
@@ -142,6 +170,7 @@ export const UsersHomeProgram: NextPage = () => {
             min={1}
             value={duration}
             onChange={handleDurationChange}
+            isDisabled={data?.homeprogram.length > 0}
           >
             <NumberInputField />
             <NumberInputStepper>
@@ -157,9 +186,12 @@ export const UsersHomeProgram: NextPage = () => {
             value={date}
             onChange={handleDateChange}
             type={"date"}
+            isDisabled={data?.homeprogram.length > 0}
           />
         </Box>
-        <Button onClick={onOpen}>Add Task</Button>
+        <Button onClick={onOpen} isDisabled={data?.homeprogram.length > 0}>
+          Add Task
+        </Button>
       </FormControl>
 
       <Table variant="simple">
@@ -171,7 +203,7 @@ export const UsersHomeProgram: NextPage = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((homeprograms, index1) => {
+          {data?.homeprogram?.map((homeprograms: any, index1: number) => {
             return (
               <>
                 <Tr key={`${index1}-table-home-program`}>
@@ -188,7 +220,7 @@ export const UsersHomeProgram: NextPage = () => {
                       <Tr key={`data-in-rows${index1}${index}`}>
                         <Td>{ele.step_number}</Td>
                         <Td>{ele.task_description}</Td>
-                        <Td>{getMomentDateMonthYearFormat(ele.start_date)}</Td>
+                        <Td>{getMomentDateMonthYearFormat(ele.date)}</Td>
                         <Td>
                           <Link
                             target="_blank"
@@ -216,36 +248,73 @@ export const UsersHomeProgram: NextPage = () => {
         isButtonClose={isClickCancel}
       >
         <Box alignSelf={"stretch"}>
-          <Box fontSize={"20px"} fontWeight={"bold"}>
-            Add Task
+          <Box
+            display={"flex"}
+            alignItems="center"
+            justifyContent={"space-between"}
+            my="4"
+          >
+            <Box fontSize={"20px"} fontWeight={"bold"}>
+              Add Task
+            </Box>
+            <Button onClick={onClickAddTaskHandler}>
+              <AddIcon w={3} mr="1" />
+              <Box fontSize={"md"}>Task</Box>
+            </Button>
           </Box>
-          <FormControl>
-            {/* isInvalid={isError} */}
-            <Box>
-              <FormLabel>Step1 Description</FormLabel>
-              <Input
-                placeholder="Task Description"
-                value={taskDescription1}
-                onChange={handleTaskDescription1Change}
-              />
-            </Box>
-            <Box>
-              <FormLabel>Step2 Description</FormLabel>
-              <Input
-                placeholder="Task Description"
-                value={taskDescription2}
-                onChange={handleTaskDescription2Change}
-              />
-            </Box>
-            <Box>
-              <FormLabel>Step3 Description</FormLabel>
-              <Input
-                placeholder="Task Description"
-                value={taskDescription3}
-                onChange={handleTaskDescription3Change}
-              />
-            </Box>
-          </FormControl>
+
+          <Accordion allowMultiple>
+            {submitTaskData.map((task, index) => {
+              return (
+                <AccordionItem
+                  key={`Task-List-${index}`}
+                  border={"1px #E2E8F0 solid"}
+                  borderRadius="5px"
+                >
+                  <AccordionButton>
+                    <Box flex="1" textAlign="left">
+                      Task {index + 1}
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel pb={4}>
+                    <FormControl>
+                      <Box>
+                        <FormLabel>Step1 Description</FormLabel>
+                        <Input
+                          placeholder="Task Description"
+                          value={submitTaskData[index].taskDescription1}
+                          onChange={(e) =>
+                            handleTaskDescription1Change(e, index)
+                          }
+                        />
+                      </Box>
+                      <Box>
+                        <FormLabel>Step2 Description</FormLabel>
+                        <Input
+                          placeholder="Task Description"
+                          value={submitTaskData[index].taskDescription2}
+                          onChange={(e) =>
+                            handleTaskDescription2Change(e, index)
+                          }
+                        />
+                      </Box>
+                      <Box>
+                        <FormLabel>Step3 Description</FormLabel>
+                        <Input
+                          placeholder="Task Description"
+                          value={submitTaskData[index].taskDescription3}
+                          onChange={(e) =>
+                            handleTaskDescription3Change(e, index)
+                          }
+                        />
+                      </Box>
+                    </FormControl>
+                  </AccordionPanel>
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
         </Box>
         <Button
           mt={4}
