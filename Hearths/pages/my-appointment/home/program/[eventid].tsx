@@ -5,8 +5,6 @@ import {
   Grid,
   GridItem,
   Heading,
-  Input,
-  Link,
   Select,
   Spinner,
   useDisclosure,
@@ -18,22 +16,22 @@ import moment from "moment";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { HeartsDropzone } from "../../../../components/common/HeartsDropZone";
 import { HeartsDropzoneVideo } from "../../../../components/common/HeartsDropZoneVideo";
 import { HeartsModal } from "../../../../components/common/HeartsModal";
 import { url } from "../../../../constant";
 import { HeartsLayouts } from "../../../../layouts/layout";
-import { CheckIcon } from "@chakra-ui/icons";
 import {
   getMomentDateMonthYearFormat,
   getMomentHourFormat,
   getMomentNextHourFormat,
 } from "../../../../utils";
 interface IMyAppointmentProgramDetailed {
+  date: Date;
+  video_url: null;
   task_number: number;
   task_description: string;
   step_number: number;
-  start_date: Date;
+  home_program_id: string;
 }
 interface IMyAppointmentProgram {
   appointment_datetime: Date;
@@ -72,15 +70,16 @@ const HomeProgram: NextPage = () => {
     setTask(task_number);
     setStep(step_number);
   };
+
   const resetState = () => {
     setTask(undefined);
     setStep(undefined);
     setuploadStatus("");
     setvideoPath("");
   };
+
   const fetchAPI = async () => {
     try {
-      console.log("WWWW");
       const { eventid } = router.query;
       const { data } = await axios.get<IMyAppointmentProgram>(
         `${url}/home/program?event_id=${
@@ -93,26 +92,29 @@ const HomeProgram: NextPage = () => {
         }
       );
       let tempDate = [] as any;
+
       data.homeprogram.map((ele) => {
-        if (
-          moment(ele[0].start_date, "YYYY-MM-DD").format("YYYY-MM-DD") ===
-          moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD")
-        ) {
-          setSelectedDate(String(ele[0].start_date));
-        }
-        tempDate.push(ele[0].start_date);
+        ele.map((ele2, index) => {
+          if (
+            moment(ele[0].date, "YYYY-MM-DD").format("YYYY-MM-DD") ===
+            moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD")
+          ) {
+            setSelectedDate(String(ele2.date));
+          }
+          tempDate.push(ele2.date);
+        });
       });
+
       const uniqueDate = tempDate.filter((item: string, pos: number) => {
         return tempDate.indexOf(item) == pos;
       });
       setDate(uniqueDate);
       setAppointmentProgram(data);
-      console.log(data);
       if (selectedDate !== "") {
         const temp = appointmentProgram?.homeprogram.filter(
           (ele) =>
             ele.filter((ele) => {
-              return String(ele.start_date) === selectedDate;
+              return String(ele.date) === selectedDate;
             }).length !== 0
         );
         setAppointmentProgramFilter(temp);
@@ -128,19 +130,21 @@ const HomeProgram: NextPage = () => {
   const onchangeHandler = (event: any) => {
     setSelectedDate(event.target.value);
   };
+
   const filterHandler = () => {
     if (selectedDate !== "") {
-      const temp = appointmentProgram?.homeprogram.filter(
-        (ele) =>
-          ele.filter((ele) => {
-            return String(ele.start_date) === selectedDate;
-          }).length !== 0
+      const temp = appointmentProgram?.homeprogram.map((task) =>
+        task.filter((step) => {
+          return String(step.date) === selectedDate;
+        })
       );
+      console.log(temp);
       setAppointmentProgramFilter(temp);
     } else {
       setAppointmentProgramFilter(appointmentProgram?.homeprogram);
     }
   };
+
   useEffect(() => {
     filterHandler();
   }, [selectedDate, appointmentProgram]);
@@ -154,7 +158,7 @@ const HomeProgram: NextPage = () => {
         task_number: task,
         step_number: step,
       };
-      const { data } = await axios.patch(`${url}/update/video/link`, sentData, {
+      await axios.patch(`${url}/update/video/link`, sentData, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
         },
@@ -218,7 +222,7 @@ const HomeProgram: NextPage = () => {
               <Box>
                 {`${appointmentProgram?.user.userPrefix_RangEng} ${appointmentProgram?.user.userFirstNameEng} ${appointmentProgram?.user.userLastNameEng}`}
               </Box>
-              <Box w="20rem" mx="auto">
+              <Box w="20rem" mx="auto" my={"4"}>
                 <Select onChange={onchangeHandler} value={selectedDate}>
                   {date?.map((ele, index) => (
                     <option value={String(ele)} key={`${ele}-${index}`}>
@@ -253,7 +257,7 @@ const HomeProgram: NextPage = () => {
                 return (
                   <>
                     <GridItem
-                      key={`${appointmentPrograms[0].start_date}`}
+                      key={`${appointmentPrograms[0].date}`}
                       py="2"
                       rowSpan={appointmentPrograms.length}
                       w="100%"
@@ -308,7 +312,7 @@ const HomeProgram: NextPage = () => {
                             justifyContent="center"
                           >
                             <Box my="auto">
-                              {getMomentDateMonthYearFormat(ele.start_date)}
+                              {getMomentDateMonthYearFormat(ele.date)}
                             </Box>
                           </GridItem>
                           <GridItem
