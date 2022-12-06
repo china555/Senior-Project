@@ -45,7 +45,7 @@ interface IAppointmentPending {
   patientFirstNameEng: string | null;
   patientMiddleNameEng: string | null;
   patientLastNameEng: string | null;
-  userNo: string;
+  userName: string;
   userPrefix: string | null;
   userPrefix_Rang: string | null;
   userFirstName: string | null;
@@ -61,7 +61,7 @@ interface submitConfirmationAppointmentData {
   appointmentStatus: "CONFIRMED" | "REJECTED";
   meetingLink?: string;
   appoint_datetime: Date;
-  user_id: string;
+  userName: string;
 }
 
 export const UsersAppointmentManagement: NextPage = () => {
@@ -109,6 +109,7 @@ export const UsersAppointmentManagement: NextPage = () => {
           },
         }
       );
+      console.log(data);
       setStateAppointment(data.sortAllappointmentStatusPending);
       setPaginationSize(data.size);
       setLoading(true);
@@ -193,8 +194,8 @@ export const UsersAppointmentManagement: NextPage = () => {
               appointmentStatus: "CONFIRMED",
               meetingLink: data.webLink,
               meetingId: data.id,
-              userId: submitData.user_id,
-              approveByUser_id: Cookies.get("user_id"),
+              userName: submitData.userName,
+              approveByUserName: Cookies.get("username"),
             },
             {
               headers: {
@@ -212,8 +213,8 @@ export const UsersAppointmentManagement: NextPage = () => {
             {
               event_id: submitData.event_id,
               appointmentStatus: "REJECTED",
-              userId: submitData.user_id,
-              approveByUser_id: Cookies.get("user_id"),
+              userName: submitData.userName,
+              approveByUserName: Cookies.get("username"),
             },
             {
               headers: {
@@ -337,7 +338,7 @@ export const UsersAppointmentManagement: NextPage = () => {
                                   event_id: ele.event_id,
                                   appointmentStatus: "CONFIRMED",
                                   appoint_datetime: ele.appoint_datetime,
-                                  user_id: ele.userNo,
+                                  userName: ele.userName,
                                 });
                               }}
                             >
@@ -350,7 +351,7 @@ export const UsersAppointmentManagement: NextPage = () => {
                                   event_id: ele.event_id,
                                   appointmentStatus: "REJECTED",
                                   appoint_datetime: ele.appoint_datetime,
-                                  user_id: ele.userNo,
+                                  userName: ele.userName,
                                 });
                               }}
                             >

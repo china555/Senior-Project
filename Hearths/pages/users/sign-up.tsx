@@ -8,32 +8,39 @@ import { url } from "../../constant";
 import Cookies from "js-cookie";
 import { useAppStore } from "../../store";
 
-type LogInForm = {
+type SignUpForm = {
   username: string;
   password: string;
+  email: string;
 };
 const errorMessages = (fieldName: string, errors: FieldError) => {
   const errorRequire = errors?.type === "required" ? "* required" : "";
-  if (fieldName === "email" || fieldName === "password") return [errorRequire];
+  if (
+    fieldName === "email" ||
+    fieldName === "password" ||
+    fieldName === "username"
+  )
+    return [errorRequire];
 };
-const UsersLogin: NextPage = () => {
+const UserSignUP: NextPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LogInForm>();
+  } = useForm<SignUpForm>();
   const router = useRouter();
   const { dispatch } = useAppStore();
   const toast = useToast();
-  const onSubmit = async (loginData: LogInForm) => {
+  const onSubmit = async (registerData: SignUpForm) => {
     try {
-      const { data } = await axios.post(url + "/users/login", loginData);
-      Cookies.set("token", data.jwtToken);
-      Cookies.set("refreshtoken", data.refreshToken);
-      Cookies.set("username", data.username);
-      dispatch("auth/setIsAuthenticated", true);
-      toast({ status: "success", title: "Login successful" });
-      router.push("/users/dashboard");
+      console.log(registerData);
+      const { data } = await axios.post(url + "/users/register", registerData);
+      //   Cookies.set("token", data.jwtToken);
+      //   Cookies.set("refreshtoken", data.refreshToken);
+      //   Cookies.set("user_id", data.pt_no);
+      //   dispatch("auth/setIsAuthenticated", true);
+      //   toast({ status: "success", title: "Login successful" });
+      router.push("/users/login");
     } catch (error) {
       console.error("Sign-in", error);
       toast({ status: "error", title: "Please check your email and password" });
@@ -52,15 +59,15 @@ const UsersLogin: NextPage = () => {
         py="2rem"
       >
         <Heading color="#003B71" as="h1" textAlign="center" mb="2rem">
-          Log In
+          Sign Up
         </Heading>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Flex flexDirection="column" gridRowGap="15px">
             <Box mx={{ base: 0, xl: "30px" }}>
               <HeartInput
                 {...register("username", { required: true })}
-                type="email"
-                placeholder="Email"
+                type="username"
+                placeholder="username"
                 isRequired={true}
                 isInvalid={errors.username?.type === "required"}
                 errorMessages={errorMessages(
@@ -82,6 +89,21 @@ const UsersLogin: NextPage = () => {
                 )}
               />
             </Box>
+            <Box mx={{ base: 0, xl: "30px" }}>
+              <HeartInput
+                {...register("email", {
+                  required: true,
+                })}
+                placeholder="Email"
+                type="text"
+                isRequired={true}
+                isInvalid={errors.password?.type === "required"}
+                errorMessages={errorMessages(
+                  "email",
+                  errors.password as FieldError
+                )}
+              />
+            </Box>
             <Flex flexDirection="column" mx={{ base: 0, xl: "30px" }}>
               <Button
                 my="1rem"
@@ -92,11 +114,8 @@ const UsersLogin: NextPage = () => {
                 fontSize="1.6rem"
                 type="submit"
               >
-                Log In
+                Sign Up
               </Button>
-              <Link textAlign="center" as="h3" size="sm" fontWeight="medium">
-                Forgot your password?
-              </Link>
             </Flex>
           </Flex>
         </form>
@@ -105,4 +124,4 @@ const UsersLogin: NextPage = () => {
   );
 };
 
-export default UsersLogin;
+export default UserSignUP;
