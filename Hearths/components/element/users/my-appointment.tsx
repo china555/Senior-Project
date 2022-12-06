@@ -55,7 +55,7 @@ type Tab = {
 type submit = {
   appointmentDateTime: string;
   event_id: number | undefined;
-  user_id?: string;
+  username?: string;
   oldEventId: number | undefined;
 };
 export const UsersAppointment = (props: Tab) => {
@@ -120,7 +120,7 @@ export const UsersAppointment = (props: Tab) => {
       }-${selectedDate.getDate()} ${selectedTime?.start}`,
       event_id: selectedTime?.event_id,
       oldEventId: selectedAppointment,
-      user_id: Cookies.get("user_id"),
+      username: Cookies.get("username"),
     };
     const { data } = await axios.post(
       url + "/user/change/appointment/date",
@@ -134,11 +134,11 @@ export const UsersAppointment = (props: Tab) => {
     return "";
   };
   const fetchMyAppointmentAPI = async () => {
-    const user_id = Cookies.get("user_id");
+    const userName = Cookies.get("username");
     try {
       setLoading(false);
       const { data } = await axios.get(
-        `${url}/user/appointment?user_id=${user_id}&start_date=${inputStartDate}&end_date=${inputEndDate}&status=${selectStatus}&patient_name=${inputPatientName}&page=${pageNumber}&size=${paginationPageSize}`,
+        `${url}/user/appointment?userName=${userName}&start_date=${inputStartDate}&end_date=${inputEndDate}&status=${selectStatus}&patient_name=${inputPatientName}&page=${pageNumber}&size=${paginationPageSize}`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,
@@ -154,9 +154,9 @@ export const UsersAppointment = (props: Tab) => {
 
   useEffect(() => {
     const fetchGetAvailableDateOfUser = async () => {
-      const user_id = Cookies.get("user_id");
+      const userName = Cookies.get("username");
       const { data } = await axios.get<IUserAppointment[]>(
-        `${url}/user/available/date?user_id=${user_id}`,
+        `${url}/user/available/date?Username=${userName}`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,

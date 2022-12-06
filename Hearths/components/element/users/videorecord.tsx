@@ -39,9 +39,9 @@ export const UsersAppointment: NextPage = () => {
 
   useEffect(() => {
     const fetchAPI = async () => {
-      const user_id = Cookies.get("user_id");
+      const userName = Cookies.get("username");
       const { data } = await axios.get(
-        `${url}/confirmation/appointment?user_id=${user_id}`
+        `${url}/confirmation/appointment?Username=${userName}`
       );
       setStatePending(data);
     };

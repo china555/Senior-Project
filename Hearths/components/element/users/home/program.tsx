@@ -157,13 +157,13 @@ export const UsersHomeProgram: NextPage = () => {
   };
   const handleSubmit = async () => {
     const tasks = validateTaskIsNotEmpty();
-    const user_id = Cookies.get("user_id");
+    const userName = Cookies.get("username");
     try {
       const submitData = {
         taskDescription: tasks,
         startDate: date,
         duration: duration,
-        user_id: user_id,
+        userName: userName,
         event_id: Cookies.get("Apmt"),
         task_number: task,
       };
@@ -185,10 +185,10 @@ export const UsersHomeProgram: NextPage = () => {
   }, [selectedDate, appointmentProgram]);
   const fetchAPI = async () => {
     try {
-      const user_id = Cookies.get("user_id");
+      const userName = Cookies.get("username");
       const event_id = Cookies.get("Apmt");
       const { data } = await axios.get(
-        `${url}/home/program?user_id=${user_id}&event_id=${event_id}`,
+        `${url}/home/program?username=${userName}&event_id=${event_id}`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,
