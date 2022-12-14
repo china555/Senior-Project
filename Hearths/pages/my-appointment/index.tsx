@@ -55,7 +55,6 @@ const MyAppointment: NextPage = () => {
     translations.Time,
     translations.meetingLink,
     translations.statusmeeting,
-    "Physical Therapist",
     "Home Program",
   ];
   const fetchAPI = async () => {
@@ -90,7 +89,7 @@ const MyAppointment: NextPage = () => {
           {translations.MyAppointment}
         </Heading>
         <Grid
-          templateColumns="auto auto auto auto auto auto"
+          templateColumns="auto auto auto auto auto"
           color={"white"}
           fontSize={{ base: "14px", xl: "20px" }}
         >
@@ -211,18 +210,7 @@ const MyAppointment: NextPage = () => {
                     )}
                   </Box>
                 </GridItem>
-                <GridItem
-                  w="100%"
-                  h="100%"
-                  bg="white"
-                  m="auto"
-                  d="flex"
-                  justifyContent="center"
-                  border="1px solid #E2E8F0"
-                  color={"black"}
-                >
-                  <Box my="auto">Test01</Box>
-                </GridItem>
+
                 <GridItem
                   w="100%"
                   h="100%"
