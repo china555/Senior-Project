@@ -45,7 +45,7 @@ interface IAppointmentPending {
   patientFirstNameEng: string | null;
   patientMiddleNameEng: string | null;
   patientLastNameEng: string | null;
-  userName: string;
+  Username: string;
   userPrefix: string | null;
   userPrefix_Rang: string | null;
   userFirstName: string | null;
@@ -338,7 +338,7 @@ export const UsersAppointmentManagement: NextPage = () => {
                                   event_id: ele.event_id,
                                   appointmentStatus: "CONFIRMED",
                                   appoint_datetime: ele.appoint_datetime,
-                                  userName: ele.userName,
+                                  userName: ele.Username,
                                 });
                               }}
                             >
@@ -351,7 +351,7 @@ export const UsersAppointmentManagement: NextPage = () => {
                                   event_id: ele.event_id,
                                   appointmentStatus: "REJECTED",
                                   appoint_datetime: ele.appoint_datetime,
-                                  userName: ele.userName,
+                                  userName: ele.Username,
                                 });
                               }}
                             >
