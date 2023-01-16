@@ -93,6 +93,7 @@ export const UsersAppointmentManagement: NextPage = () => {
   const [paginationPageSize, setPaginationPageSize] = useState<number>(10);
   const [paginationSize, setPaginationSize] = useState<number>(0);
   const [loading, setLoading] = useState(false);
+  const [waitForUpdateData, setWaitForUpdateData] = useState(false);
   let pageNumber = 1;
   async function handlerSubmitRenderResult(type?: string) {
     try {
@@ -164,6 +165,7 @@ export const UsersAppointmentManagement: NextPage = () => {
           );
         }
       } else {
+        setWaitForUpdateData(true);
         if (submitData.appointmentStatus === "CONFIRMED") {
           const { appoint_datetime } = submitData;
           const config = {
@@ -231,6 +233,7 @@ export const UsersAppointmentManagement: NextPage = () => {
           (appoint) => appoint.event_id !== submitData.event_id
         );
         setStateAppointment(tempPending);
+        setWaitForUpdateData(false);
       }
     } catch (error) {
       console.error("Confirmation Management", error);
@@ -371,7 +374,31 @@ export const UsersAppointmentManagement: NextPage = () => {
         </Tbody>
       </Table>
       {loading ? <></> : <HeartsLoading />}
-
+      {!waitForUpdateData ? (
+        <></>
+      ) : (
+        <Box
+          position={"fixed"}
+          top="0"
+          left={"0"}
+          zIndex="100"
+          bg={"#ffffff8c"}
+          width="100vw"
+          height={"100vh"}
+        >
+          <Box
+            position={"absolute"}
+            top="50%"
+            left={"50%"}
+            style={{ transform: "translate(-50%,-50%)" }}
+          >
+            <Box mb="5" fontSize={"2xl"}>
+              Wait a second
+            </Box>
+            <HeartsLoading />
+          </Box>
+        </Box>
+      )}
       <HeartsPagination
         className="pagination-bar"
         currentPage={paginationPage}
