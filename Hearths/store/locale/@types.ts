@@ -32,6 +32,7 @@ export type Overview = {
   detail: string[];
 };
 export interface ILocaleState {
+  Skip: string;
   currentLocale: Language;
   test: string;
   SignIn: string;

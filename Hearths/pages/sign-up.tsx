@@ -76,7 +76,8 @@ const SignUp: NextPage = () => {
     "paymentFee",
     "clickappointmentcanceled",
     "clickpleaseUploadPayment",
-    "clickconfirm"
+    "clickconfirm",
+    "Skip"
   );
   const resetState = () => {
     setIsClickCancel(false);
@@ -102,10 +103,21 @@ const SignUp: NextPage = () => {
     onOpen();
   };
 
-  const onSubmitImageandDataHandler = async () => {
+  const onSubmitImageandDataHandler = async (type: string) => {
     try {
       if (!hasReceipFile && !isClickCancel) {
-        onOpen();
+        if (type === "skip") {
+          setReceiptFile("/" as any as File);
+          const id: IReturnID = await submitHandler(); //.patient_id
+          const paymentData = {
+            patient_id: id.patient_id,
+            payFor: "register",
+            payMethod: "scan",
+            imgPath: "/none",
+          };
+          axios.post(url + "/payment", paymentData);
+          onOpen();
+        } else onOpen();
       } else if (hasReceipFile) {
         const id: IReturnID = await submitHandler(); //.patient_id
         const formData = new FormData();
@@ -392,14 +404,14 @@ const SignUp: NextPage = () => {
               fontSize="1.4rem"
               width={{ base: "80%", lg: "60%", xl: "50%" }}
               mx={"auto"}
-              onClick={onSubmitImageandDataHandler}
+              onClick={() => onSubmitImageandDataHandler("normal")}
             >
               {translations.Confirm}
             </Button>
             <Heading
               textAlign="center"
               as="h3"
-              mb="3rem"
+              mb="1rem"
               size="md"
               fontWeight="medium"
               color="red"
@@ -408,6 +420,22 @@ const SignUp: NextPage = () => {
               onClick={handleClickCancel}
             >
               {translations.Cancel}
+            </Heading>
+            <Box mx={"auto"} fontSize="lg">
+              ถ้าหากมี account แล้ว
+            </Box>
+            <Heading
+              textAlign="center"
+              as="h3"
+              mb="3rem"
+              size="md"
+              fontWeight="medium"
+              color="blue"
+              textDecoration="underline"
+              cursor="pointer"
+              onClick={() => onSubmitImageandDataHandler("skip")}
+            >
+              {translations.Skip}
             </Heading>
           </Flex>
         </Box>

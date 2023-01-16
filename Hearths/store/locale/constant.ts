@@ -7,6 +7,7 @@ import {
 } from "../common/Physiotherapist";
 
 export const enLocale: ILocaleState = {
+  Skip: "Skip",
   currentLocale: "en",
   test: "Test Eng",
   SignIn: "SIGN IN",
@@ -115,6 +116,7 @@ export const enLocale: ILocaleState = {
 };
 
 export const thLocale: ILocaleState = {
+  Skip: "ข้าม",
   currentLocale: "th",
   test: "ทดสอบไทย",
   SignIn: "เข้าสู่ระบบ",
