@@ -100,7 +100,7 @@ const MyAppointment: NextPage = () => {
                 h="100%"
                 bg="PrimaryColor.900"
                 m="auto"
-                d="flex"
+                display="flex"
                 justifyContent="center"
                 key={`${index}`}
               >
@@ -119,7 +119,7 @@ const MyAppointment: NextPage = () => {
                   bg="white"
                   m="auto"
                   color={"Black"}
-                  d="flex"
+                  display="flex"
                   justifyContent="center"
                   border="1px solid #E2E8F0"
                 >
@@ -134,7 +134,7 @@ const MyAppointment: NextPage = () => {
                   bg="white"
                   m="auto"
                   color={"black"}
-                  d="flex"
+                  display="flex"
                   border="1px solid #E2E8F0"
                   justifyContent="center"
                 >
@@ -150,7 +150,7 @@ const MyAppointment: NextPage = () => {
                   bg="white"
                   m="auto"
                   color={"black"}
-                  d="flex"
+                  display="flex"
                   border="1px solid #E2E8F0"
                   justifyContent="center"
                 >
@@ -173,7 +173,7 @@ const MyAppointment: NextPage = () => {
                   h="100%"
                   bg="white"
                   m="auto"
-                  d="flex"
+                  display="flex"
                   justifyContent="center"
                   border="1px solid #E2E8F0"
                   color={"black"}
@@ -216,13 +216,13 @@ const MyAppointment: NextPage = () => {
                   h="100%"
                   bg="white"
                   m="auto"
-                  d="flex"
+                  display="flex"
                   justifyContent="center"
                   border="1px solid #E2E8F0"
                   color={"black"}
                 >
                   {ele.event_id &&
-                    ele.appointment_status === temp.CONFIRMED &&
+                    ele.appointment_status === AppointmentStatus.CONFIRM &&
                     ele.count > 0 && (
                       <Box
                         my="auto"

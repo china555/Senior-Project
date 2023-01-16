@@ -65,10 +65,10 @@ export const HearthsDrawer = (props: UseDisclosureProps) => {
           )}
         </DrawerBody>
         {isAuthenticated && (
-          <DrawerFooter d="flex" justifyContent={"space-between"} px="2">
+          <DrawerFooter display="flex" justifyContent={"space-between"} px="2">
             <Box
               w="50%"
-              d="flex"
+              display="flex"
               alignItems={"center"}
               onClick={() => {
                 router.push("/profile");

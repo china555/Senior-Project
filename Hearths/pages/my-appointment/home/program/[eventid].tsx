@@ -249,7 +249,7 @@ const HomeProgram: NextPage = () => {
                     h="100%"
                     bg="PrimaryColor.900"
                     m="auto"
-                    d="flex"
+                    display="flex"
                     justifyContent="center"
                     key={`${ele}`}
                   >
@@ -269,7 +269,7 @@ const HomeProgram: NextPage = () => {
                       bg="white"
                       m="auto"
                       color={"Black"}
-                      d="flex"
+                      display="flex"
                       justifyContent="center"
                       border="1px solid #E2E8F0"
                     >
@@ -287,7 +287,7 @@ const HomeProgram: NextPage = () => {
                             bg="white"
                             m="auto"
                             color={"black"}
-                            d="flex"
+                            display="flex"
                             border="1px solid #E2E8F0"
                             justifyContent="center"
                           >
@@ -299,7 +299,7 @@ const HomeProgram: NextPage = () => {
                             bg="white"
                             m="auto"
                             color={"black"}
-                            d="flex"
+                            display="flex"
                             border="1px solid #E2E8F0"
                             justifyContent="center"
                           >
@@ -311,7 +311,7 @@ const HomeProgram: NextPage = () => {
                             bg="white"
                             m="auto"
                             color={"black"}
-                            d="flex"
+                            display="flex"
                             border="1px solid #E2E8F0"
                             justifyContent="center"
                           >
@@ -324,7 +324,7 @@ const HomeProgram: NextPage = () => {
                             h="100%"
                             bg="white"
                             m="auto"
-                            d="flex"
+                            display="flex"
                             justifyContent="space-evenly"
                             border="1px solid #E2E8F0"
                             color={"black"}
