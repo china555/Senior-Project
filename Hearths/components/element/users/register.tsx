@@ -138,13 +138,17 @@ export const UsersRegisterManagement = () => {
                 <Td>{<Box>{getname(ele)}</Box>}</Td>
                 <Td>{ele.pay_method}</Td>
                 <Td>
-                  <a
-                    href={`${url}/${ele.receipt_image_path}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Link
-                  </a>
+                  {ele.receipt_image_path === "/none" ? (
+                    <></>
+                  ) : (
+                    <a
+                      href={`${url}/${ele.receipt_image_path}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Link
+                    </a>
+                  )}
                 </Td>
                 <Td>
                   <Flex justifyContent={"space-evenly"}>

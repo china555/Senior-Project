@@ -67,7 +67,12 @@ export const HeartsDropzone = ({
         {isDragActive ? (
           <Text>Drop the files here ...</Text>
         ) : (
-          <Text>Drag n drop some files here, or click to select files</Text>
+          <>
+            <Text fontSize={20} mb={5}>
+              แนบรูปภาพการชำระเงิน
+            </Text>
+            <Text>Drag n drop some files here, or click to select files</Text>
+          </>
         )}
       </Box>
     </Box>
