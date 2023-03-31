@@ -186,6 +186,24 @@ export const UsersAppointmentManagement: NextPage = () => {
               enabledAutoRecordMeeting: true,
               enabledJoinBeforeHost: true,
               enableConnectAudioBeforeHost: true,
+              // adhoc: false,
+              // allowAnyUserToBeCoHost: false,
+              // enabledJoinBeforeHost: false,
+              // excludePassword: false,
+              // publicMeeting: false,
+              // enabledWebcastView: false,
+              // enableAutomaticLock: false,
+              // allowFirstUserToBeCoHost: false,
+              // allowAuthenticatedDevices: false,
+              // sendEmail: true,
+              // invitees: [
+              //   {
+              //     email: "prach.cha@mahidol.ac.th",
+              //     displayName: "Prach",
+              //     coHost: true,
+              //   },
+              // ],
+              // hostEmail: "wudhichart.saw@mahidol.ac.th",
             },
             config
           );
